@@ -5,7 +5,7 @@ archive: false
 post_class: post-template
 ---
 
-<header class="main-header post-head {% if page.cover %}" style="background-image: url({{ page.cover }}) {%else%}no-cover{% endif %}">
+<header class="main-header post-head {% if page.cover %}" style="background-image: url({{ site.baseurl }}{{ page.cover }}) {%else%}no-cover{% endif %}">
     <nav class="main-nav {% if page.cover %} overlay {% endif %} clearfix">
         <a class="back-button icon-arrow-left" href="{{ site.baseurl }}">Home</a>
         <a class="subscribe-button icon-feed" href="{{ site.baseurl }}feed.xml">Subscribe</a>
@@ -20,8 +20,8 @@ post_class: post-template
             <h1 class="post-title">{{ page.title }}</h1>
             <section class="post-meta">
                 <time class="post-date" datetime="{{ page.date | date:"%Y-%m-%d" }}">{{ page.date | date_to_string }}</time>
-                {% if page.categories.size > 0 %}
-                    {{ page.categories | array_to_sentence_string | prepend: 'on ' }}
+                {% if page.tags.size > 0 %}
+                    {{ page.tags | array_to_sentence_string | prepend: 'on ' | replace: "Csharp", "C#" }}
                 {% endif %}
             </section>
         </header>
@@ -62,20 +62,23 @@ post_class: post-template
 
         <footer class="post-footer">
             <!-- If we want to display author's name and bio -->
-            {% if site.author %}
-                <figure class="author-image">
-                    <a class="img" href="{{ site.baseurl }}" style="background-image: url(/assets/images/profile.png)">
-                    <span class="hidden">{{site.author}}'s Picture</span></a>
+             {% for author in site.data.authors %}
+                    {% if author[1].username == page.author %}
+                    <figure class="author-image">
+                    <a class="img" href="{{ site.baseurl }}author/{{ page.author }}" style="background-image: url({{ site.baseurl }}{{ author[1].picture }})">
+                    <span class="hidden">{{ author[1].name }}'s Picture</span></a>
                 </figure>
                 <section class="author">
                     <!-- Author Name -->
-                    <h4> {{ site.author }} </h4>
+                    <h4> {{ author[1].name }} </h4>
                     <!-- Author Bio -->
                     <p>
-                        Here goes the author description. You might want to place some links too in here
+                       {{ author[1].bio }}
                     </p>
                 </section>
-            {% endif %}
+                       
+                    {% endif %}
+                {% endfor %}
 
             <!-- Share links section -->
             {% include share.html %}

@@ -1,16 +1,18 @@
-name: Your New Jekyll Site
-description: Blogging about stuffs
-meta_description: "Your New Jekyll Site, Blogging about stuffs"
+name: Code with Shadman
+description: Easy-to-understand tutorials on the .NET stack with C# language
+meta_description: "Easy-to-understand tutorials on the .NET stack with C# language."
 
 markdown: kramdown
 highlighter: pygments
 logo: false
 paginate: 15
 baseurl: /
-domain_name: 'http://yourblog-domain.com'
-google_analytics: 'UA-XXXXXXXX-X'
-gems: [jekyll-paginate]
+domain_name: "https://codewithshadman.com"
+google_analytics: 'UA-114994933-6'
+plugins: [jekyll-paginate, jekyll-redirect-from]
 
 # Details for the RSS feed generator
-url:            'blog url'
-author:         'Your Name'
+url:            'https://codewithshadman.com'
+author:         'Shadman Kudchikar'
+
+permalink: /:title/

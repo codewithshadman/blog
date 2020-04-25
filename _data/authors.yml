@@ -1,0 +1,22 @@
+shadman_kudchikar:
+  username: shadman_kudchikar
+  name: Shadman Kudchikar
+  location: Mumbai, India
+  url_full: https://codewithshadman.com/
+  url: codewithshadman.com
+  bio: I'm a passionate software developer living in Mumbai, India. I am a technology enthusiast and enjoy developing with all technologies, especially with .NET.
+  picture: assets/images/kudchikarsk.jpg
+  facebook: False
+  twitter: kudchikarsk
+  cover: False
+andriy_zapisotskyi:
+  username: andriy_zapisotskyi
+  name: Andriy Zapisotskyi
+  location: False
+  url_full: https://www.linkedin.com/in/zapisotskyi/
+  url: www.linkedin.com/in/zapisotskyi
+  bio:  Andriy is a Growth Manager at Mailtrap, a product that helps people inspect and debug emails before sending them to real users. He has over 5 years of experience in the field of marketing & product. Andriy loves to network with people. Running is his hobby and he enjoys discovering new places.
+  picture: assets/images/andriy_zapisotskyi.jpeg
+  facebook: False
+  twitter: zapisotskyi
+  cover: False

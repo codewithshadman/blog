@@ -1,0 +1,65 @@
+csharp_beginner:
+  name: Csharp Beginner
+  description: The C# tutorials in this section are designed to give you basic knowledge you need to become a C# developer. By the end of this section, you’ll have a firm understanding of the C# language.
+  cover: False
+  title: C# Beginner
+csharp_intermediate:
+  name: Csharp Intermediate
+  description: The C# tutorials in this section will provide everything you need to know to take advantage of the rich feature set C# provides.
+  cover: False
+  title: C# Intermediate
+csharp_advanced:
+  name: Csharp Advanced
+  description: The C# tutorials in this section will provide valuable insight into the finer points of the C# language.
+  cover: False
+  title: C# Advanced
+csharp_multithreading:
+  name: Csharp Multithreading
+  description: If you want to be able to write multi-threaded .NET apps, then this course is for you. We will learn about problems with concurrent programming on multicore CPU, and we will also look at Task-based approach provided by C# for async and parallel programming.
+  cover: False
+  title: C# Multithreading
+csharp_design_patterns:
+  name: Csharp Design Patterns
+  description: Design patterns provide general solutions or a flexible way to solve common design problems. This library provides an introduction of design patterns and how design patterns are implemented in C# and .NET.
+  cover: False
+  title: C# Design Patterns
+csharp_functional_programming:
+  name: Csharp Functional Programming
+  description: 
+  cover: False
+  title: C# Functional Programming
+csharp_tips:
+  name: Csharp Tips
+  description: Whether you’re still learning C# or you already have some experience, there will always be gaps in your knowledge, places where you are clueless as to your ignorance. In the series of articles in C# Tips I will provide a whole host of useful information about the sometimes underused or unknown features of both C# and .NET.
+  cover: False
+  title: C# Tips
+asp.net:
+  name: ASP.NET
+  description:
+  cover: False
+  title: ASP.NET
+programming:
+  name: Programming
+  description:
+  cover: False
+  title: Programming
+csharp:
+  name: Csharp
+  description:
+  cover: False
+  title: C#
+angularjs:
+  name: AngularJs
+  description:
+  cover: False
+  title: Angular Js
+entity_framework:
+  name: Entity Framework
+  description:
+  cover: False
+  title: Entity Framework
+visual_studio:
+  name: Visual Studio
+  description:
+  cover: False
+  title: Visual Studio
