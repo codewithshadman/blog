@@ -203,7 +203,8 @@ In this example leak occurs when we don't unregister our `Clock` class `UpdateTi
 Here is the code of MainWindow and Clock window to give you the idea. Also, you can find complete solution [here](https://github.com/kudchikarsk/leaky-app).
 
 **MainWindow.xaml.cs**
-```cs
+{% highlight csharp linenos %}
+
 using System.Collections.Generic;
 using System.Windows;
 
@@ -239,10 +240,11 @@ namespace LeakyApp
     }
 }
 
-```
+{% endhighlight %}
 
 **Clock.xaml.cs**
-```cs
+{% highlight csharp linenos %}
+
 using System;
 using System.Windows;
 using System.Windows.Threading;
@@ -281,7 +283,7 @@ namespace LeakyApp
         }
     }
 }
-```
+{% endhighlight %}
 
 ### Cause of Event Handler memory leaks?
 While an event handler is subscribed, the publisher of the event holds a reference to the subscriber via the event handler delegate (assuming the delegate is an instance method).

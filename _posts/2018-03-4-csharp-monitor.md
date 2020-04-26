@@ -33,7 +33,8 @@ Monitor assure that thread access the shared resource one thread at a time
 
 Here is the code to use Monitor for shared resources to avoid the race condition
 
-```csharp
+{% highlight csharp linenos %}
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -98,7 +99,7 @@ namespace _05_Monitor_Class_Usage
         }
     }
 }
-```
+{% endhighlight %}
 
 Here, `sum++` is considered as the critical section, as this operation should be done in a thread-safe manner we use the monitor to carry out this operation as one thread at a time.
 
@@ -138,7 +139,8 @@ So,
 
 To overcome this problem we have to use proper try-finally construct to manage the exception (not handle it). Let's see the code how to do it,
 
-```csharp
+{% highlight csharp linenos %}
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -211,7 +213,7 @@ namespace _06_Exception_Aware_Monitor
         }
     }
 }
-```
+{% endhighlight %}
 
 ## C\# Lock Keyword {#csharp-lock-keyword}
 
@@ -219,7 +221,8 @@ Some high level languages have syntactic sugar which reduces the amount of code 
 
 C# has this lock syntax for the same code we wrote above. Here is the code
 
-```csharp
+{% highlight csharp linenos %}
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -278,7 +281,7 @@ namespace _07_Lock_Keyword
         }
     }
 }
-```
+{% endhighlight %}
 
 so we simply use the lock keyword syntax and write critical section code in its body and compiler will generate the Exception Aware Monitor code for us. Sweet!
 

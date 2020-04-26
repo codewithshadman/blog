@@ -84,7 +84,8 @@ Bottom line, Ignore all these limitations.
 
 Threads in C# are modelled by Thread Class. When a process starts (you run a program) you get a single thread (also known as the main thread) to run your application code. To explicitly start another thread (other than your application main thread) you have to create an instance of thread class and call its Start method to run the thread using C#, Let's see an example
 
-```csharp
+{% highlight csharp linenos %}
+
  using System;
  using System.Diagnostics;
  using System.Threading;
@@ -115,7 +116,7 @@ Threads in C# are modelled by Thread Class. When a process starts (you run a pro
          Console.WriteLine("Hello World!");
      }
  }      
-```
+{% endhighlight %}
 
 When you run this program you may see _Press Enter to terminate!_ message first and then _Hello World!_ as they both run in parallel, so it is not guaranteed which execute first.
 
@@ -125,15 +126,17 @@ We can use Thread's `Join()` method to halt our main thread until reference thre
 
 Another method to do this would be by using boolean `IsAlive` property of thread which gives instantaneous snapshot of thread's state whether it is running or not. Like this,
 
-```csharp
+{% highlight csharp linenos %}
+
 while ( t.IsAlive ) { } 
-```
+{% endhighlight %}
 
 However, `t.Join()` is the recommended method.
 
 Here is an example
 
-```csharp
+{% highlight csharp linenos %}
+
 using System;
 using System.Diagnostics;
 using System.Threading;
@@ -167,13 +170,14 @@ public class Example
         Console.WriteLine("Hello World!");
     }
 }
-```
+{% endhighlight %}
 
 Now,
 
 Thread doesn't start running until you call `thread.Start()` method, So before calling this Start method you can set some properties of a thread like its name and priority. Setting name of the thread will only help you in debugging, by setting name you can easily point out your thread in Visual Studio Thread window, Let's see an example
 
-```csharp
+{% highlight csharp linenos %}
+
 Thread t = new Thread(SomeMethod);
 
 t.Name="My Parallel Thread";
@@ -182,14 +186,15 @@ t.Priority=ThreadPriority.BelowNormal;
 
 //start running your thread
 t.Start();
-```
+{% endhighlight %}
 
 
 ## Difference Between Foreground And Background Thread In C\# {#difference-between-foreground-and-background-thread-in-csharp}
 
 There is also this another thread property IsBackground. If set to true your thread will be a background thread otherwise it will be a foreground thread, by default its false so it will always be a foreground thread, Let's see an example
 
-```csharp
+{% highlight csharp linenos %}
+
 Thread t = new Thread(SomeMethod);
 
 //set thread object as a background thread
@@ -197,7 +202,7 @@ t.IsBackground = true;
 
 //start running your thread
 t.Start();
-```
+{% endhighlight %}
 
 Suppose if a foreground thread is the only thread (your main thread is done with execution and terminated) in your process, so your process is about to exit. However, it won't, your process will wait for foreground thread to complete its execution. Thus, It will prevent application to exit until the foreground thread is done with the execution.
 
@@ -212,25 +217,29 @@ Learn more about how foreground & background threads work in C# .NET [here](http
 
 As you saw in example before that we pass method name to thread constructor parameter like this,
 
-```csharp
+{% highlight csharp linenos %}
+
 Thread t = new Thread(SomeMethod);
-```
+{% endhighlight %}
 
 We able to do this because this thread contructor takes delegate as parameter. Its supports two type of delegates, Here is the definition of first delegate
 
-```csharp
+{% highlight csharp linenos %}
+
 public delegate void ThreadStart()
-```
+{% endhighlight %}
 
 this we already saw in the above example, other is
 
-```csharp
+{% highlight csharp linenos %}
+
 public delegate void ParameterizedThreadStart(object obj)
-```
+{% endhighlight %}
 
 If your custom method takes argument you can pass a ParameterizedThreadStart delegate to constructor, Let's see an example
 
-```csharp
+{% highlight csharp linenos %}
+
 using System;
 using System.Diagnostics;
 using System.Threading;
@@ -265,13 +274,14 @@ public class Example
 
     }
 }
-```
+{% endhighlight %}
 
 Did you notice now we need to pass the Speak method argument to Start method.
 
 So far we have used only static method. However, you can also use instance methods as a thread constructor parameter, Let's see an example
 
-```csharp
+{% highlight csharp linenos %}
+
 using System;
 using System.Diagnostics;
 using System.Threading;
@@ -311,14 +321,15 @@ public class Person
 
     }
 }
-```
+{% endhighlight %}
 In the above example, we used ParameterizedThreadStart delegate however same applies to ThreadStart delegate, both of them can be used with an instance method.
 
 ## Thread Life Cycle In C\# {#thread-life-cycle-in-csharp}
 
 So now we know how thread class models a thread. This thread, however, doesn't stay for infinity and has lifespan which is up to the return of the thread delegate method, Let's see an example
 
-```csharp
+{% highlight csharp linenos %}
+
 using System;
 using System.Diagnostics;
 using System.Threading;
@@ -354,7 +365,7 @@ public class Example
 
     } // <-- this line is where thread exit and shutdown
 }
-```
+{% endhighlight %}
 
 Here, line no 33 will be the last execution statement after which thread will be shutdown.
 
@@ -372,7 +383,8 @@ This exception is an explicit exception raised by calling thread's Abort or Inte
 
 Lets start with an example this time,
 
-```csharp
+{% highlight csharp linenos %}
+
 using System;
 using System.Diagnostics;
 using System.Threading;
@@ -416,7 +428,7 @@ public class Example
 
     }
 }
-```
+{% endhighlight %}
 
 Here we used a boolean field to signal another thread Speak method to stop running when `_cancel` is set to true.
 

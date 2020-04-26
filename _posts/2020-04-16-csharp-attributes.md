@@ -83,14 +83,15 @@ One example of an attribute in the .NET Framework is `SerializableAttribute`. Th
 The below example shows how to apply the Serializable attribute.
 
 
-```cs
+{% highlight csharp linenos %}
+
 [Serializable]
 class Person
 {
     public string FirstName { get; set; }
     public string LastName { get; set; }
 }
-```
+{% endhighlight %}
 
 As you can see, the actual class in the .NET Framework is called SerializableAttribute. By convention, the name is suffixed with Attribute so you can easily distinguish between attributes and other types in the .NET Framework. When using the attribute, however, you can skip the Attribute suffix. 
 
@@ -98,10 +99,11 @@ As you can see, the actual class in the .NET Framework is called SerializableAtt
 
 A type can have as many attributes applied to it as necessary. Some attributes can even be applied multiple times. For example, you can use the ConditionalAttribute to indicate to the compiler that a method call should be ignored unless a specific compiler option is specified. The below example shows how to apply this attribute.
 
-```cs
+{% highlight csharp linenos %}
+
 [Conditional( "CONDITION1"), Conditional( "CONDITION2")]
 static void MyMethod(){ }
-```
+{% endhighlight %}
 
 An attribute can have parameters. Just as with regular types, those parameters can be named an optional. The values set to an attribute can later be inspected at runtime.
 
@@ -111,7 +113,8 @@ An attribute also has a specific target to which it applies. It can be an attrib
 
 If you look at the AssemblyInfo.cs of a new class library, you can see how the target is explicitly specified.
 
-```cs
+{% highlight csharp linenos %}
+
 [assembly: AssemblyTitle( "ClassLibrary1")]
 [assembly: AssemblyDescription( "")]
 [assembly: AssemblyConfiguration( "")]
@@ -120,7 +123,7 @@ If you look at the AssemblyInfo.cs of a new class library, you can see how the t
 [assembly: AssemblyCopyright( "Copyright © 2013")]
 [assembly: AssemblyTrademark( "")]
 [assembly: AssemblyCulture( "")]
-```
+{% endhighlight %}
 
 These attributes are all applied to the current assembly and describe some metadata about the assembly.
 
@@ -132,13 +135,14 @@ The DebuggerDisplay attribute is available to customize the display of Class, St
 
 Let’s consider the following Person class, which has two properties as FirstName and LastName.
 
-```cs
+{% highlight csharp linenos %}
+
 public class Person
 {
     public string FirstName { get; set; }
     public string LastName { get; set; }
 }
-```
+{% endhighlight %}
 
  
 
@@ -157,14 +161,15 @@ The attribute takes a string value as a parameter.
 The following code shows that the Properties are used as parameters enclosed in curly braces.
 
 
-```cs
+{% highlight csharp linenos %}
+
 [DebuggerDisplay("Hello {FirstName} {LastName}!")]
 public class Person
 {
     public string FirstName { get; set; }
     public string LastName { get; set; }
 }
-```
+{% endhighlight %}
 
 The display of the class would change like the following.
 
@@ -179,7 +184,8 @@ DebuggerBrowsable is an attribute available to C# language. This attribute is he
  
 Let’s consider the following Person class, which has two properties as FirstName and LastName.
 
-```cs
+{% highlight csharp linenos %}
+
 public class Person
 {
     public string FirstName { get; set; }
@@ -188,7 +194,7 @@ public class Person
 
     public int[] WorkingDays { get; set; }
 }
-```
+{% endhighlight %}
 
 Debugging the code displays the usual way of the array name and its values on expanding.
 
@@ -208,7 +214,8 @@ Notice that, it takes an enum as a parameter. The DebuggerBrowsableState enum ha
 
 Using this attribute other than Property, Index, and Field would give you the error. Now we would add the RootHidden enum type of DebuggerBrowsableState to AbsentDays property.
 
-```cs
+{% highlight csharp linenos %}
+
 public class Person
 {
     public string FirstName { get; set; }
@@ -217,7 +224,7 @@ public class Person
     [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
     public int[] WorkingDays { get; set; }
 }
-```
+{% endhighlight %}
  
 
 Notice that, the property name is not displayed and the children are expanded by default.
@@ -236,7 +243,8 @@ If specific symbols have not been defined at the instant they are called, then c
 
 Let’s consider the following Program class, which has a Display person method.
 
-```cs
+{% highlight csharp linenos %}
+
 class Program
 {
     public class Person
@@ -266,7 +274,7 @@ class Program
         WriteLine(person.FirstName);
     }
 }
-```
+{% endhighlight %}
 
 The conditional attribute takes conditionString as a parameter. Wherein methods are selectively called on the basis of this definition of the symbol.
 
@@ -274,13 +282,14 @@ The conditional attribute takes conditionString as a parameter. Wherein methods 
 
 It instructs the compiler to compile (into Microsoft Intermediate Language) or not, based on a condition - whether or not a specific conditional compilation symbol is defined. 
 
-```cs
+{% highlight csharp linenos %}
+
 [Conditional("Release")]
 public static void Display(Person person)
 {
     WriteLine(person.FirstName);
 }
-```
+{% endhighlight %}
 
 Now if we run the program it will not display any output. However when we can define the symbol in project properties.
 
@@ -300,16 +309,18 @@ The System.Attribute class, from which all other attributes inherit, defines som
 Suppose that you want to check that a class has the Serializable attribute applied. You can do this by calling the static IsDefined method on Attribute. 
 
 
-```cs
-[Serializable] class Person { } 
-```
+{% highlight csharp linenos %}
 
-```cs
+[Serializable] class Person { } 
+{% endhighlight %}
+
+{% highlight csharp linenos %}
+
 if (Attribute.IsDefined(typeof(Person), typeof(SerializableAttribute))) 
 { 
     //do something
 }
-```
+{% endhighlight %}
 
 ## C# Reflection
 
@@ -317,10 +328,11 @@ When reading attributes, you’ve already looked at some of the functionality th
 
 The most basic example of reflection is getting the current type of an object you have: 
 
-```cs
+{% highlight csharp linenos %}
+
 int i = 42; 
 Type type = i.GetType(); 
-```
+{% endhighlight %}
 
 This returns `System.Int32` as the type of int. `Type` is a class in the .NET Framework that you can use to get all kinds of metadata about any given type. 
 
@@ -330,7 +342,8 @@ Let's create a class and invoke its method using reflection.
 
 ### Invoke Method with parameters using C# reflection
 
-```cs
+{% highlight csharp linenos %}
+
 public class MyClass
 {
    public virtual int AddNumb(int numb1,int numb2)
@@ -340,13 +353,14 @@ public class MyClass
    }
 
 }
-```
+{% endhighlight %}
 
 The above class has the `AddNumb` method which takes two `int` parameters and returns their addition.
 
 You can call this method using reflection like this:
 
-```cs
+{% highlight csharp linenos %}
+
 class MyMainClass
 {
     public static void Main()
@@ -366,25 +380,28 @@ class MyMainClass
                          myMethodInfo.Invoke(myClassObj, mParam) + "\n");
     }
 }
-```
+{% endhighlight %}
 
 So this is how it work first you get the type information:
 
-```cs
+{% highlight csharp linenos %}
+
 Type myTypeObj = myClassObj.GetType();
-```
+{% endhighlight %}
 
 Then will get the method's information:
 
-```cs
+{% highlight csharp linenos %}
+
 Methodinfo myMethodInfo = myTypeObj.GetMethod("AddNumb"); 
-```
+{% endhighlight %}
 
 Finally, we will invoke the AddNumb method:
 
-```cs
+{% highlight csharp linenos %}
+
 myMethodInfo.Invoke(myClassObj, mParam);
-```
+{% endhighlight %}
 
 ### Things you can achieve with C# reflection
 
@@ -404,7 +421,8 @@ Let's see a problem statement that a typical C# programmer will face converting 
 
 For this example, I am creating a simple Student class.
 
-```cs
+{% highlight csharp linenos %}
+
 public class Student  
 {  
     public int StudentId { get; set; }  
@@ -412,11 +430,12 @@ public class Student
     public string Address { get; set; }  
     public string MobileNo { get; set; }  
 } 
-```
+{% endhighlight %}
 
 And a DataTable with some data.
 
-```cs
+{% highlight csharp linenos %}
+
 DataTable dt = new DataTable("Student");  
 dt.Columns.Add("StudentId", typeof(Int32));  
 dt.Columns.Add("StudentName", typeof(string));  
@@ -427,11 +446,12 @@ dt.Rows.Add(1, "Manish", "Hyderabad","0000000000");
 dt.Rows.Add(2, "Venkat", "Hyderabad", "111111111");  
 dt.Rows.Add(3, "Namit", "Pune", "1222222222");  
 dt.Rows.Add(4, "Abhinav", "Bhagalpur", "3333333333"); 
-```
+{% endhighlight %}
 
 Now, I will convert the preceding DataTable into a `List<Student>` using Linq.
 
-```cs
+{% highlight csharp linenos %}
+
 List<Student> studentList = new List<Student>();  
 studentList = (from DataRow dr in dt.Rows  
         select new Student()  
@@ -441,7 +461,7 @@ studentList = (from DataRow dr in dt.Rows
             Address = dr["Address"].ToString(),  
             MobileNo = dr["MobileNo"].ToString()  
         }).ToList(); 
-```
+{% endhighlight %}
 
 The above solution works well for the Student class but what if we have more datatables like this, we can have classes for Teachers, Employees, and whatnot. In that case, we have to write the mapping code just like we did for the Student class in the above example. 
 
@@ -452,7 +472,8 @@ However, we can use reflection to write a code that converts datatable to user-d
 
 The following are the two functions in which if we pass a DataTable and a user-defined class as a generic parameter it will then return the List of that class with the DataTable data. 
 
-```cs
+{% highlight csharp linenos %}
+
 private static List<T> ConvertDataTable<T>(DataTable dt)  
 {  
     List<T> data = new List<T>();  
@@ -484,13 +505,14 @@ private static T GetItem<T>(DataRow dr)
     }  
     return obj;  
 } 
-```
+{% endhighlight %}
 
 Now, we can convert the preceding DataTable like this, 
 
-```cs
+{% highlight csharp linenos %}
+
 List<Student> studentDetails = ConvertDataTable<Student>(dt); 
-```
+{% endhighlight %}
 
 Thus, reflection simplifies the instantiating and mapping task. The programmer does not have to explicitly write all the code to create an object and setting it values that we did previously using LINQ.
 
@@ -500,10 +522,11 @@ If we call the method like this, `ConvertDataTable<Student>(...)` our type will 
 
 You may have noticed the following line of code as well
 
-```cs
+{% highlight csharp linenos %}
+
 if (pro.Name == column.ColumnName)  
     pro.SetValue(obj, dr[column.ColumnName], null);  
-```
+{% endhighlight %}
 
 The above condition checks if the property name of the user-defined class is the same as datatable on and set that property value based on the matched column name.
 
@@ -513,7 +536,8 @@ The DataTable column's name and class property name should be the same otherwise
 
 Now, what if these names somehow failed to match and you don't want to rename the class properties as well 
 
-```cs
+{% highlight csharp linenos %}
+
 public class Student
 {
     public int Id { get; set; } //Id for student
@@ -521,15 +545,16 @@ public class Student
     public string Address { get; set; }
     public string MobileNo { get; set; }
 }
-```
+{% endhighlight %}
 
-```cs
+{% highlight csharp linenos %}
+
 DataTable dt = new DataTable("Student");
 dt.Columns.Add("StudentId", typeof(Int32)); //Id for student
 dt.Columns.Add("StudentName", typeof(string));
 dt.Columns.Add("Address", typeof(string));
 dt.Columns.Add("MobileNo", typeof(string));
-```
+{% endhighlight %}
 
 As you can see Id property in Student class and Datatable is mismatched.
 
@@ -539,16 +564,18 @@ Let's tackle the above problem using attributes
 
 First, we will define a custom attribute `NamesAttribute`.
 
-```cs
+{% highlight csharp linenos %}
+
 public class NamesAttribute : Attribute
 {
     public string[] Values { get; set; }
 }
-```
+{% endhighlight %}
 
 It only has one property Values which is a string array. Now we will use this attribute on Id property in our Student class like this:
 
-```cs
+{% highlight csharp linenos %}
+
 public class Student
 {
     [Names(Values = new string[] { "StudentId" })]
@@ -557,24 +584,26 @@ public class Student
     public string Address { get; set; }
     public string MobileNo { get; set; }
 }
-```
+{% endhighlight %}
 
 ### Using reflection to read C# attribute
 
 Now we will write a method that checks whether Values defined on a property match with columnName passed in the parameter, using reflection.
 
-```cs
+{% highlight csharp linenos %}
+
 private static bool NamesMatched(PropertyInfo pro, string columnName)
 {
     var displayNameAttr = pro.GetCustomAttributes(false)
         .OfType<NamesAttribute>().FirstOrDefault();
     return displayNameAttr?.Values.Any(v => v == columnName) ?? false;
 }
-```
+{% endhighlight %}
 
 Now we can update our `GetItem` method to use the above method like this
 
-```cs
+{% highlight csharp linenos %}
+
 private static T GetItem<T>(DataRow dr)
 {
     Type temp = typeof(T);
@@ -593,7 +622,7 @@ private static T GetItem<T>(DataRow dr)
     }
     return obj;
 }
-```
+{% endhighlight %}
 
 Now our program will able to map the properties values even though the name of columns and properties mismatched. This was possible as it takes into consideration the metadata that we attached with the property using attributes.
 

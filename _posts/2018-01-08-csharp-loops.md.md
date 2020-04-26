@@ -29,12 +29,13 @@ In C#, it is possible to manage the execution of code with different control str
 ## C\# While Loops
 The syntax for a while loop is:
 
-```cs
+{% highlight csharp linenos %}
+
 while (condition) 
 {
 	Statement
 } 
-```
+{% endhighlight %}
 	
 	
 The syntax can almost be directly translated into English: do something while a condition is met.
@@ -42,7 +43,8 @@ The syntax can almost be directly translated into English: do something while a 
 Let's look at a simple example:
 
 
-```cs
+{% highlight csharp linenos %}
+
 class Program
 {
     static void Main(string[] args)
@@ -70,7 +72,7 @@ This text is repeated 10 times
 This text is repeated 10 times
 This text is repeated 10 times
 */
-```
+{% endhighlight %}
 	
 In the example, a variable named `i` is used. As you can see, variables in C# always start with a datatype int in our case.
 
@@ -80,31 +82,34 @@ Apart from that, the example is almost self-explanatory. First the variable `i` 
 
 A 'do-while' loop is just like a 'while' loop except that the condition is evaluated after the block of code specified in the 'do' clause has been run. So even where the condition is initially false, the block runs once. For instance, the following code outputs '4':
 
-```cs
+{% highlight csharp linenos %}
+
 int a = 4;
 do
 {
     System.Console.WriteLine(a);
     a++;
 } while (a < 3);
-```
+{% endhighlight %}
 
 
 ## C# For Loops
 Another way to make a loop is with for statement in the following form:
 
 	
-```txt
+{% highlight text linenos %}
+
 for (Initialization; Condition; Step) 
 {
 	 Statement
 }
-```
+{% endhighlight %}
 	
 	
 The statement is repeated as long as 'Initialization' + 'Step' meets the 'Condition'. If that doesn't make sense, look at this example:
 
-```cs
+{% highlight csharp linenos %}
+
 class Program
 {
     static void Main(string[] args)
@@ -131,7 +136,7 @@ variable i is now = 40
 variable i is now = 45
 variable i is now = 50
 */
-```
+{% endhighlight %}
 	
 In the example above, `i` is growing with the value 5 in each loop. The loop will continue as long as `i` is below or equals 50. Also note how the value `i` is used as part of the sentence.
 
@@ -139,7 +144,8 @@ In the example above, `i` is growing with the value 5 in each loop. The loop wil
 
 In principle, there are no limitations on how loops can be used. For instance, you can easily put loops inside loops and thereby create many repeats.
 
-```cs
+{% highlight csharp linenos %}
+
 class Program
 {
     static void Main(string[] args)
@@ -169,7 +175,7 @@ This example produces the following results:
 1X9=9   2X9=18  3X9=27  4X9=36  5X9=45  6X9=54  7X9=63  8X9=72  9X9=81  10X9=90
 1X10=10 2X10=20 3X10=30 4X10=40 5X10=50 6X10=60 7X10=70 8X10=80 9X10=90 10X10=100
 */
-```
+{% endhighlight %}
 	
 In this example, we have created a multiplication table from 1 to 10 you can easily change the value for variable i and j and extend the table.
 
@@ -177,11 +183,12 @@ In this example, we have created a multiplication table from 1 to 10 you can eas
 
 The 'foreach' loop is used to iterate through the values contained by any object which implements the IEnumerable interface. When a 'foreach' loop runs, the given variable1 is set in turn to each value exposed by the object named by variable2. As we have seen previously, such loops can be used to access array values. So, we could loop through the values of an array in the following way:
 
-```cs
+{% highlight csharp linenos %}
+
 int[] a = new int[]{1,2,3};
 foreach (int b in a)
     System.Console.WriteLine(b);
-```
+{% endhighlight %}
 
 
 The main drawback of 'foreach' loops is that each value extracted (held in the given example by the variable 'b') is read-only.

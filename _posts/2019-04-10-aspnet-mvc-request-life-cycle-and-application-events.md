@@ -52,15 +52,17 @@ You can download a PDF document from [here][mvc-life-cycle-ms] that charts the l
 ## Http Application Class {#http-application-class}
 
 The `MVCApplication` class in *Global.asax* file inherits `HttpApplication` class.
-```csharp
+{% highlight csharp linenos %}
+
 public class MvcApplication : System.Web.HttpApplication
-```
+{% endhighlight %}
 
 HttpApplication Class defines the methods, properties, and events that are common to all application objects in an ASP.NET application. This class is the base class for applications defined by the user in the *Global.asax* file.
 
 HttpApplication class has number of application and request level events which you can override. 
 
-```csharp
+{% highlight csharp linenos %}
+
 public class MvcApplication : System.Web.HttpApplication
 {
 
@@ -85,7 +87,7 @@ public class MvcApplication : System.Web.HttpApplication
     }
 
 }
-```
+{% endhighlight %}
 
 Below is a complete list of events you can override in HttpApplication class.
 
@@ -138,9 +140,10 @@ However,
 We sometimes need to execute some custom code before all this events take place in the first place, like registering a HttpModule. In that case we can use PreApplicationStart method to register this HttpModules.
 
 The PreApplicationStart method is defined at the assembly level using an attribute. We can define the name of a type as well as a method on that type that we want to run before our application starts. Below is the example,
-```csharp
+{% highlight csharp linenos %}
+
 [assembly: PreApplicationStartMethod(typeof(PreApplicationStart), "Start")]
-```
+{% endhighlight %}
 
 ## Working with Events Across Frameworks Using HttpModules {#working-with-events-across-frameworks-using-httpmodules}
 
@@ -152,7 +155,8 @@ For example, you could have a webforms application and an MVC application runnin
 
 Below is a sample code for a HttpModule that registers for HttpApplication events using event handlers.
 
-```csharp
+{% highlight csharp linenos %}
+
 public class HelloWorldModule : IHttpModule
 {
     public HelloWorldModule()
@@ -179,7 +183,7 @@ public class HelloWorldModule : IHttpModule
         
     }
 }
-```
+{% endhighlight %}
 
 ## Further Reading
 

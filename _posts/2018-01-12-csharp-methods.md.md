@@ -19,21 +19,24 @@ Methods in C# are operations associated with types. To provide a type with metho
 
 To take a simple example, suppose that we have an `Arithmetic` class, whose purpose is to provide arithmetic operations. One simple method this class could have is the `addTwoIntegers` method, whose job is to support the operation of adding two integers. To make use of this functionality, a piece of code would call the method by passing it two integers. The method would then return their sum. Such a piece of code might look like this:
 
-```cs
+{% highlight csharp linenos %}
+
 int sum = Arithmetic.addTwoIntegers(4,7);
-```
+{% endhighlight %}
 
 A method declaration, specified within a class declaration, comprises a method-head and a method-body. The method-head is made up of the following elements (square brackets enclose those which are optional).
 
-```txt
+{% highlight text linenos %}
+
 [attributes] [method-modifiers] return-type method-name ([ formal-parameter-list] )
-```
+{% endhighlight %}
 
 In the case of the example method, its method head could look something like this:
 
-```cs
+{% highlight csharp linenos %}
+
 [Description("a pointless method")] public static int addTwoIntegers(int a, int b)
-```
+{% endhighlight %}
 
 Let's discuss all the elements of a C# method one by one:
 
@@ -63,14 +66,15 @@ In other words, you can use attributes to inject additional information to the a
 
 The Obsolete attribute can be used to denote a method as obsolete - one that shouldn't be used anymore as it is no longer needed or may have some other alternative. The following code snippet illustrates how you can use the Obsolete attribute on top of a method declaration.
 
-```cs
+{% highlight csharp linenos %}
+
 [Obsolete("This method is obsolete...")]
 public static void DoSomeWork()
 
 {
 
 }
-```
+{% endhighlight %}
 
 If you use this method in your code and compile your program, you would see a warning displayed in the output window of the Visual Studio IDE. You can ignore this warning if you want to. You can learn more about c# attributes [here](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/attributes/).
 
@@ -101,7 +105,8 @@ When a method declaration includes an extern modifier, that method is said to be
 
 A method's parameters are the types that get passed to it when the method is called. The list of parameters begins by specifying zero or more 'fixed parameters', or it may finish by specifying a single parameter-array. This latter element - is declared using the `params` keyword - means that it is possible to pass an arbitrary number of types to a single method.
 
-```cs
+{% highlight csharp linenos %}
+
 public void change() //zero parameters
 {
 
@@ -116,21 +121,23 @@ public void change(params int[] s) //arbitrary number of parameters
 {
 
 }
-```
+{% endhighlight %}
 
 Fixed parameter specifications can have either two or three parts (ignoring attributes). The first, optional modifier can be either `ref` or `out`. The second part of the specification specifies the parameter's type, and the third part its name. Examples of these different elements can be seen in the illustrative code in the sections below.
 
-```txt
-[Modifier] parameter-type parameter-identifier
-```
+{% highlight text linenos %}
 
-```cs
+[Modifier] parameter-type parameter-identifier
+{% endhighlight %}
+
+{% highlight csharp linenos %}
+
 //here 'ref' is a modifier and 'a' is the parameter name with datatype 'int'
 public void change(ref int a) 
 {
     //do something
 }
-```
+{% endhighlight %}
 
 ### Parameter Passing
 
@@ -138,7 +145,8 @@ public void change(ref int a)
 
 The parameter modifiers `ref` and `out` relate to how the parameter is passed into the method. Where neither of these modifiers is used, the parameter is passed in 'by value'. In this case, when the method is called the value given is copied to the variable specified in the method declaration. The following example illustrates this point; note that the change made to variable b in the body of the `change` method doesn't result in a change to the variable used to invoke the method.
 
-```cs
+{% highlight csharp linenos %}
+
 public static void Main()
 {
     int a = 0;
@@ -149,7 +157,7 @@ public static void change(int b)
 {
     b = 5;
 }
-```
+{% endhighlight %}
 
 
 In this example, it was a value type that was passed 'by value'. But reference types can also be passed 'by value'. As we saw previously, the immediate value held by a reference type variable is actually a memory address. So when this variable is passed 'by value', the memory address is copied to the variable specified in the method head. But of course, because the two variables will hold the same memory address, any changes made within the method body to the object located at that memory address will be reflected outside the method (although this doesn't apply for immutable reference types like strings, which act more like value types - see lesson 4).
@@ -160,7 +168,8 @@ In C# we can pass variables into methods 'by reference'. Where a variable is pas
 
 Passing by reference is most obviously useful in cases where we want to treat a value type like a reference type. For instance, the method call in the following code does change the value of the variable a passed into the `change` method.
 
-```cs
+{% highlight csharp linenos %}
+
 public static void Main()
 {
     int a = 0;
@@ -171,7 +180,7 @@ public static void change (ref int b)
 {
     b = 5;
 }
-```
+{% endhighlight %}
 
 
 #### Output Parameters
@@ -180,7 +189,8 @@ Where a method parameter is defined (and invoked) using the `out` modifier, it i
 
 The reason that one might use output parameters is to return multiple values from a method. For instance, in the following code, an integer and a boolean is passed to the `change` method. This method sets the boolean to indicate whether or not the integer is greater than 0, and returns the value of the integer doubled.
 
-```cs
+{% highlight csharp linenos %}
+
 public static void Main()
 {
     bool b;
@@ -194,7 +204,7 @@ public static int change (int a, out bool b)
         b=true;
     return (2*a);
 }
-```
+{% endhighlight %}
 
 
 #### The Params Modifier
@@ -202,7 +212,8 @@ One can pass an arbitrary number of types to a method by declaring a parameter a
 
 Types passed as `params` are all passed by value. The following code gives an example of the use of the `params` modifier; the method called ignores the first type passed to it (a double) and returns the sum of all (an arbitrary number of) the integer values passed to it.
 
-```cs
+{% highlight csharp linenos %}
+
 public static void Main()
 {
     double a = 1;
@@ -218,7 +229,7 @@ public static int totalIgnoreFirst(double a, params int[] intArr)
         sum += intArr[i];
     return sum;
 }
-```
+{% endhighlight %}
 
 
 ## C\# Method Return Type
@@ -226,7 +237,8 @@ Methods can either return a type or not. A method that doesn't return a type mus
 
 A method will stop and return a value if it reaches a `return` statement at any point in its execution. The type returned is given at the end of such a return statement; its type must correspond with that specified in the method declaration. The following piece of code illustrates this point.
 
-```cs
+{% highlight csharp linenos %}
+
 public static int exampleMethod()
 {
     int i =0;
@@ -234,25 +246,28 @@ public static int exampleMethod()
     
     return i;
 }
-```
+{% endhighlight %}
 
 
 ## C\# Method Overloading
 
 Each method has a signature. This comprises the method's name and its parameters (excepting their names), but not the method's return type. In the following method header, the elements making up the method's signature are emphasized - note also that the `params` keyword is not included in the signature.
 
-```cs
+{% highlight csharp linenos %}
+
 public static int myMethod(int a, ref double b, out bool c, params int[] d)
-```
+{% endhighlight %}
 
 The importance of the signature is that no class is allowed to contain two methods with the same signature. Since the signature takes in more than the method name, however, one class can have methods sharing a name. For example, a class with the method whose header is given above might also contain a method with the header:
 
-```cs
+{% highlight csharp linenos %}
+
 public static int myMethod(int a, ref double b)
-```
+{% endhighlight %}
 
 Note, however, that since neither its return type nor the params keyword is part of a method's signature this class could not also contain a method with the header:
 
-```cs
+{% highlight csharp linenos %}
+
 public static void myMethod(int e, ref double f, out bool g, int[] h)
-```
+{% endhighlight %}

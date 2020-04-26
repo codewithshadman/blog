@@ -41,7 +41,8 @@ Below is an example of declaring a **delegate** and calling a method through it.
 
 ### Using A Delegate In C\# {#using-a-delegate-in-csharp}
 
-```csharp
+{% highlight csharp linenos %}
+
 class Program
 {
     public delegate double MathDelegate(double value1, double value2);
@@ -71,7 +72,7 @@ class Program
     }
 
 }
-```
+{% endhighlight %}
 
 As you can see, we use the **delegate** keyword to tell the compiler that we are creating a **delegate** type.
 
@@ -79,16 +80,18 @@ Instantiating **delegates** is easy with the automatic creation of a new **deleg
 
 You can also use the new keyword method of instantiating a delegate
 
-```cs
+{% highlight csharp linenos %}
+
 MathDelegate mathDelegate = new MathDelegate(Add);
-```
+{% endhighlight %}
 
 An instantiated **delegate** is an object; you can pass it around and give it as an argument to other methods.
 
 ### Multicast Delegates In C\# {#multicast-delegates}
 Another great feature of **delegates** is that you can combine them together. This is called multicasting. You can use the `+` or `+=` operator to add another method to the invocation list of an existing **delegate** instance. Similarly, you can also remove a method from an invocation list by using the decrement assignment operator (`-` or `-=`). This feature forms the base for **events** in **C#**. Below is a multicast **delegate** example.
 
-```csharp
+{% highlight csharp linenos %}
+
 class Program
 {
     static void Hello(string s)
@@ -147,22 +150,24 @@ class Program
         Console.ReadLine();
     }
 }
-```
+{% endhighlight %}
 
 All this is possible because **delegates** inherit from the `System.MulticastDelegate` class that in turn inherits from `System.Delegate`. Because of this, you can use the members that are defined in those base classes on your **delegates**.
 
 For example, to find out how many methods a multicast **delegate** is going to call, you can  use the following code:
 
-```csharp
+{% highlight csharp linenos %}
+
 int invocationCount = d.GetInvocationList().GetLength(0);
-```
+{% endhighlight %}
 
 ### Covariance and Contravariance In C\# {#covariance-and-contravariance-in-csharp}
 When you assign a method to a **delegate**, the method signature does not have to match the **delegate** exactly. This is called covariance and contravariance. Covariance makes it possible that a method has a return type that is more derived than that defined in the **delegate**. Contravariance permits a method that has parameter types that are less derived than those in the **delegate** type.
 
 #### Covariance With Delegates {#covariance-with-delegates}
 Here is an example of covariance,
-```csharp
+{% highlight csharp linenos %}
+
 class Program
 {
     public delegate TextWriter CovarianceDel();
@@ -180,13 +185,14 @@ class Program
         Console.ReadLine();
     }
 }
-```
+{% endhighlight %}
 
 Because both `StreamWriter` and `StringWriter` inherit from `TextWriter`, you can use the `CovarianceDel` with both methods. 
 
 #### Contravariance With Delegates {#contravariance-with-delegates}
 Below is an example of contravariance.
-```csharp
+{% highlight csharp linenos %}
+
 class Program
 {
     public static void DoSomething(TextWriter textWriter) { }
@@ -199,7 +205,7 @@ class Program
         Console.ReadLine();
     }
 }
-```
+{% endhighlight %}
 
 Because the method `DoSomething` can work with a TextWriter, it surely can also work with a StreamWriter. Because of contravariance, you can call the **delegate** and pass an instance of StreamWriter to the `DoSomething` method
 
@@ -212,7 +218,8 @@ For these cases, Microsoft added some new features to **C#**, 2.0 **anonymous me
 
 Below is an example of newer **lambda syntax**.
 
-```csharp
+{% highlight csharp linenos %}
+
 class Program
 {
     public delegate double MathDelegate(double value1, double value2);
@@ -233,7 +240,7 @@ class Program
     }
 
 }
-```
+{% endhighlight %}
 
 When reading this code, you can say go or goes to for the special **lambda syntax**. For example, the first **lambda expression** in the above example is read as "x and y goes to adding x and y".
 
@@ -241,25 +248,28 @@ The **lambda function** has no specific name as the methods. Because of this, **
 
 You can create lambdas that span multiple statements. You can do this by adding curly braces around the statements that form the lambda as below example shows.
 
-```csharp
+{% highlight csharp linenos %}
+
 MathDelegate mathDelegate = (x,y) => 
             {
                 Console.WriteLine("Add");
                 return x + y;
             };
-```
+{% endhighlight %}
 
 Sometimes declaring a **delegate** for an **event** feels a bit cumbersome. Because of this, the .NET Framework has a couple of built-in **delegates** types that you can use when declaring **delegates**. For the MathDelegate examples, you have used the following **delegate**:
 
-```csharp
+{% highlight csharp linenos %}
+
 public delegate double MathDelegate(double value1, double value2);
-```
+{% endhighlight %}
 
 You can replace this **delegate** with one of the built-in types namely ```Func<int, int, int>```. 
 
 like this,
 
-```csharp
+{% highlight csharp linenos %}
+
 class Program
     {
         public static void Main()
@@ -283,7 +293,7 @@ class Program
         }
 
     }
-```
+{% endhighlight %}
 
 The `Func<...>` types can be found in the `System` namespace and they represent **delegates** that return a type and take 0 to 16 parameters. All those types inherit from `System.MulticaseDelegate` so you can add multiple methods to the invocation list.
 
@@ -291,7 +301,8 @@ If you want a **delegate** type that doesn't return a value, you can use the Sys
 
 Here is an example of using the Action type,
 
-```csharp
+{% highlight csharp linenos %}
+
 class Program
     {
         public static void Main()
@@ -312,7 +323,7 @@ class Program
         }
 
     }
-```
+{% endhighlight %}
 
 You can learn more about .NET built-in delegates [here][built-in-delegates].
 
@@ -328,7 +339,8 @@ Delegate form the basis for the **event** system in **C#**.
 
 An event is a special kind of delegate that facilitates event-driven programming. Events are class members that cannot be called outside of the class regardless of its access specifier. So, for example, an event declared to be public would allow other classes the use of += and -= on the event, but firing the event (i.e. invoking the delegate) is only allowed in the class containing the event. Let's see an example,
 
-```csharp
+{% highlight csharp linenos %}
+
 //Define publisher class as Pub
 public class Pub
 {
@@ -342,13 +354,14 @@ public class Pub
         OnChange();
     }
 }
-```
+{% endhighlight %}
 
 A method in another class can then subscribe to the event by adding one of its methods to the event delegate:
 
 Below example shows how a class can expose a public **delegate** and raise it.
 
-```csharp
+{% highlight csharp linenos %}
+
 class Program
 {
     static void Main(string[] args)
@@ -371,7 +384,7 @@ class Program
         Console.ReadLine();
     }
 }
-```
+{% endhighlight %}
 
 Even though the event is declared public, it cannot be directly fired anywhere except in the class containing it.
 

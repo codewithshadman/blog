@@ -58,7 +58,8 @@ The most simple example I could come up with is alert **service** or notifier **
 
 Below is the sample code.
 
-```javascript
+{% highlight javascript linenos %}
+
 angular.module('app')
     .factory('alertService', function ($interval) {
 
@@ -99,7 +100,7 @@ angular.module('app')
         }
 
     });
-```
+{% endhighlight %}
 
 
 ## Different Methods To Create AngularJS Services {#different-methods-to-create-angularjs-services}
@@ -127,7 +128,8 @@ Let's see how to create and configure a **service** with the **provider function
 
 In the below example I created an oauth **service** that can be used for login and logut operation in the app. It internally depends on custom currentUser and formEncode **service** and angular built-in $http **service**. You can find currentUser and formEncode **service** code [here](https://gist.github.com/kudchikarsk/f8ae377255f04cdc00a0fbc35287dbb5) and [here](https://gist.github.com/kudchikarsk/4145277e8d81aedca5b69782f9fe1713).
 
-```javascript
+{% highlight javascript linenos %}
+
 angular.module("app")
     .config(function ($provide) {
         $provide.provider("oauth", function () {
@@ -189,7 +191,7 @@ angular.module("app")
 angular.module("app").config(["oauthProvider", function(oauthProvider) {
   oauthProvider.setUrl('/another-token-url');
 }]);
-```
+{% endhighlight %}
 
 The below three **service** creation methods all internally call the **provider function**. They're just syntactic sugar that make your code a little simpler if you don't need to provide all of the data required by the **provider function**.
 
@@ -198,7 +200,8 @@ The **factory function** is much easier to use than the above **provider** metho
 
 In the below example I created a simple localStorage **service** that internally use browser window local storage to store key value data.
 
-```javascript
+{% highlight javascript linenos %}
+
 angular.module("app")
     .factory("localStorage", function ($window) {
 
@@ -227,7 +230,7 @@ angular.module("app")
             remove: remove
         };
     });
-```
+{% endhighlight %}
 
 ### Service Method In AngularJs {#service-method-in-angularjs}
 
@@ -238,7 +241,8 @@ The only difference is that the function you passed to the **service method** wi
 
 There are several reasons why you may want that behavior. One is if you have defined an inheritance hierarchy in your code. Creating an instance with "new" will make sure that your instantiated object properly inherits from its prototypes. Here is an example,
 
-```javascript
+{% highlight javascript linenos %}
+
  angular.module('app')
         .service('logger', CustomerLogger);
 
@@ -258,20 +262,21 @@ There are several reasons why you may want that behavior. One is if you have def
     }
 
     CustomerLogger.prototype = Object.create(LoggerBase.prototype);
-```
+{% endhighlight %}
 
 From the above code you can call logger **service** `output` method which is part of base `LoggerBase` class even though logger **service** is registering CustomerLogger class.
 
 ### Angularjs Value Service {#angularjs-value-service}
 Similarly, the value function is just a thin wrapper around the **factory function**.  The value function is just shorthand for calling the **factory function** with no parameters. If you don't need to inject anything into your **factory function**, you can use the value function instead.
 
-```javascript
+{% highlight javascript linenos %}
+
 angular.module('app').value('clientId', 'a12345654321x');
 
 angular.module('app').controller('DemoController', ['clientId', function DemoController(clientId) {
   this.clientId = clientId;
 }]);
-```
+{% endhighlight %}
 
 You use it in much the same way you use the **constant service** which is the fifth function available for **service** creation. 
 
@@ -283,13 +288,14 @@ AngularJS splits the life-cycle into configuration phase and run phase and you c
 
 This is what the Constant **service** is for.
 
-```javascript
+{% highlight javascript linenos %}
+
 angular.module('app').constant('tokerUrl', '/another-token-url');
 
 angular.module("app").config(["oauthProvider", "tokerUrl", function(oauthProvider, tokerUrl) {
   oauthProvider.setUrl(tokerUrl);
 }]);
-```
+{% endhighlight %}
 
 ## Conclusion {#conclusion}
 There are five methods to create **services**: Value, Factory, Service, Provider and Constant.

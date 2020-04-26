@@ -44,47 +44,52 @@ Suppose that we define a Square class that inherits from a Rectangle class (a sq
 
 For the Square class to `override` the Rectangle class' getArea method, the Rectangle class' method must have first declared that it is happy to be overridden. One way in which it can do this is with the `virtual` keyword. So, for instance, the Rectangle class' getArea method might be specified like this:
 
-```cs
+{% highlight csharp linenos %}
+
 public virtual double getArea() // in Rectangle
 {
 	return length * width;
 }
-```
+{% endhighlight %}
 
 
 To override this method the Square class would then specify the overriding method with the `override` keyword. For example:
 
-```cs
+{% highlight csharp linenos %}
+
 public override double getArea() // in Square
 {
     return length * length;
 }
-```
+{% endhighlight %}
 
 
 Note that for one method to override another, the overridden method must not be static, and it must be declared as either `virtual`, `abstract` or `override`. Furthermore, the access modifiers for each method must be the same.
 
 The major implication of the specifications above is that if we construct a new Square instance and then call its `getArea` method, the method actually called will be the Square instance's getArea method. So, for instance, if we run the following code:
 
-```cs
+{% highlight csharp linenos %}
+
 Square sq = new Square(5);
 double area = sq.getArea();
-```
+{% endhighlight %}
 
 then the getArea method called on the second line will be the method defined in the Square class.
 
 There is, however, a more subtle point. To show this, suppose that we declare two variables in the following way:
 
-```cs
+{% highlight csharp linenos %}
+
 Square sq = new Square(4);
 Rectangle r = sq;
-```
+{% endhighlight %}
 
 Here variable r refers to sq as a Rectangle instance (possible because the Square class derives from the Rectangle class). We can now raise the question: if we run the following code
 
-```cs
+{% highlight csharp linenos %}
+
 double area = r.getArea();
-```
+{% endhighlight %}
 
 then which getArea method is actually called - the Square class method or the Rectangle class method?
 
@@ -93,7 +98,8 @@ The answer, in this case, is that the Square class method would still be called.
 ## C\# Method Hiding
 Where one method hides another, the hidden method does not need to be declared with any special keyword. Instead, the hiding method just declares itself as `new`. So, where the Square class hides the Rectangle class's getArea method, the two methods might just be written thus:
 
-```cs
+{% highlight csharp linenos %}
+
 public double getArea() // in Rectangle
 {
     return length * width;
@@ -103,17 +109,18 @@ public new double getArea() // in Square
 {
     return length * length;
 }
-```
+{% endhighlight %}
 
 
 Note that a method can `hide` another one without the access modifiers of these methods being the same. So, for instance, Square's getArea method could be declared as private, viz:
 
-```cs
+{% highlight csharp linenos %}
+
 private new double getArea()
 {
     return length * length;
 }
-```
+{% endhighlight %}
 
 
 This leads us to an important point. A `new` method only hides a super-class method with a scope defined by its access modifier. Specifically, where the access level of the hiding method is `private`, as in the method just described, this method only hides the super-class method for the particular class in which it is defined.
@@ -122,15 +129,17 @@ To make this point more concrete, suppose that we introduced a further class, Sp
 
 The final point to note about method hiding is that method calls do not always 'slide through' in the way that they do with virtual methods. So, if we declare two variables thus:
 
-```cs
+{% highlight csharp linenos %}
+
 Square sq = new Square(4);
 Rectangle r = sq;
-```
+{% endhighlight %}
 
 then run the code
 
-```cs
+{% highlight csharp linenos %}
+
 double area = r.getArea();
-```
+{% endhighlight %}
 
 the getArea method defined in the Rectangle class will be executed and not the one in the Square class.

@@ -49,7 +49,8 @@ First, let's see the implementation of Pub-Sub pattern in C# using Action delega
 
 An Action delegate is nothing but a built-in delegate with return type as void.
 
-```csharp
+{% highlight csharp linenos %}
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -96,7 +97,7 @@ class Program
         Console.ReadLine();
     }
 }
-```
+{% endhighlight %}
 
 In above code, we created a publisher and subscribe to its events using two anonymous methods sharing the signature of Action delegate.
 
@@ -116,7 +117,8 @@ As OnChange is a public property any outside user of the class can raise the eve
 
 Let's see the same code using event keyword,
 
-```csharp
+{% highlight csharp linenos %}
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -159,7 +161,7 @@ class Program
         Console.ReadLine();
     }
 }
-```
+{% endhighlight %}
 As you can see in above code, with the use of event keyword we are using OnChange as a field instead of property. I know its still public.
 
 But,
@@ -180,18 +182,20 @@ Here EventHandler is our that third component that acts as event bus between pub
 
 So instead of using Action delegate, we have to use EventHandler which is defined as the following delegate:
 
-```csharp
+{% highlight csharp linenos %}
+
 public delegate void EventHandler(
     object sender,
     EventArgs e
 )
-```
+{% endhighlight %}
 
 By default, EventHandler takes sender object and some event argument as a parameter. Here sender is the same object which raises the event, which is publisher in our case.
 
 Let's see an example
 
-```csharp
+{% highlight csharp linenos %}
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -251,7 +255,7 @@ class Program
         Console.ReadLine();
     }
 }
-```
+{% endhighlight %}
 
 Here the pub class uses generic EventHandler, which specifies the type of event argument you need to pass to the while raising the EventHandler OnChange, MyArgs in our case
 
@@ -259,7 +263,8 @@ Here the pub class uses generic EventHandler, which specifies the type of event 
 
 Let's start with code this time
 
-```csharp
+{% highlight csharp linenos %}
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -321,7 +326,7 @@ class Program
         Console.ReadLine();
     }
 }
-```
+{% endhighlight %}
 
 When you run this code you will find that the first subscriber is executed successfully and the second one throws an exception and the third one is never called.
 
@@ -329,7 +334,8 @@ If this not the behavior you want, you need to manually raise the event and hand
 
 Let's see the code example
 
-```csharp
+{% highlight csharp linenos %}
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -417,7 +423,7 @@ class Program
         Console.ReadLine();
     }
 }
-```
+{% endhighlight %}
 
 ## Where To Apply Publish Subscribe Pattern?
 

@@ -34,7 +34,8 @@ In this article, we're going to be learning about a whole host of different tips
 
 Let's start with some code,
 
-```cs
+{% highlight csharp linenos %}
+
 using System;
 using static System.Console;
 
@@ -65,48 +66,53 @@ namespace string_formatting_tips
     }
 }
 
-```
+{% endhighlight %}
 
 The above code reads the user input and checks if the user has entered any value. It also makes sure that the user hasn't typed in a few spaces and hit Enter using the `Trim()` method.
 
-```cs
+{% highlight csharp linenos %}
+
 name.Trim() == ""
-```
+{% endhighlight %}
 
 The first tip we're going to look at is to simplify the above code, and what we're going to do is actually just delete all of the conditional code:
 
-```cs
+{% highlight csharp linenos %}
+
 if (name == null || name == "" || name.Trim() == "")
 {
     ...
 }  
-```
+{% endhighlight %}
 
 and instead, we're going to make use of the string.IsNullOrWhiteSpace method. 
 
-```cs
+{% highlight csharp linenos %}
+
 if (String.IsNullOrWhiteSpace(name))
 {
     ...
 }
-```
+{% endhighlight %}
 
 This string.IsNullOrWhiteSpace method returns true if the input string is null and an empty string or contains only whitespace characters, such as spaces and tabs. 
 
 There's also another convenience method on the String class here, and that's the IsNullOrEmpty method. 
 
-```cs
+{% highlight csharp linenos %}
+
 if (String.IsNullOrEmpty(name))
 {
     ...
 } 
-```
+{% endhighlight %}
 
 This method returns true if the specified string is null or empty, meaning that it contains no characters. But for this version, we're going to make use of the IsNullOrWhiteSpace because we want to make sure that the user hasn't typed in a few spaces and hit Enter. 
 
 Our final code will look like this:
 
-```cs
+{% highlight csharp linenos %}
+
 using System;
 using static System.Console;
 
@@ -136,13 +142,14 @@ namespace string_formatting_tips
         }        
     }
 }
-```
+{% endhighlight %}
 
 
 
 ## String Formatting and String Interpolation {#string-formatting-and-string-interpolation}
 
-```cs
+{% highlight csharp linenos %}
+
 using System;
 using static System.Console;
 
@@ -198,46 +205,51 @@ namespace string_formatting_tips
         }
     }
 }
-```
+{% endhighlight %}
 
 In the above program, we take name and age as input and display it using the string concatenation. 
 
-```cs
+{% highlight csharp linenos %}
+
 WriteLine("Name:" + name + " Age:" + age);
 ReadLine();
-```
+{% endhighlight %}
 But this is a little bit clunky. As an alternative, we can make use of the string.Format method. 
 
 There are several different overloads to this method, one of which allows us to provide a formatting string as the first parameter and then one or more arguments to fulfill that format.
 
-```cs
+{% highlight csharp linenos %}
+
 var line = String.Format("Name:{0} Age:{1}", name, age);
 WriteLine(line);
-```
+{% endhighlight %}
 
 Notice that we've got these braces or curly brackets, and inside these braces, we've got the values 0 and 1. We can then specify values that will be inserted into these positions, 0 and 1. So into position 0, we want to output the name, and into this second position, we want to insert the value age. 
 
 I'm just going to tidy this up so we can see it on one line. 
 
-```cs
+{% highlight csharp linenos %}
+
 WriteLine(String.Format("Name:{0} Age:{1}", name, age));
-```
+{% endhighlight %}
 
 And the benefit of this method is we're not manually concatenating strings. We can see the overall message here, and then the values that get inserted into that message. 
 
 Some methods provide a convenient way to pass a format string and a number of values, and then under the hood call string.Format. So this applies to the WriteLine method. One of the overloads of the WriteLine method allows us to specify a format string and then a number of values like this:
 
-```cs
+{% highlight csharp linenos %}
+
 WriteLine("Name:{0} Age:{1}", name, age);
-```
+{% endhighlight %}
 
 One disadvantage of the string.Format approach is that we're somewhat disconnected between the items in the format string, such as 0 and 1, and the actual data that's being passed into them.
 
 An alternative method that solves this problem is to make use of C#'s string interpolation. So we can create an interpolated string by prefixing the string with a dollar sign, as we can see here. 
 
-```cs
+{% highlight csharp linenos %}
+
 WriteLine($"Name:{name} Age:{age}");
-```
+{% endhighlight %}
 
 As with the string.Format version, we make use of the braces, but inside the braces here, notice that rather than specifying positions such as 0 and 1, we specify directly the item that we want to output. 
 
@@ -249,7 +261,8 @@ So this may help prevent bugs where we've got the order of the string.Format val
 Sometimes you may want to format strings in such a way as things line up perfectly in columns. 
 
 
-```cs
+{% highlight csharp linenos %}
+
 using System;
 using System.Collections.Generic;
 using static System.Console;
@@ -284,17 +297,18 @@ namespace string_formatting_tips
         }
     }
 }
-```
+{% endhighlight %}
 
 The above program generates the following result:
 
-```txt
+{% highlight text linenos %}
+
 Name: Clarence Barnes Age:27
 Name: Erica Wood Age:33
 Name: Lois Watson Age:56
 Name: Teresa Moore Age:25
 Name: Addison Richardson Age:45
-```
+{% endhighlight %}
 
 
 
@@ -302,9 +316,10 @@ Let's see how we can line up the output perfectly in columns.
 
 We'll start with a harder way of solving this problem. Once again, we're going to use string concatenation. 
 
-```cs
+{% highlight csharp linenos %}
+
 WriteLine("Name: "+ person.Name.PadRight(20)+" Age:"+ person.Age.ToString().PadRight(20));
-```
+{% endhighlight %}
 
 Here we call the string's PadRight method and pass in a value of 20, which represents the total column width that we want here. So as long as none of the first names exceed 20 we should be okay. 
 
@@ -314,31 +329,35 @@ So we called ToString.PadRight, and made the column holding the Age 20 wide as w
 
 The above changes will generate the following result:
 
-```txt
+{% highlight text linenos %}
+
 Name: Clarence Barnes      Age:27
 Name: Erica Wood           Age:33
 Name: Lois Watson          Age:56
 Name: Teresa Moore         Age:25
 Name: Addison Richardson   Age:45
-```
+{% endhighlight %}
 
 There's an easier way to accomplish this, however, and that's to once again make use of the string.Format method. 
 
-```cs
+{% highlight csharp linenos %}
+
 WriteLine(String.Format("Name: {0,-20} Age:{1,-20}", person.Name, person.Age));
-```
+{% endhighlight %}
 
 or simply do this:
 
-```cs
+{% highlight csharp linenos %}
+
 WriteLine("Name: {0,-20} Age:{1,-20}", person.Name, person.Age);
-```
+{% endhighlight %}
 
 or this:
 
-```cs
+{% highlight csharp linenos %}
+
 WriteLine($"Name: {person.Name,-20} Age:{person.Age,-20}");
-```
+{% endhighlight %}
 
 So this is almost identical to what we saw before, but notice in the formatting expressions here we've got an additional parameter. The first parameter specifies the position of the argument that will be mapped to that element, so 0 represents Name and 1 represents Age, but the second parameter after the comma allows us to specify formatting information. 
 
@@ -352,7 +371,8 @@ In addition to using the second parameter of these items to specify column width
 
 Let's see a completely different example, suppose we want to display a product ranting of type int. 
 
-```cs
+{% highlight csharp linenos %}
+
 using System;
 using System.Collections.Generic;
 using static System.Console;
@@ -396,34 +416,38 @@ Name: HEAD PROTECTED CAP   Rating:5
 Name: BORING HEAD CAP      Rating:-5
 Name: NEW AGE SUN GLASS    Rating:0
 */
-```
+{% endhighlight %}
 
 Suppose that rather than outputting the integer value for the productivity rating as it is, we wanted some conditional formatting. So, for example, we wanted to output the text Good if the value is positive, we wanted to output Bad if the value is negative, and if the value is 0, we want to assume that they're a new product and don't currently have a rating. 
 
 So we could use an if statement or ternary operator to do this depending on the value for productivity rating, 
 
-```cs
+{% highlight csharp linenos %}
+
 var rating = product.Rating < 0 ? "Bad": product.Rating > 0 ? "Good" : "Not Rated";
 WriteLine($"Name: {product.Name,-20} Rating:{rating,-20}");
-```
+{% endhighlight %}
 
 but there's an easier way, and that's to use a three‑part conditional formatting string.
 
-```cs
+{% highlight csharp linenos %}
+
 WriteLine($"Name: {product.Name,-20} Rating:{product.Rating.ToString("Good;Bad;Not Rated"),-20}");
-```
+{% endhighlight %}
 
 A three‑part format string is separated by semicolons here. In the first part of this three‑part format, we can specify how we want positive numbers presented. 
 
 We can also output the actual value. One way we can get the actual value is to specify the hash or the pound symbol, and this will map to the numeric value, in our case the rating. 
 
-```cs
+{% highlight csharp linenos %}
+
 product.Rating.ToString("Good #;Bad -#;Not Rated")
-```
+{% endhighlight %}
 
 So now we've defined this format, we can go and make use of it:
 
-```cs
+{% highlight csharp linenos %}
+
 using System;
 using System.Collections.Generic;
 using static System.Console;
@@ -459,59 +483,65 @@ namespace string_formatting_tips
     }
 }
 
-```
+{% endhighlight %}
 
 The above program will generate the following result:
 
-```txt
+{% highlight text linenos %}
+
 Name: BLACK SUN GLASS      Rating:Good 5
 Name: BEAUTIFUL HEAD CAP   Rating:Good 3
 Name: HEAD PROTECTED CAP   Rating:Good 5
 Name: BORING HEAD CAP      Rating:Bad -5
 Name: NEW AGE SUN GLASS    Rating:Not Rated
-```
+{% endhighlight %}
 
 ## Building Strings with the StringBuilder Class {#building-strings-with-the-stringbuilder-class}
 
 Let's say we want to display all the above products name in one line separated by a comma.
 
-```txt
+{% highlight text linenos %}
+
 BLACK SUN GLASS, BEAUTIFUL HEAD CAP, HEAD PROTECTED CAP, BORING HEAD CAP, NEW AGE SUN GLASS,
-```
+{% endhighlight %}
 
 Then the required program might look like this,
 
-```cs
+{% highlight csharp linenos %}
+
 var line = "";
 foreach (var product in products)
 {
     line += product.Name + ", ";
 }
 Console.WriteLine(line);
-```
+{% endhighlight %}
 
 So this first version uses string concatenation here where we're just adding one string to another string inside this loop. When you're concatenating strings like this, one alternative is to use the StringBuilder class. 
 
 
-```cs
+{% highlight csharp linenos %}
+
 var stringBuilder = new StringBuilder();
-```
+{% endhighlight %}
 
 The two most common methods that you'll use are the StringBuilder.Append method and the AppendLine method, which adds a carriage return line feed at the end. 
 
-```cs
+{% highlight csharp linenos %}
+
 foreach (var product in products)
 {
     stringBuilder.Append(product.Name);
     stringBuilder.Append(", ");
 }
-```
+{% endhighlight %}
 
 To get the final string, we can call the ToString method of the StringBuilder. But because we're using string interpolation here, we don't have to manually specify the ToString method, it will be called automatically for us. 
 
-```cs
+{% highlight csharp linenos %}
+
 Console.WriteLine(stringBuilder);
-```
+{% endhighlight %}
 
 There are two main reasons why you might want to consider using a StringBuilder over manually concatenating strings. 
 
@@ -525,7 +555,8 @@ The second reason you may want to consider using a StringBuilder is if it improv
 
 Sometimes you might have more complex formatting requirements, or you may want to create the formatting once and then reuse it in multiple places or multiple applications. One way to achieve this is to create custom format providers. Let's create one for the rating.
 
-```cs
+{% highlight csharp linenos %}
+
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -582,7 +613,7 @@ namespace string_formatting_tips
         }
     }
 }
-``` 
+{% endhighlight %} 
 
 ## Summary
 So that brings us to the end of this article. We started by learning how we can simplify null or whitespace checking code with one of the string static methods such as the string.IsNullOrWhiteSpace method. 

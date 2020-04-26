@@ -36,11 +36,12 @@ A data type is a value type if it holds a data value within its own memory space
 
 In the following lines of code, two variables are declared and set with integer values.
 
-```cs
+{% highlight csharp linenos %}
+
 int x = 10;
 int y = x;
 y = 20; // after this statement x holds value 10 and y holds value 20
-```
+{% endhighlight %}
 
 ![A picture illustrating a value type object](/assets/images/value_type.png)
 
@@ -68,12 +69,13 @@ bool | System.Boolean | N/A | 1 / 2 | true or false
 
 Reference types actually hold the value of a memory address occupied by the object they reference. Consider the following piece of code, in which two variables are given a reference to the same object (for the sake of the example, this object is taken to contain the numeric property 'myValue').
 
-```cs
+{% highlight csharp linenos %}
+
 object x = new object();
 x.myValue = 10;
 object y = x;
 y.myValue = 20; // after this statement both x.myValue and y.myValue equal 20
-```
+{% endhighlight %}
 
 This code illustrates how changing a property of an object using a particular reference to it is reflected in all other references to it. 
 
@@ -88,15 +90,17 @@ New reference types can be defined using [class](/csharp-object-oriented-program
 
 However, that although strings are reference types, they work rather more like value types. When one string is set to the value of another, eg
 
-```cs
+{% highlight csharp linenos %}
+
 string s1 = "hello";
 string s2 = s1;
-```
+{% endhighlight %}
 Then s2 does at this point reference the same string object as s1. However, when the value of s1 is changed, for instance with
 
-```cs
+{% highlight csharp linenos %}
+
 s1 = "goodbye";
-```
+{% endhighlight %}
 what happens is that a new string object is created for s1 to point to. Hence, following this piece of code, s1 equals "goodbye", whereas s2 still equals "hello".
 
 The reason for this behaviour is that string objects are 'immutable'. That is, the properties of these objects can't themselves change. So in order to change what a string variable references, a new string object must be created.
@@ -108,7 +112,8 @@ C# allows you convert any value type to a corresponding reference type, and to c
 
 When the second line executes, an object is initiated as the value of 'box', and the value held by i is copied across to this object. It is interesting to note that the runtime type of box is returned as the boxed value type; the 'is' operator thus returns the type of box below as 'int'.
 
-```cs
+{% highlight csharp linenos %}
+
 int i = 123;
 object box = i; // boxing happens here
 if (box is int)
@@ -116,7 +121,7 @@ if (box is int)
 	Console.Write("Box contains an int"); // this line is printed
 } 
 int x = (int)box; // unboxing happens here
-```
+{% endhighlight %}
 
 The important difference between a value type and a reference type is that the value type
 stores its value directly. A reference type stores a reference that points to an object on the heap that contains the value.
@@ -129,15 +134,17 @@ The only other important thing to know is that when boxing and unboxing happen (
 
 Boxing, on the other hand, is not that obvious. For example, calling GetType always boxes your value type because GetType is defined only on an object and can’t be overridden.
 
-```cs
+{% highlight csharp linenos %}
+
 int i = 3;
 Type t = i.GetType();
-``` 
+{% endhighlight %} 
 
 Boxing occurs in other situations, too. One that can come as a surprise is that a value type is boxed when you use it as an interface. This snippet boxes the value 3 so you can use it as an interface.
 
-```cs
+{% highlight csharp linenos %}
+
 IFormattable x = 3;
-```
+{% endhighlight %}
 
 There are some performance implications with each box and unbox operation. When using the nongeneric collections to store a value type, you have a lot of those operations. The boxing and unboxing operations can hurt performance; however, now that you have generic support in the .NET Framework, this is less of an issue because you can store value types in a collection without boxing them.

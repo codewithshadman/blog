@@ -16,7 +16,8 @@ author: shadman_kudchikar
 
 In C#, a field is a variable which is declared directly in a class or struct in C#. A property is a member that provides a flexible mechanism to read, write, or compute the value of a private field.
 
-```cs
+{% highlight csharp linenos %}
+
 public class MyClass
 {
     // this is a field.  It is private to your class and stores the actual data.
@@ -40,7 +41,7 @@ public class MyClass
     // used to generate a private field for you
     public int AnotherProperty { get; set;} 
 }
-```
+{% endhighlight %}
 
 If you are a beginner, you might get confused between a C# field and a C# property. You can store value using either a field or a property and retrieve the value back. You can even protect both fields and properties using access modifiers such as private or protected. So you might wonder, why we need to have property when you can achieve the same using field or vice-versa? 
 
@@ -74,7 +75,8 @@ Fields are variables associated with either classes or instances of classes. The
 
 By default, fields are associated with class instances. Use of the 'static' keyword, however, associates a field with a class itself, so there will only ever be one such field per class, regardless of the number of the class instances (and the static field will exist even if there are no class instances).
 
-```cs
+{% highlight csharp linenos %}
+
 class Program
 {
     static void Main(string[] args)
@@ -106,13 +108,14 @@ public class MyClass
         MyClass.NoOfInstances = MyClass.NoOfInstances + 1;
     }
 }
-```
+{% endhighlight %}
 
 ### C\# Readonly
 
 Where a field is readonly, its value can be set only once, either in the class declaration, or in the class constructor (for static fields this will be static constructor). The following code example (which, please note, deliberately doesn't compile) shows both cases: the field StaticReadonlyInt is set in the class declaration; the field readonlyString is set in the class constructor.
 
-```cs
+{% highlight csharp linenos %}
+
 public class MyClass
 {
     public static readonly float pi = 3.14f; // a static readonly field
@@ -134,33 +137,37 @@ public class MyClass
         gravityOnEarth = 2f; //this will not compile
     }
 }
-```
+{% endhighlight %}
 
 Also,
 
 While we're on declarations, note also that a field declaration can involve multiple fields, as in the following line of code
 
-```cs
+{% highlight csharp linenos %}
+
 public static int a = 1, b, c = 2;
-```
+{% endhighlight %}
 
 which is equivalent to
 
-```cs
+{% highlight csharp linenos %}
+
 public static int a = 1;
 public static int b;
 public static int c = 2;
-```
+{% endhighlight %}
 
 ### C\# Constants
 
 Constants are unchanging types, associated with classes, that are accessible at compile time. Because of this latter fact, constants can only be value types rather than reference types. Constant declarations take the 'const' keyword (not 'static', even though they are associated with classes), and the five modifiers 'public', 'protected', 'internal', 'private' and 'new'.
 
-```cs
-public const int area = 4;
-```
+{% highlight csharp linenos %}
 
-```cs
+public const int area = 4;
+{% endhighlight %}
+
+{% highlight csharp linenos %}
+
 class Program
 {
     static void Main(string[] args)
@@ -178,7 +185,7 @@ class Program
         }
     }
 }
-```
+{% endhighlight %}
 
 If you've been reading carefully, you may be struck by the thought: what's the difference between declaring a field as 'const' and declaring a field 'static readonly'. Good question. The general point is that static readonly fields can be reference types as well as value types. However the main intention is to allows the class designer to remove write privilege of attributes that are intended to be set only during construction, even from methods of the target class (see [Private class data pattern](https://en.wikipedia.org/wiki/Private_class_data_pattern)).
 
@@ -188,7 +195,8 @@ Properties can be thought of as 'virtual' fields. From the outside, a class' pro
 
 Property declarations take just those modifiers taken by methods (see [C# Method Modifiers](/csharp-methods/#c-method-modifiers)) Unlike languages like Java, C# provides dedicated support for accession and mutation of these properties. Suppose, for instance, that a type contains an internal field called 'age'. With the following code one could specify a property Age, providing accessors and mutators to this internal field.
 
-```cs
+{% highlight csharp linenos %}
+
 public int Age
 {
     get
@@ -200,18 +208,20 @@ public int Age
         this.age = value;
     }
 }
-```
+{% endhighlight %}
 
 
 Notice that the term 'value' is used in the above piece of code. This variable always holds the value passed to the 'set' block. For instance, the execution of the following line of code (assuming the appropriate class instance) would automatically set 'value' in the 'set' block to 4.
 
-```cs
+{% highlight csharp linenos %}
+
 person.Age = 4;
-```
+{% endhighlight %}
 
 This property Age can be described as 'read-write' since it can be both read from and written to. To make a property 'write-only' one simply does not specify a 'get' block; to make it 'read-only' one does not specify a 'set' block. The following piece of code demonstrates the read-only property 'Adult':
 
-```cs
+{% highlight csharp linenos %}
+
 public bool Adult
 {
     get
@@ -222,14 +232,15 @@ public bool Adult
             return true;
     }
 }
-```
+{% endhighlight %}
 
 ## C\# Indexers
 If properties are 'virtual fields', indexers are more like 'virtual arrays'. They allow a class to emulate an array, where the elements of this array are actually dynamically generated by function calls.
 
 The following piece of code defines a class to hold a list of runners in an athletics race. The runners are held in lane order, and an indexer is exposed which allows the list to be both read from and written to. The indexer deals gracefully with cases in which the lane number passed to it is either too high or too low.
 
-```cs
+{% highlight csharp linenos %}
+
 class RaceDetails
 {
     private string[] lanes;
@@ -252,16 +263,17 @@ class RaceDetails
         }
     }
 }
-```
+{% endhighlight %}
 
 
 The following simple code illustrates use being made of the class just defined. The name of the person in the race's first lane is set, and then this name is sent to a console window.
 
-```cs
+{% highlight csharp linenos %}
+
 RaceDetails rd = new RaceDetails();
 rd[0] = "fred";
 Console.WriteLine("Lane One : " + rd[0]);
-```
+{% endhighlight %}
 
 As can be seen from the example, an indexer is defined in a similar way to a property. One important difference is in the indexer's signature; the word 'this' is used in place of a name, and after this word indexing elements are provided.
 
@@ -271,7 +283,8 @@ Because indexing elements are not limited to integers, the original description 
 
 The following code shows an implementation for the RaceDetails class of an indexer whose indexing element is a string. Using this indexer it is possible to refer to a lane using the name of the person currently filling that lane.
 
-```cs
+{% highlight csharp linenos %}
+
 public string this[string s]
 {
     get
@@ -296,14 +309,15 @@ private int getCorrespondingLane(string myName)
     }
     return -1;
 }
-```
+{% endhighlight %}
 
 
 The following piece of code gives an example of the kind of use one might make of this string indexer.
 
-```cs
+{% highlight csharp linenos %}
+
 rd[5] = "fred";
 rd["fred"] = "jill";
 Console.WriteLine(rd[5]); //Displays jill
-```
+{% endhighlight %}
 

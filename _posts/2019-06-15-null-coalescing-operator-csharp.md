@@ -37,7 +37,8 @@ This is why Nullables were added to the .Net Framework. A Nullable is a wrapper 
 
 Below is a simplified version of the support of Nullables in the .NET Framework
 
-```csharp
+{% highlight csharp linenos %}
+
 [Serializable, StructLayout(LayoutKind.Sequential)]
 public struct Nullable<T> where T : struct
 {
@@ -93,16 +94,17 @@ public struct Nullable<T> where T : struct
         return value.Value;
     }
 }
-```
+{% endhighlight %}
 
 You can use the '?' operator to shorthand the syntax e.g. int?, long? instead of using Nullable<T>.
 
 ### Shorthand Syntax For Nullable Types {#shorthand-syntax-for-nullable-types}
 
-```csharp
+{% highlight csharp linenos %}
+
 int? i = null;
 double? d = null;
-```
+{% endhighlight %}
 
 From the above definition, you can easily make out that:
 
@@ -120,21 +122,23 @@ for nullable value types or for reference types.
 The operator returns the left value if it’s not null; otherwise, the right operand.
 Here is an example of using the operator.
 
-```csharp
+{% highlight csharp linenos %}
+
 int? x = null;
 int y = x ?? -1;
-```
+{% endhighlight %}
 
 In this case, the value of y is -1 because x is null.
 You can also nest the null-coalescing operator, below is an example,
 
-```csharp
+{% highlight csharp linenos %}
+
 int? x = null;
 int? z = null;
 int y = x ??
         z ??
         -1;
-```
+{% endhighlight %}
 
 Of course, you can achieve the same with an if statement but the null-coalescing operator
 can shorten your code and improve its readability.
@@ -146,7 +150,8 @@ Let us see how to use the Null coalescing operators in practical scenarios.
 ### Scenario 1 - Assign a Nullable type to Non-Nullable Type
 Consider the following piece of code where we are assigning a nullable type to a non-nullable type.
 
-```csharp
+{% highlight csharp linenos %}
+
 class Program
 {
     static void Main(string[] args)
@@ -158,13 +163,14 @@ class Program
         Console.ReadLine();
     }
 }
-```
+{% endhighlight %}
 
 In the code above, if the nullable type (in our case ‘a’) has a null value and the null value is assigned to a non-nullable type (in our case ‘b’), an exception of type InvalidOperationException is thrown.
 
 One way to resolve this error is to use an "IF..ELSE" condition and check the value of the nullable type before assigning it to the non-nullable type
 
-```csharp
+{% highlight csharp linenos %}
+
 class Program
 {
     static void Main(string[] args)
@@ -180,11 +186,12 @@ class Program
         Console.ReadLine();
     }
 }
-```
+{% endhighlight %}
 
 The code will now compile and give you desired results. However using the null coalescing operator in such scenarios, you can create clearer code than the equivalent if-else statement, as shown below:
 
-```csharp
+{% highlight csharp linenos %}
+
 class Program
 {
     static void Main(string[] args)
@@ -196,13 +203,14 @@ class Program
         Console.ReadLine();
     }
 }
-```
+{% endhighlight %}
 
 In the code shown above, if ‘a’ has been assigned a non-null value, then this value will be assigned to the int b. However since the nullable type ‘a’ has been assigned null, the value to the right of the operator (??) i.e. zero will be assigned to b instead.
 
 ### Scenario 2 - How you can use this operator in LINQ.
 
-```csharp
+{% highlight csharp linenos %}
+
 using System;  
 using System.Collections.Generic;  
 using System.Linq;  
@@ -243,12 +251,13 @@ namespace NullCollation
         }  
     }  
 }
-```
+{% endhighlight %}
 
 ### Scenario 3 - In expressions with the null-conditional operators ?. and ?[]
 You can use the null-coalescing operator to provide an alternative expression to evaluate in case the result of the expression with null-conditional operations is null:
 
-```csharp
+{% highlight csharp linenos %}
+
 double SumNumbers(List<double[]> setsOfNumbers, int indexOfSetToSum)
 {
     return setsOfNumbers?[indexOfSetToSum]?.Sum() ?? double.NaN;
@@ -256,18 +265,20 @@ double SumNumbers(List<double[]> setsOfNumbers, int indexOfSetToSum)
 
 var sum = SumNumbers(null, 0);
 Console.WriteLine(sum);  // output: NaN
-```
+{% endhighlight %}
 ### Scenario 4 - Null-conditional delegate invocation
 
 Use the ?. operator to check if a delegate is non-null and invoke it in a thread-safe way (for example, when you [raise an event](/delegates-and-events-in-csharp/#create-and-raise-events-in-csharp)), as the following code shows:
 
-```csharp
+{% highlight csharp linenos %}
+
 myDelegate?.Invoke(args)
-```
+{% endhighlight %}
 
 ### Scenario 5 - You can use the null coalesce operator to lazy load certain properties.
 
-```csharp
+{% highlight csharp linenos %}
+
 public class Vocabulary
 {
     private IEnumerable<string> _definitions;
@@ -286,7 +297,7 @@ public class Vocabulary
         }
     } 
 }
-```
+{% endhighlight %}
 
 ## Further Reading {#further-reading}
 

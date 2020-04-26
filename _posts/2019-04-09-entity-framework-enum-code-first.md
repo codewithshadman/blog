@@ -46,7 +46,8 @@ C# usually manages the IDs of enumeration for you.
 
 As you version your code from one version to the next you want to make sure that those IDs remain consistent. To keep it consistent we assing values to each enum. Below is the code for StatusEnum we will be working on.
 
-```csharp
+{% highlight csharp linenos %}
+
 public enum StatusEnum
 {
     FullTime = 0,
@@ -54,25 +55,27 @@ public enum StatusEnum
     Casual = 2,
     Contract = 3
 }
-```
+{% endhighlight %}
 
 ## Creating Lookup Table Class Using Code-First Approch {#creating-lookup-table-class-using-code-first-approch}
 
 We will create another class named Status to represent our above enum as lookup table. Status class will act as a lookup table for our above StatusEnum. Here we use StatusEnum as datatype for our IDs to constrain the Status ID to just those values in the StatusEnum.
 
-```csharp
+{% highlight csharp linenos %}
+
 public class Status
 {
     public StatusEnum Id { get; set; }
     public string Name { get; set; }
 }
-```
+{% endhighlight %}
 
 ## Define Foreign Key Constraint Using Code-First Conventions {#define-foreign-key-constraint-using-code-first-conventions}
 
 Below is the Employee class that represent our Employee Table. Below code will create the Foreign Key relationship inside a Employee, and constrain the Status ID to just those values in the StatusEnum.
 
-```csharp
+{% highlight csharp linenos %}
+
 public class Employee
 {
     public long Id { get; set; }
@@ -91,13 +94,14 @@ public class Employee
     
 
 }
-```
+{% endhighlight %}
 
 ## Disable Identity for Lookup Table IDs {#disable-identity-for-lookup-table-ids}
 
 When you're backing enum with the database you want to control those IDs. We can disable the identity on our lookup Status table by confuguring the modelBuilder. By disabling the identity we will have control over the IDs we want to poplulate, which will be the enum values in our case.
 
-```csharp
+{% highlight csharp linenos %}
+
 public class ApplicationContext:DbContext
 {
     public DbSet<Employee> Employees { get; set; }
@@ -112,13 +116,14 @@ public class ApplicationContext:DbContext
             .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
     }
 }
-```
+{% endhighlight %}
 
 ## Seeding Enum into Lookup Table {#seeding-enum-into-lookup-table}
 
 In order to insert the enumeration values into the database we're going to take advantage of the seed method. This is a method on the configuration class that was created whenever we enabled migrations for the first time. Let's jump to the code, and see how we can create seed data for an enumeration.
 
-```csharp
+{% highlight csharp linenos %}
+
 internal sealed class Configuration : DbMigrationsConfiguration<ApplicationContext>
 {
     public Configuration()
@@ -141,7 +146,7 @@ internal sealed class Configuration : DbMigrationsConfiguration<ApplicationConte
                 .ToArray());
     }
 }
-```
+{% endhighlight %}
 
 By using the above method for seeding we can eliminate mistakes and error occur in populating enums in our lookup table.
 

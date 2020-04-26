@@ -33,7 +33,8 @@ The Tuple class was introduced in .NET Framework 4.0. A tuple is a data structur
 
 Let's see some sample code
 
-```cs
+{% highlight csharp linenos %}
+
 using System;
 using static System.Console;
 
@@ -69,7 +70,7 @@ namespace csharp_data_types_and_object_tips
         }
     }
 }
-```
+{% endhighlight %}
 
 When you find yourself adding "out" parameters to your methods or creating a simple POCO or model to return multiple fields, you should consider using a Tuple.
 
@@ -91,7 +92,8 @@ The ValueTuple is only available in .NET Framework 4.7. If you don’t see Value
 
 The following are examples of how to use ValueTuple.
 
-```cs
+{% highlight csharp linenos %}
+
 using System;
 using static System.Console;
 
@@ -141,11 +143,12 @@ namespace csharp_data_types_and_object_tips
         }
     }
 }
-```
+{% endhighlight %}
 
 We can now specify different member names for a ValueTuple returned from a method.
 
-```cs
+{% highlight csharp linenos %}
+
 using System;
 using static System.Console;
 
@@ -172,13 +175,14 @@ namespace csharp_data_types_and_object_tips
         }
     }
 }
-```
+{% endhighlight %}
 
 Also, ValueTuple now allows "discards" in deconstruction for the members you are not going to use.
 
-```cs
+{% highlight csharp linenos %}
+
 (var id, var fname, _) = GetPerson(); // use discard _ for the unused member LastName
-```
+{% endhighlight %}
 
 In summary, if you have been holding out on using Tuples like me due to the lack of naming fields or performance issues before C# 7, it's time to give them another chance.
 
@@ -186,7 +190,8 @@ In summary, if you have been holding out on using Tuples like me due to the lack
 
 Let's take a look next to how we can create enums that we can combine to represent multiple options in a single enum value. 
 
-```cs
+{% highlight csharp linenos %}
+
 using System;
 using static System.Console;
 
@@ -230,13 +235,14 @@ namespace csharp_data_types_and_object_tips
 
 //Output:
 //<b>Hello world!<b>
-```
+{% endhighlight %}
 
 In the above program, we're using a switch statement and depending on the enum value, we're just adding the HTML tag element to the text.
 
 Let's take a look next to how we can create a version of this TextStyles that uses an enum that's configured to allow the combination of its values. 
 
-```cs
+{% highlight csharp linenos %}
+
 [Flags]
 public enum TextStyles
 { 
@@ -245,58 +251,64 @@ public enum TextStyles
     Italics = 2,
     Underlined = 4,
 }
-```
+{% endhighlight %}
 
 In the above version, we added a class attribute Flags. Notice here, however, that I'm setting explicit values for each of these style options. We're starting at 0 to represent normal, and then we're defining the enum constants in powers of 2, So we start at 1, then we go to 2, if we added another option, that would be 4, and so on. 
 
 The reason we do this is so we can combine these enum constants to represent multiple options without the values overlapping. Like this,
 
-```cs
+{% highlight csharp linenos %}
+
 var style = TextStyles.Bold | TextStyles.Underlined;
-```
+{% endhighlight %}
 
 
 Now, let's update the switch program we had before and instead use if statements.
 
 Let's start by determining whether no processing is required. To do this, we can compare the options that were passed in,
 
-```cs
+{% highlight csharp linenos %}
+
 if (style == TextStyles.Normal)
 {
     text = $"<span>{text}<span>";
 }
-``` 
+{% endhighlight %} 
 
 Now, this Boolean will be set to true if the only style option is Normal. 
 
 But we don't want to just say `style == TextStyles.Normal` because the options that are going to be passed in may contain multiple enum values. Like this,
 
-```cs
+{% highlight csharp linenos %}
+
 var style = TextStyles.Bold | TextStyles.Underlined;
-```
+{% endhighlight %}
 
 
 So, for example, the options passed in could represent both Bold and Underlined, so we can't perform a straight equality comparison here. One way to check that the Bold option has been specified is to use a bitwise end and check the result is not equal to 0. Like this,
 
-```cs
+{% highlight csharp linenos %}
+
 if ((style & TextStyles.Bold) != 0)
 {
     text = $"<b>{text}<b>";
 }
-```
+{% endhighlight %}
 
 A more readable version, however, is to use the HasFlag method. Like this,
 
-```cs
+{% highlight csharp linenos %}
+
 if (style.HasFlag(TextStyles.Bold))
 {
     text = $"<b>{text}<b>";
 }
-```
+{% endhighlight %}
 
 So our final program will now look like this,
 
-```cs
+{% highlight csharp linenos %}
+
 using System;
 using static System.Console;
 
@@ -333,12 +345,13 @@ namespace csharp_data_types_and_object_tips
         }
     }
 }
-```
+{% endhighlight %}
 
 
 Notice here to create a combination of enum values, we're using the bitwise or operator. You can also do the same in Enums like this,
 
-```cs
+{% highlight csharp linenos %}
+
 [Flags]
 public enum TextStyles
 { 
@@ -348,7 +361,7 @@ public enum TextStyles
     Underlined = 4,
     BoldItalics = Bold | Italics //Combine option
 }
-```
+{% endhighlight %}
 
 > Note: Add the flags attribute if you're creating an enum that represents a set of combinable flags as we've done here, you should add the flags attribute to indicate your intent as the developer and also provide better ToString functionality for enum values.
 
@@ -356,7 +369,8 @@ public enum TextStyles
 
 The next tip we're going to look at is the performance of structs, specifically their performance of equality comparisons. 
 
-```cs
+{% highlight csharp linenos %}
+
 public static void Run(string[] args)
 {
     var stopwatch = new Stopwatch();
@@ -381,13 +395,14 @@ public static void Run(string[] args)
     stopwatch.Stop();
     WriteLine("StructWithRef Comparison: " + stopwatch.ElapsedMilliseconds + " Milliseconds");
 }
-```
+{% endhighlight %}
 
 In the above program, all we're doing is calling the Equals method to compare two objects, and we're performing this equality check inside a for loop just so we get more accurate numbers. 
 
 Now, these objects are of type structs. Here struct StructNoRef has only two property `X` and `Y`, which are [value types](/csharp-variable-types/#c-value-types). And, StructWithRef is also a struct but it also has a additional property `Description` which is a [reference type](/csharp-variable-types/#c-reference-types). Like this,
 
-```cs
+{% highlight csharp linenos %}
+
 struct StructNoRef
 {
     public int X { get; set; }
@@ -400,14 +415,15 @@ struct StructWithRef
     public int Y { get; set; }
     public string Description { get; set; }
 }
-```
+{% endhighlight %}
 
 Now if we run the program and test the time required to check the equality we will get result somewhat like this,
 
-```txt
+{% highlight text linenos %}
+
 StructNoRef Comparison: 45 Milliseconds
 StructWithRef Comparison: 818 Milliseconds
-```
+{% endhighlight %}
 As you can see from the output struct with reference type members require 20 times more execution time than a struct with value type members
 
 So why is this? Essentially, when checking for equality of two structs, if none of the fields in the struct are reference types, the Equals method performs a byte-by-byte comparison of the two objects in memory. 
@@ -416,7 +432,8 @@ However, if there are reference types, reflection is used, and reflection is com
 
 But we can overcome this issue by overriding the Equals method. When we override the Equals method, we can provide our own code to determine whether two instances are equal. In this case, we're comparing the X and Y values and also the string description. Like this, 
 
-```cs
+{% highlight csharp linenos %}
+
 struct StructWithRef
 {
     public int X { get; set; }
@@ -435,14 +452,15 @@ struct StructWithRef
                Description == other.Description;
     }
 }
-```
+{% endhighlight %}
 
 Because we've overridden the Equals method, the default reflection‑based equality method won't be used. So let's come back to the test.
 
-```txt
+{% highlight text linenos %}
+
 StructNoRef Comparison: 48 Milliseconds
 StructWithRef Comparison: 47 Milliseconds
-```
+{% endhighlight %}
 
 We can see when we override the Equals method, we reduce time to about 47 ms, which is a significant performance improvement if you're doing a lot of equality checks. 
 
@@ -452,13 +470,14 @@ So that's how we can improve the performance of struct equality checks, by overr
 
 For the final tip in this article, we're going to see how we can check the two references point to the same object in memory. 
 
-```cs
+{% highlight csharp linenos %}
+
 Uri a = new Uri("https://codewithshadman.com");
 Uri b = new Uri("https://codewithshadman.com");
 
 var areEqual = a == b;
 WriteLine(areEqual); //True
-```
+{% endhighlight %}
 
 In the above program, we're creating two new instances of the Uri class. And if I just click on this and hit F12, we can see here that this Uri is a reference type, a class. 
 
@@ -470,7 +489,8 @@ Even though Uri is a reference type, a class, it overrides the reference equalit
 
 So, We want to check whether or not a and b point to the same object, we're going to call the ReferenceEquals method on the object class. To use this, we pass in the two references we want to check, in this case, a and b. And for good measure after this, let's go and assign b to a and recheck if a and b point to the same reference. 
 
-```cs
+{% highlight csharp linenos %}
+
 Uri a = new Uri("https://codewithshadman.com");
 Uri b = new Uri("https://codewithshadman.com");
 
@@ -480,7 +500,7 @@ WriteLine(areEqual1); //False
 a = b;
 var areEqual2 = Object.ReferenceEquals(a, b);
 WriteLine(areEqual2); //True
-```
+{% endhighlight %}
 
 
 Here, the object.ReferenceEquals method is telling us whether or not two references point to the same object in memory. And because a and b are different objects in memory, areEqual1 is returning false here. 

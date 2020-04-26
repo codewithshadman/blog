@@ -32,7 +32,8 @@ Here is an example:
 
 ### C# Is Operator Example
 
-```cs
+{% highlight csharp linenos %}
+
 using System;
 
 class Example
@@ -42,7 +43,7 @@ class Example
         Console.WriteLine("hello, world" is string);  // True
     }
 }
-```
+{% endhighlight %}
 
 Obviously, this is a simple example but I am sure that the reader is capable of extrapolating more practical usages of is. 
 
@@ -56,7 +57,8 @@ Why is this a problem?
 
 Because the next step most developers take is to cast the instance to the type. The `is` operator viewed as a sort of "safe cast" since you know that the instance is of that type. Here is an example of this practice:
 
-```cs
+{% highlight csharp linenos %}
+
 using System;
 
 class Dog
@@ -74,7 +76,7 @@ class Example
             ((Dog)obj).Speak();  // Bark!
     }
 }
-```
+{% endhighlight %}
 
 In this example there are actually two separate casts, the `is` and the explicit cast below it (inside the conditional statement). You shouldn’t cast more then once if you don’t need to do so. Also, the `is` check does not consider user-defined conversions (such as implicit and explicit cast operators) so is may return false for an instance that could have successfully been casted.
 
@@ -82,7 +84,8 @@ So what should we do instead?
 
 One method would be to use `is` operator with a variable name. Like this,
 
-```cs
+{% highlight csharp linenos %}
+
 using System;
 
 class Dog
@@ -100,7 +103,7 @@ class Example
             dog.Speak();  // Bark!
     }
 }
-```
+{% endhighlight %}
 
 Or use C#'s true safe casting operator: `as`. 
 
@@ -112,7 +115,8 @@ Here is an example of how to use `as`:
 
 ### As In C# Example
 
-```cs
+{% highlight csharp linenos %}
+
 using System;
 
 class Dog
@@ -131,7 +135,7 @@ class Example
             dog.Speak();
     }
 }
-```
+{% endhighlight %}
 
 This example only contains one cast and also allows you to avoid any exceptions that may occur at execution time.
 
@@ -145,30 +149,34 @@ Be careful that you are not using casting to solve a problem that would be bette
 
 The `is` operator is used to check if a type of an object is compatible with the given type at the run-time, 
 
-```cs
+{% highlight csharp linenos %}
+
 if(obj is SomeClass)
 {
      ...
 }
-```
+{% endhighlight %}
 
 whereas, `as` operator is used to perform casting between compatible reference types or Nullable types.
 
-```cs
+{% highlight csharp linenos %}
+
 SomeClass someObject = obj as SomeClass;
-```
+{% endhighlight %}
 
 With the "classic" method of type casting, 
 
-```cs
+{% highlight csharp linenos %}
+
 SomeClass someObject = (SomeClass) obj;
-```
+{% endhighlight %}
 
 if the cast fails, an exception is thrown. However, with the `as` method, it results in null, which can be checked for, and avoid an exception being thrown.
 
-```cs
+{% highlight csharp linenos %}
+
 SomeClass someObject = (obj as SomeClass) ?? new SomeClass();
-```
+{% endhighlight %}
 
 > **Note:** you can only use `as` with reference types, so if you are typecasting to a value type, you must still use the "classic" method.
 

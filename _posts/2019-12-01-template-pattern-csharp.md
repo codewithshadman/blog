@@ -40,7 +40,8 @@ Let's start with the problem statement,
 
 Let say you are creating a library of algorithms for C# developers that contain all type of sorting algorithm. One of the algorithms would be Merge Sort like this:
 
-```cs
+{% highlight csharp linenos %}
+
 using System.Collections.Generic;
 using System.Linq;
 
@@ -105,13 +106,14 @@ public class MergeSort
         return result;
     }
 }
-```
+{% endhighlight %}
 
 Now you don't have to know the code for the Merge Sort, it's only going to be here to prove a point. 
 
 Let's see how clients will use our above class,
 
-```cs
+{% highlight csharp linenos %}
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -151,16 +153,17 @@ namespace example1
         }        
     }
 }
-```
+{% endhighlight %}
 
 Everything looks cool in the above program right! If we run the above program we will get the following output.
 
-```txt
+{% highlight text linenos %}
+
 Original array elements:
 68 27 53 12 52 43 71 16 66 87
 Sorted array elements:
 12 16 27 43 52 53 66 68 71 87
-```
+{% endhighlight %}
 
 Now,
 
@@ -168,7 +171,8 @@ Here’s my problem, it only stores int.
 
 What if our clients want to use a different data type like float or string or any user-defined type like below one, a Person type. 
 
-```cs
+{% highlight csharp linenos %}
+
 public class Person
 {
     public Person(string name, int age)
@@ -185,7 +189,7 @@ public class Person
         return $"Name: {Name}\tAge: {Age}";
     }
 }
-```
+{% endhighlight %}
 
 Also, what if I have to sort the list of person based on its age or name.
 
@@ -193,7 +197,8 @@ One thing we can do is make our MergeSort algorithm [generic](/generics-in-cshar
 
 > **Note:** You can learn more about Generic Types in my blog post [Generics In C#](/generics-in-csharp/).
 
-```cs
+{% highlight csharp linenos %}
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -263,7 +268,7 @@ namespace example2
     }
 }
 
-```
+{% endhighlight %}
 
 After we make this adjustment you will find that there would be a compile-time error
 
@@ -276,24 +281,27 @@ As I mentioned earlier, In C#, the template method is used extensively through p
 
 In the above sort method, the compare operations can replace `<=` operator with the primitive operation CompareTo, as in:
 
-```cs
+{% highlight csharp linenos %}
+
 if (left.First().CompareTo(right.First()) <= 0)  
-```
+{% endhighlight %}
 
 CompareTo is a method that returns 1 if `a>b`, 0 if `a==b`, and -1 if `a<b`. 
 
 It is defined in the `IComparable` interface, which many predefined C# types already implement. For example, CompareTo is available for integers and strings. Because our sort methods are meant
 to be general, we declare that the item types must implement the interface using:
 
-```cs
+{% highlight csharp linenos %}
+
 public class MergeSort<T> : where T : IComparable<T>
-```
+{% endhighlight %}
 
 The where clause puts a constraint on the type `<T>` by saying it must implement
 `IComparable`. Any class can do so if it provides a CompareTo method. So,
 inside a Person class, we have to implement the `IComparable` interface like this:
 
-```cs
+{% highlight csharp linenos %}
+
 public class Person : IComparable<Person> 
 {
     ...
@@ -306,13 +314,14 @@ public class Person : IComparable<Person>
     }    
 }
 
-```
+{% endhighlight %}
 
 But how is CompareTo defined in terms of CompareTo? Well, we are looking at names, so the name will presumably be a string. CompareTo is defined for strings so that is what will be called. The check for the type of the object is necessary because the implementation of CompareTo must match its interface, which is defined on the object.
 
 Let's see how clients can use our new update merge sort class,
 
-```cs
+{% highlight csharp linenos %}
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -388,11 +397,12 @@ namespace example2
         }
     }
 }
-```
+{% endhighlight %}
 
 If we run the above program we will get the following output:
 
-```txt
+{% highlight text linenos %}
+
 Original array elements:
 Name: Tamra Grist       Age: 68
 Name: Bennie Sweatt     Age: 27
@@ -416,7 +426,7 @@ Name: Michele Barga     Age: 66
 Name: Misha Mattei      Age: 53
 Name: Nettie Horace     Age: 43
 Name: Tamra Grist       Age: 68
-```
+{% endhighlight %}
 
 When a Template Method uses an interface for specifying the primitive operations, the classes must implement those operations. It is also possible to define IPrimitives as an abstract class and to provide default behavior for any of the operations, leaving the subclass to override as many operations as it wishes. Methods that have defaults are called hook operations, and they often do nothing by default.
 

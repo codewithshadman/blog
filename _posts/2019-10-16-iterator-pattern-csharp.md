@@ -45,7 +45,8 @@ In the traditional design pattern approach, iterator pattern has an Aggregate in
 
 Let's see a quick example,
 
-```cs
+{% highlight csharp linenos %}
+
 class Program
 {
     public class Weeks //Aggregate object
@@ -105,13 +106,14 @@ class Program
         Console.ReadLine();
     }
 }
-```
+{% endhighlight %}
 
 In the above code, we have created a collection class `Weeks` which is our Aggregate object, for the sake of simplicity we have not created an Aggregate interface, our `Weeks` class contains a private array of the string containing days in a week. Next, we have a `WeeksIterator` class, implementing the `IWeeksIterator` which is our Iterator interface, that traverse over this collection.
 
 A sharp reader will wonder why we did not just loop through weeks. Like this,
 
-```cs
+{% highlight csharp linenos %}
+
 class Program
 {
     public class Weeks
@@ -138,7 +140,7 @@ class Program
         }
     }
 }
-```
+{% endhighlight %}
 The reason is that weeks is declared not in the Client, but in its own collection class. Even without the benefits gained from separating iteration and enumeration, it would be a bad style for the Client to access weeks directly.
 
 However, talking about benefits,
@@ -147,7 +149,8 @@ Iterators can also provide filters, transformations, and projections on the data
 
 Let's say we just want weekdays (all days of the week other than Sunday or Saturday) from the collection, in that case, we can create another iterator.
 
-```cs
+{% highlight csharp linenos %}
+
 public class WeekDaysIterator : IWeeksIterator
 {
     private readonly string[] weeks;
@@ -167,7 +170,7 @@ public class WeekDaysIterator : IWeeksIterator
         return true;
     }
 }
-```
+{% endhighlight %}
 
 Here only change I did is, `(weeks.Length -2)` in MoveNext method that just skips the last two values in the array that is Saturday and Sunday!
 
@@ -178,7 +181,8 @@ From the early days of C# 1.0 and 2.0, C# supported the iterators. In C#, iterat
 
 Let's transform our above code to use C# `IEnumertor`. You will find the `IEnumertor` interface in `System.Collections` namespace
 
-```cs
+{% highlight csharp linenos %}
+
 class Program
 {
     public class Weeks
@@ -243,13 +247,14 @@ class Program
         ...
     }
 }
-```
+{% endhighlight %}
 
 Now the only thing we changed here is that instead of custom `IWeeksIterator` interface we use the .NET `IEnumerator` interface which has the same methods define as we defined for the `IWeeksIterator`. Now, the `IEnumerator` interface use object as the return type for `Current` property in the interface. Hence, we need to change the return type of our `Current` property as well:
 
-```cs
+{% highlight csharp linenos %}
+
 public object Current => weeks[position];
-```
+{% endhighlight %}
 
 Now, you would be wondering how this could be of any use at all. We can just use the `IWeeksIterator` or any custom interface. The real benefit is that .NET IEnumerator has some language support for the iterator pattern. Before that let's talk about the IEnumerable interface.
 
@@ -259,12 +264,13 @@ IEnumerable is an interface, in `System.Collections` namespace, defining a singl
 
 Now, IEnumerable acts as an Aggregate interface that guarantees to return an iterator.
 
-```cs
+{% highlight csharp linenos %}
+
 public interface IEnumerable
 {
     IEnumerator GetEnumerator();
 }
-```
+{% endhighlight %}
 
 The thing is all collections in the .NET library implement IEnumerable (i.e., they each provide a conforming GetEnumerator method).
 
@@ -276,7 +282,8 @@ So,
 
 By implementing the IEnumerable interface in an iterator (or any collection class) you can use them in a foreach loop. Let's see how,
 
-```cs
+{% highlight csharp linenos %}
+
 class Program
 {
     public class Weeks
@@ -328,7 +335,7 @@ class Program
         Console.ReadLine();
     }
 }
-```
+{% endhighlight %}
 
 The only thing I changed in the above code is that I implemented the IEnumerable interface in the iterators and return `this` object. And the other important thing we need to do is change the return type for GetWeeksIterator() and GetWeekDaysIterator() method, they need to return IEnumerable instead of IEnumerator as foreach statement looks for an IEnumerable (which ensures an IEnumerator is returned by the passed collection). 
 
@@ -342,7 +349,8 @@ Yield is a special keyword that can be used only in the context of iterators. It
 
 Yeah! that means we can write less and do more, i.e. we can remove the WeeksIterator and WeekDaysIterator class. Let's see how
 
-```cs
+{% highlight csharp linenos %}
+
 class Program
 {
     public class Weeks
@@ -384,7 +392,7 @@ class Program
         Console.ReadLine();
     }
 }
-```
+{% endhighlight %}
 
 Using yield to define an iterator removes the need for an explicit extra class (the class that holds the state for an enumeration, WeeksIterator, and WeekDaysIterator in our case!) when you implement the IEnumerable and IEnumerator pattern for a custom collection type.
 
@@ -394,7 +402,8 @@ Also, remember that you can write [LINQ queries in C#](https://www.codeproject.c
 
 Below is the final version of the `Weeks` class. Here we have implemented the `IEnumerable` interface in the `Weeks` class and used the `yield` keyword in the `GetEnumerator` method to define our iterator. Now, we can directly use weeks object in a foreach loop in the client code.
 
-```cs
+{% highlight csharp linenos %}
+
 class Program
 {
     public class Weeks : IEnumerable
@@ -429,7 +438,7 @@ class Program
         Console.ReadLine();
     }
 }
-``` 
+{% endhighlight %} 
 
 ## Where To Apply Iterator Pattern?
 

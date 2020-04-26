@@ -52,7 +52,8 @@ Entity Framework (EF) itself implements Unit of work pattern and somewhat loosel
 
 Let's see how to create a repository using EF, let say you have customer entity in your application, then this is how your customer repository interface will look like:
 
-```csharp
+{% highlight csharp linenos %}
+
 public interface ICustomerRepository:IDisposable    
 {        
     IEnumerable GetCustomers();        
@@ -62,11 +63,12 @@ public interface ICustomerRepository:IDisposable
     void UpdateCustomer(Customer customer);        
     void Save();    
 }
-```
+{% endhighlight %}
 
 And the implementation of the above interface with EF looks like this:
 
-```csharp
+{% highlight csharp linenos %}
+
 public class CustomerRepository:ICustomerRepository    
 {        
     private ApplicationContext context;        
@@ -126,7 +128,7 @@ public class CustomerRepository:ICustomerRepository
         GC.SuppressFinalize(this);        
     }    
 }
-```
+{% endhighlight %}
 
 Usually, people argue on using repository pattern over EF as it restricts EF uses by returning IEnumnerable instead of IQueryable from the repository. You can learn more about it [here](https://softwareengineering.stackexchange.com/questions/192044/should-repositories-return-iqueryable).
 
@@ -136,7 +138,8 @@ Creating a repository class for each entity type could result in a lot of repeti
 
 Let's see the interface for the generic repository,
 
-```cs
+{% highlight csharp linenos %}
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -148,22 +151,22 @@ public interface IRepository<TEntity> where TEntity :class
 {
     void Delete(TEntity entityToDelete);
     void Delete(object id);
-    IEnumerable<TEntity> Get( 
-      Expression<Func<TEntity, bool>> filter = null, 
-      Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, 
-      string includeProperties = "");
+    IEnumerable<TEntity> Get(
+        Expression<Func<TEntity, bool>> filter = null, 
+        Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, 
+        string includeProperties = "");
     TEntity GetByID(object id);
-    IEnumerable<TEntity> GetWithRawSql(
-      string query, 
-      params object[] parameters);
+    IEnumerable<TEntity> GetWithRawSql(string query, 
+        params object[] parameters);
     void Insert(TEntity entity);
     void Update(TEntity entityToUpdate);
 }
-```
+{% endhighlight %}
 
 And the implementation of the above interface with EF looks like this:
 
-```csharp
+{% highlight csharp linenos %}
+
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -252,7 +255,7 @@ class BaseRepository<TEntity> : IRepository <TEntity> where TEntity : class
         context.Entry(entityToUpdate).State = EntityState.Modified;
     }
 }
-```
+{% endhighlight %}
 
 The above generic repository defines core operations. You can extend this class and interface base on business requirement and can inherit in your custom repository.
 
@@ -262,7 +265,8 @@ Use of separate repository for a single transaction could result in partial upda
 
 Unit of work pattern is easy to implement with the use of a generic repository. Let's see an example,
 
-```csharp
+{% highlight csharp linenos %}
+
 using System;
 using System.Collections.Generic;
 
@@ -272,11 +276,12 @@ public interface IUnitOfWork
     IRepository<Order> Orders { get; }
     void Commit();
 }
-```
+{% endhighlight %}
 
 Below is the code of how the implementation of above `IUnitOfWork` will look like,
 
-```csharp
+{% highlight csharp linenos %}
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -320,7 +325,7 @@ public class UnitOfWork : IUnitOfWork
         _dbContext.SaveChanges();
     }
 }
-```
+{% endhighlight %}
 
 Unit of Work is the concept related to the effective implementation of the repository pattern, whether its non-generic repository pattern or generic repository pattern. 
 
@@ -330,13 +335,13 @@ Unit of Work is referred to as a single transaction that involves multiple opera
 
 Let's see now how our controller code will look like after using repository pattern along with unit of work:
 
-```csharp
+{% highlight csharp linenos %}
+
 public class CustomerController : Controller
 {
   private UnitOfWork unitOfWork = new UnitOfWork();
 
   // GET: /Customer/
-
   public ViewResult Index()
   {
      var Customers = unitOfWork.CustomerRepository.Get();
@@ -344,7 +349,6 @@ public class CustomerController : Controller
   }
 
   // GET: /Customer/Details/5
-
   public ViewResult Details(int id)
   {
      Customer Customer = unitOfWork.CustomerRepository.GetByID(id);
@@ -352,7 +356,6 @@ public class CustomerController : Controller
   }
 
   // GET: /Customer/Create
-
   public ActionResult Create()
   {
      return View();
@@ -406,7 +409,6 @@ public class CustomerController : Controller
   }
 
   // GET: /Customer/Delete/5
-
   public ActionResult Delete(int id)
   {
      Customer Customer = unitOfWork.CustomerRepository.GetByID(id);
@@ -414,7 +416,6 @@ public class CustomerController : Controller
   }
 
   // POST: /Customer/Delete/5
-
   [HttpPost, ActionName("Delete")]
   [ValidateAntiForgeryToken]
   public ActionResult DeleteConfirmed(int id)
@@ -431,12 +432,13 @@ public class CustomerController : Controller
      base.Dispose(disposing);
   }
 }
-```
+{% endhighlight %}
 In the above code we directly initialized unitOfWork variable. Like this,
 
-```csharp
+{% highlight csharp linenos %}
+
 private UnitOfWork unitOfWork = new UnitOfWork();
-```
+{% endhighlight %}
 However to truly use the power of repository pattern and make the above controller testable we need to use `IUnitOfWork` instead of `UnitOfWork` for our `unitOfWork` variable data type, and also we have to initialize it using Dependency Injection (DI) technique.
 
 Assuming you’re starting with a new ASP.NET MVC 5 application, the easiest way to get StructureMap is using Nuget package StructureMap.MVC5.
@@ -445,7 +447,8 @@ After installing StructureMap, from solution explorer we can notice that Depende
 
 The important file which is needed is the DefaultRegistry.cs. In Default Registry class, we are going configure StructureMap container. Let's see how:
 
-```csharp
+{% highlight csharp linenos %}
+
 public class DefaultRegistry : Registry 
 {
     #region Constructors and Destructors
@@ -475,10 +478,11 @@ public class DefaultRegistry : Registry
 
     #endregion
 }
-```
+{% endhighlight %}
 
 After configuring DefaultRegistry replace your CustomerController unitOfWork initialization code with the below code:
-```csharp
+{% highlight csharp linenos %}
+
 public class CustomerController : Controller
 {
   private readonly IUnitOfWork unitOfWork;
@@ -489,7 +493,7 @@ public class CustomerController : Controller
   }
 
 }
-``` 
+{% endhighlight %} 
 
 You can now start writing your unit tests for your controller classes from this base. Learn more about unit testing and how to use Moq library for mocking from this great [article](https://techbrij.com/unit-testing-asp-net-mvc-controller-service).
 

@@ -16,7 +16,8 @@ author: shadman_kudchikar
 
 Let's begin in the traditional way, by looking at the code of a 'Hello World' program using C# language.
 
-```cs
+{% highlight csharp linenos %}
+
 using System;
 public class HelloWorld
 {
@@ -29,7 +30,7 @@ public class HelloWorld
 		Console.WriteLine("Hello World!");
 	}
 }
-```
+{% endhighlight %}
 
 
 The first thing to note about C# is that it is case-sensitive. You will therefore get compiler errors if, for instance, you write 'console' rather than 'Console'.
@@ -60,6 +61,7 @@ HelloWorld
 
 Fairly obviously, this program would produce the output:
 
-```txt
+{% highlight text linenos %}
+
 Hello World!
-```
+{% endhighlight %}

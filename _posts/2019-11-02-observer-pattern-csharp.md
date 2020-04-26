@@ -46,7 +46,8 @@ The below code is a stock simulator that contains a list of dummy stock data. Ea
 
 Now you don’t have to know the code for the stock simulator, it’s only going to be here to prove a point.
 
-```cs
+{% highlight csharp linenos %}
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -110,16 +111,17 @@ class Program
         public int Price { get; }
     }
 }
-```
+{% endhighlight %}
 
 Here’s my problem, if look at the program we can say that we have two different activity. One activity is checking for the Microsoft price and the other is checking for the google price. 
 
 Although they both are independent of each other they are occurring in the same program. If for some reason we want to monitor a new stock we have to update the main program and add some lines like below code,
 
-```cs
+{% highlight csharp linenos %}
+
 if (stock.Name == "Apple")
     Console.WriteLine($"Apple new price is {stock.Price}");
-```
+{% endhighlight %}
 
 Now, The observer pattern that allows us to do is separate the monitoring aspect of the stock data from the action of reading the stock data from the stock simulator.
 
@@ -127,16 +129,18 @@ Let's go step by step and implement the observer pattern for the above problem,
 
 First, we will define a generic interface for observers (subscribers) specifying how they should be updated. In traditional observer pattern, the Update method doesn't specify any parameters and observers keep a reference of the observable (publisher). But, this approach usually creates a problem like memory leak if we do not clean our observers and observables properly. Hence the below code!
 
-```cs
+{% highlight csharp linenos %}
+
 public interface IObserver<T>
 {
     void Update(T data);           
 }
-```
+{% endhighlight %}
 
 Secondly, we will define a generic observable (subject/publisher) class that uses a generic parameter `T` as a subject. In traditional observer pattern, usually observable is defined as interface first and then get implemented by concrete subjects. However, by using generics this can be simplified in a single type.
 
-```cs
+{% highlight csharp linenos %}
+
 public class Observable<T>
 {
     private List<IObserver<T>> observers = new List<IObserver<T>>();
@@ -170,11 +174,12 @@ public class Observable<T>
         }
     }
 }
-```
+{% endhighlight %}
 
 And, finally, we will create our concrete observers for Microsoft and Google stock.
 
-```cs
+{% highlight csharp linenos %}
+
 public class GoogleStockObserver : IObserver<Stock>
 {
     public void Update(Stock data)
@@ -192,11 +197,12 @@ public class MicrosoftStockObserver : IObserver<Stock>
             Console.WriteLine($"Microsoft new price is {data.Price}");
     }
 }
-```
+{% endhighlight %}
 
 Now our main program can be written in the following way:
 
-```cs
+{% highlight csharp linenos %}
+
 static void Main(string[] args)
 {
     //This is our Observable also known as publisher that notifies about change
@@ -224,11 +230,12 @@ static void Main(string[] args)
 
     Console.ReadLine();
 }
-```
+{% endhighlight %}
 
 Let's see everything together,
 
-```cs
+{% highlight csharp linenos %}
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -359,23 +366,25 @@ class Program
         public int Price { get; }
     }
 }
-```
+{% endhighlight %}
 
 Now, We have discussed before that when observers lose interest in the
 subject, they simply unregister from the subject. To implement this all we need to do is update our `Subscribe` method to return an object that will help us to unregister the passed `observer`.
 
-```cs
+{% highlight csharp linenos %}
+
 public Unsubscriber<T> Subscribe(IObserver<T> observer)
 {
     if(!observers.Contains(observer))
         observers.Add(observer);
     return new Unsubscriber<T>(observers, observer);
 }
-```
+{% endhighlight %}
 
 Now, here the `Unsubscriber<T>` is a generic type that maintains the list of observers and the observer to be unsubscribed from the list, i.e the observer we want to remove from the list. Below is the code for the same,
 
-```cs
+{% highlight csharp linenos %}
+
 public class Unsubscriber<T> : IDisposable
 {
     private List<IObserver<T>> observers;
@@ -392,7 +401,7 @@ public class Unsubscriber<T> : IDisposable
         observers.Remove(observer);
     }
 }
-```
+{% endhighlight %}
 
 The action of removing the observer from the list of observers unsubscribe the observer from the subject as our subject has reference to the same list. 
 
@@ -400,7 +409,8 @@ Also, the code, of removing the observer from the list, is written within the di
 
 After making the above changes, our `Observable<T>` class will look like the code below.
 
-```cs
+{% highlight csharp linenos %}
+
 public class Observable<T>
 {
     private List<IObserver<T>> observers = new List<IObserver<T>>();
@@ -448,11 +458,12 @@ public class Unsubscriber<T> : IDisposable
         observers.Remove(observer);
     }
 }
-```
+{% endhighlight %}
 
 We can go one step further and provide unsubscribe functionality to our observers too. As this will require some implementation we will make our observer as an abstract class instead of an interface. 
 
-```cs
+{% highlight csharp linenos %}
+
 public abstract class Observer<T>
 {
     private Unsubscriber<T> cancellation;
@@ -468,30 +479,33 @@ public abstract class Observer<T>
         cancellation.Dispose();
     }
 }
-```
+{% endhighlight %}
 Here all we did is created a `Subscribe` method that takes an observable and pass current observer object to its `Subscribe` method and keep a reference of the cancellation object returned by the method, then we use this object in `Unsubscribe` method to unsubscribe with the provider.
 
 Now,  we can write the client code in the following manner:
 
-```cs
+{% highlight csharp linenos %}
+
 var stockObservable = new Observable<Stock>();
 
 var microsoftObserver = new MicrosoftStockObserver();
 microsoftObserver.Subscribe(stockObservable); //this is more intuitive
-```
+{% endhighlight %}
 
 above code is more intuitive, instead of,
 
-```cs
+{% highlight csharp linenos %}
+
 var stockObservable = new Observable<Stock>();
 
 var microsoftObserver = new MicrosoftStockObserver();
 stockObservable.Subscribe(microsoftObserver); //this is Ok too :p
-```
+{% endhighlight %}
 
 Also, we can now do this in the client code,
 
-```cs
+{% highlight csharp linenos %}
+
 static void Main(string[] args)
 {
     var stockObservable = new Observable<Stock>();
@@ -517,7 +531,7 @@ static void Main(string[] args)
 
     Console.ReadLine();
 }
-```
+{% endhighlight %}
 
 
 ## Push And Pull Mechanism Observer Pattern
@@ -556,7 +570,8 @@ The push model implemented by [Reactive Extensions for .NET](https://github.com/
 
 You can implement them too in our existing classes like this:
 
-```cs
+{% highlight csharp linenos %}
+
 public abstract class Observer<T> : IObserver<T>
 {
     private Unsubscriber<T> cancellation;
@@ -625,7 +640,7 @@ public class Observable<T> : IObservable<T>
             observer.OnError(e);
     }
 }
-```
+{% endhighlight %}
 From the above code, you may have noticed, instead of `Notify` method IObserver relies on `OnNext` method. The thing is reactive programming represents asynchronous and event-based programs using observable sequences. Reactive Extensions also represents data sequences as observable sequences. An application can subscribe to these observable sequences to receive asynchronous notifications as new data arrive. 
 
 In addition to implementing the observer design pattern, you may love to explore libraries that are built using the `IObservable<T>` and `IObserver<T>` interfaces. For example, [Reactive Extensions for .NET](https://github.com/dotnet/reactive) consist of a set of extension methods and LINQ standard sequence operators to support asynchronous programming.
@@ -645,7 +660,8 @@ Typically, an event is created in the subject/observables and registration of ob
 
 Let's see the example,
 
-```cs
+{% highlight csharp linenos %}
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -775,7 +791,7 @@ class Program
     }
 
 }
-```
+{% endhighlight %}
 
 You can also read my article [Publish Subscribe Design Pattern In C#](/publish-subscribe-design-pattern-in-csharp/) for more in-depth knowledge of this concept.
 

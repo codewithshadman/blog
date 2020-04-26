@@ -92,17 +92,19 @@ The table below lists the standard operators. Note that when writing classes it 
 
 To overload an operator in a class, one defines a method using the 'operator' keyword. For instance, the following code overloads the equality operator. <!--(see lesson 13 for details about methods).-->
 
-```cs
+{% highlight csharp linenos %}
+
 public static bool operator == (Value a, Value b)
 {
 	return a.Int == b.Int
 }
-```
+{% endhighlight %}
 
 Where an operator is one of a logical pair, both operators should be overwritten if any one is. These pairs are the following:
 
-```txt
+{% highlight text linenos %}
+
 == and !=
 < and >
 <= and >=
-```
+{% endhighlight %}

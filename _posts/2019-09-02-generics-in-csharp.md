@@ -44,7 +44,8 @@ The LinkedList class contains a single Node reference to the first item in the l
 
 Now you don't have to know the code for the linked list, it's only going to be here to prove a point. 
 
-```cs
+{% highlight csharp linenos %}
+
 public class LinkedList
 {
     public class Node
@@ -113,7 +114,7 @@ public class LinkedList
         }
     }
 }
-```
+{% endhighlight %}
 
 Here's my problem, it only stores int.
 
@@ -126,7 +127,8 @@ I want to use this linked list for different types of objects. I want to be able
 ### The Object Solution
 One solution to my problem is to allow the linked list to work with objects instead of int. That is change the API, change the internal implementation, change everything to take object instead of int, because we are in C#, and everything we work with derives from `System.Object`. 
 
-```cs
+{% highlight csharp linenos %}
+
 public class LinkedListObject
 {
     public class Node
@@ -195,11 +197,12 @@ public class LinkedListObject
         }
     }
 }
-```
+{% endhighlight %}
 
 Let's just check if the above changes are working below in the Main method that uses this linked list class. In this method, we will add four items and remove one item from the list. Eventually, it will contain three elements 1, 2, and 3.
 
-```cs
+{% highlight csharp linenos %}
+
 public class Program
 {
     public static void Main(string[] args)
@@ -226,7 +229,7 @@ Output:
 2
 3
 */
-```
+{% endhighlight %}
 
 And this seems like we are off to a pretty good start, but there are two problems.
 
@@ -256,7 +259,8 @@ It's not as easy to work with. What I'll have to do now is more than just a type
 
 Let me show you this try-catch version of the program, which is good. But I have to write a little more code, so it's not as nice to work with.
 
-```cs
+{% highlight csharp linenos %}
+
 public class Program
 {
     public static void Main(string[] args)
@@ -293,7 +297,7 @@ public class Program
 John Doe
 Sum:6
 */
-``` 
+{% endhighlight %} 
 
 There's also the hidden problem that I alluded to. Let me go to the command prompt for Visual Studio and open up a tool that's always installed with Visual Studio, it's called ILDASM. That's short for Intermediate Language Disassembler and with this tool I can browse to any EXE or DLL, any type of assembly compiled for. NET. 
 
@@ -322,7 +326,8 @@ So let's forget about this approach of using objects inside of the LinkedList. W
 
 Now, I'll take the LinkedList class that I have, copy it, and then I'm just going to paste it here inside of the same file. And now I'll change the name of this class, let me call it LinkedListString. And now I just need to make it work with string, so I want data in the Node to be a string. I want the `AddLast` method to take only strings, I want the `First.data` to be a string, and voila! I now have a LinkedList that works with strings. Below is an example
 
-```cs
+{% highlight csharp linenos %}
+
 public class LinkedListString
 {
     public class Node
@@ -391,7 +396,7 @@ public class LinkedListString
         }
     }
 }
-```
+{% endhighlight %}
 
 But, I just remembered I also need one that works with floats too. Well fortunately with today's powerful computers, I can copy/paste as many classes as I need. 
 
@@ -411,10 +416,11 @@ Like our LinkedList class, we've discussed before, we want to reuse the code ins
 
 The way this works is that we'll have a placeholder for types inside our code and the client, that is the code using our class, gets to pick a type when they instantiate an instance of our class. 
 
-```cs
+{% highlight csharp linenos %}
+
 var list1 = new LinkedList<string>();
 var list2 = new LinkedList<int>();
-```
+{% endhighlight %}
 
 So I can instantiate one LinkedList object that can only store integers, and another LinkedList object that can only store strings, and these will both be typesafe. 
 
@@ -434,7 +440,8 @@ Here are the steps to create a generic class:
 
 Let's take a look at this in our code and see how to use it.
 
-```cs
+{% highlight csharp linenos %}
+
 public class LinkedList<T>
 {
     public class Node<T>
@@ -503,11 +510,12 @@ public class LinkedList<T>
         }
     }
 }
-```
+{% endhighlight %}
 
 Our final Main method will look like this,
 
-```cs
+{% highlight csharp linenos %}
+
 public class Program
 {
     public static void Main(string[] args)
@@ -530,7 +538,7 @@ public class Program
         Console.ReadLine();
     }
 }
-```
+{% endhighlight %}
 
 Generics are very popular for collections and data structures like linked lists, dictionaries and so forth, because the real code inside these data structures is code to manage the data structure itself. It doesn't really care what type of objects you're storing inside, the code just needs to manage its internal state, its internal pointers, and it lets you read and write data, strongly-typed data, and it does that without any performance penalties like boxing. 
 
@@ -544,7 +552,8 @@ So, Generics allow for code reuse, because generic arguments can parameterize th
 
 Similar to generic classes are generic interfaces, you can define a parameter T on the interface level, and your methods can use this parameter in their prototype, so any class that will be implementing this interface will naturally implement the parameter T within its own methods. You can also add constraints to generic interfaces. Note that the class which will be implementing the generic interface must define the parameter T. Here is an example, inspired by our LinkedList class,
 
-```cs
+{% highlight csharp linenos %}
+
 public interface ILinkedList<T>
 {
     LinkedList<T>.Node<T> First { get; }
@@ -553,19 +562,21 @@ public interface ILinkedList<T>
     bool Any();
     void Remove(T data);
 }
-```
+{% endhighlight %}
 Above we have an interface for LinkedList containing all the properties and methods require for defining the contract a LinkedList must implement. Now, all we have to do is inherit our `LinkedList<T>` with `ILinkedList<T>` and implement the logic which we already did in the above examples.
 
-```cs
+{% highlight csharp linenos %}
+
 public class LinkedList<T> : ILinkedList<T>
 {
     ...
 }
-```
+{% endhighlight %}
 
 So now in our final program, we can use or `ILinkedList<T>` as list type and thus can replace our implementation of the list with any class that implements our `ILinkedList<T>`
 
-```cs
+{% highlight csharp linenos %}
+
 public class Program
 {
     public static void Main(string[] args)
@@ -574,7 +585,7 @@ public class Program
         ...
     }
 }
-```
+{% endhighlight %}
 
 ## Generic Class And Method In C\#
 
@@ -583,55 +594,61 @@ Let's discuss some rules of generics that will help you understand how to use in
 ### More Than One Type Parameter
 A class or an interface can define more than one type parameter, as follows:
 
-```cs
+{% highlight csharp linenos %}
+
 class Dictionary<K, V>
 {
     ...
 }
-```
+{% endhighlight %}
 
-```cs
+{% highlight csharp linenos %}
+
 interface IDictionary<K, V>
 {
     ...
 }
-```
+{% endhighlight %}
 
 ### Closed Constructed Type
 Classes can extend closed constructed generic classes, as follows:
 
-```cs
+{% highlight csharp linenos %}
+
 class BaseClass<T> { }
 
 class SampleClass : BaseClass<string> { }
-```
+{% endhighlight %}
 
 same goes for generic interfaces: 
 
-```cs
+{% highlight csharp linenos %}
+
 interface IBaseInterface<T> { }
 
 interface ISampleInterface : IBaseInterface<string> { }
 class SampleClass : IBaseInterface<string> { }
-```
+{% endhighlight %}
 
 ### Partial Closed Constructed Types
 Generic classes can extend other generic classes or closed constructed classes as long as the class parameter list supplies all arguments required by the base generic class, as follows:
 
-```cs
+{% highlight csharp linenos %}
+
 class BaseClass<T, U> { }
 
 class SampleClass<T> : BaseClass<T, string> { } //No error
-```
+{% endhighlight %}
 
 Similarly, Generic interfaces/classes can implement other generic interfaces or closed constructed interfaces as long as the interface/class parameter list supplies all arguments required by the base interface, as follows:
 
-```cs
+{% highlight csharp linenos %}
+
 class IBaseInterface<T, U> { }
 
 class SampleClass<T> : IBaseInterface<T, string> { } //No error
 class ISampleInterface<T> : IBaseInterface<T, string> { } //No error
-```
+{% endhighlight %}
 
 It is often useful to define interfaces either for generic collection classes, or for the generic classes that represent items in the collection. 
 
@@ -653,13 +670,14 @@ The foreach statement in C# is some nice syntactic sugar that hides from you tha
 
 Syntactic sugar of the foreach statement
 
-```cs
+{% highlight csharp linenos %}
+
 List<int> numbers = new List<int> { 1, 2, 3, 5, 7, 9 };
 using (List<int>.Enumerator enumerator = numbers.GetEnumerator())
 {
     while (enumerator.MoveNext()) Console.WriteLine(enumerator.Current);
 }
-```
+{% endhighlight %}
 
 The GetEnumerator function on an IEnumerable returns an IEnumerator. You can think of this in the way it’s used on a database: IEnumerable<T> is your table and IEnumerator is a cursor that keeps track of where you are in the table. It can only move to the next row. 
 
@@ -671,9 +689,10 @@ Now,
 
 There are two ways we can implement `IEnumerable<T>` , one way is to inherit `IEnumerable<T>` in  `ILinkedList<T>` interface or implement it directly at `LinkedList<T>` class, like this:
 
-```cs
+{% highlight csharp linenos %}
+
 public class LinkedList<T> : ILinkedList<T>, IEnumerable<T>
-```
+{% endhighlight %}
 
 If we implement directly in our LinkedList class that will create problem while iterating on ILinkedList type like this:
 
@@ -681,7 +700,8 @@ If we implement directly in our LinkedList class that will create problem while 
 
 So, instead we will inherit it on ILinkedList interface and implement the required methods in LinkedList class:
 
-```cs
+{% highlight csharp linenos %}
+
 public interface ILinkedList<T> : IEnumerable<T>
 {
     LinkedList<T>.Node<T> First { get; }
@@ -690,9 +710,10 @@ public interface ILinkedList<T> : IEnumerable<T>
     bool Any();
     void Remove(T data);
 }
-```
+{% endhighlight %}
 
-```cs
+{% highlight csharp linenos %}
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -726,7 +747,7 @@ public class LinkedList<T> : ILinkedList<T>
         return GetEnumerator();
     }
 }
-```
+{% endhighlight %}
 
 Notice the yield return in the GetEnumerator function. Yield is a special keyword that can be used only in the context of iterators. It instructs the compiler to convert this regular code to a state machine. The generated code keeps track of where you are in the collection and it implements methods such as MoveNext and Current.
 
@@ -734,7 +755,8 @@ Because creating iterators is so easy now, it has suddenly become a feature that
 
 Let's see how this improves our code readability in our final program,
 
-```cs
+{% highlight csharp linenos %}
+
 public class Program
 {
     public static void Main(string[] args)
@@ -755,7 +777,7 @@ public class Program
         Console.ReadLine();
     }
 }
-```
+{% endhighlight %}
 
 ## C# Generic Method
 
@@ -763,12 +785,13 @@ Let's see a very new type of problem, now, for instance if we have a `LinkedList
 
 Well, first let's take the simple case of converting whatever is inside the LinkedList to a 32-bit integer. And for the simple case of always converting to an integer, I might consider creating a method AsEnumerableOfInt, which will be a method that returns IEnumerableOfInt so that each item inside comes back as an integer value.
 
-```cs
+{% highlight csharp linenos %}
+
 public IEnumerable<int> AsEnumerableOfInt()
 {
     ...
 }
-``` 
+{% endhighlight %} 
 
 But what about strings? In that case, perhaps I could also have AsEnumerableOfString that returns IEnumerableOfString. But once again we're facing a scenario where we are writing code and only the type name changes. And as we saw with generic classes, it's valuable to be able to parameterize code using type parameters so we only need to write the code once. We want to do that when we're duplicating code and only the type name changes. And fortunately, type parameters can also be applied to methods. 
 
@@ -776,12 +799,13 @@ So, I want to write this API using type parameters, and when I do that, I'm only
 
 I want a new type parameter, one that is available just to this method. So, let me call it TOutput. When you invoke this method, you have to tell me the type of output that you're expecting. And now TOutput becomes a generic type parameter that is available throughout this method. 
 
-```cs
+{% highlight csharp linenos %}
+
 public IEnumerable<TOutput> AsEnumerableOf<TOutput>()
 {
     ...
 }
-```
+{% endhighlight %}
 
 > **Note:** When I implement a generic method parameter, I can use it anywhere in the method definition. I can use it inside the method. I can also use it in the return type for this method, but I wouldn't be able to use it outside that method. 
 
@@ -793,25 +817,27 @@ Well,
 
 Fortunately .NET has a class that I can use to get a converter that knows how to convert quite a few different types. If I go to the TypeDescriptor class, and TypeDescriptor is in the `System.ComponentModel`namespace, if I go up to that class, there is a static method there, `GetConverter`. And GetConverter doesn't know how to do all different types of conversions, but it knows how to do quite a few, particularly among primitive types like ints and doubles and strings.
 
-```cs
+{% highlight csharp linenos %}
+
 public IEnumerable<TOutput> AsEnumerableOf<TOutput>()
 {
     var converter = TypeDescriptor.GetConverter(...);
     ...
 }
-``` 
+{% endhighlight %} 
 
 But,
 
 I have to give GetConverter a parameter. One of the method overloads here takes a type, and what I'm going to ask TypeDescriptor. GetConverter to do is to give me a converter for the type T. If that's double, I want something that knows how to convert double to other things. If T is an int, I want to get a converter that will convert ints to different things, and I can do that by passing T, the type. And it turns out the typeof operator will work just fine against generic type parameters. 
 
-```cs
+{% highlight csharp linenos %}
+
 public IEnumerable<TOutput> AsEnumerableOf<TOutput>()
 {
     var converter = TypeDescriptor.GetConverter(typeof(T));
     ...
 }
-``` 
+{% endhighlight %} 
 
 So, 
 
@@ -819,7 +845,8 @@ If this is a `LinkedList<double>`, I've just asked to get the converter for type
 
 So, am I trying to convert a double to an int or a double to a string? I'm not sure at compile time. All I know is that I have TOutput that represents the type that I want to convert to. So, once again, I could use the typeof operator and say please convert that item to typeof TOutput, and then I could return that result. I'll use yield return to build an IEnumerable and return that result. 
 
-```cs
+{% highlight csharp linenos %}
+
 public IEnumerable<TOutput> AsEnumerableOf<TOutput>()
 {
     var converter = TypeDescriptor.GetConverter(typeof(T));
@@ -828,11 +855,12 @@ public IEnumerable<TOutput> AsEnumerableOf<TOutput>()
         yield return (TOutput)converter.ConvertTo(item, typeof(TOutput));
     }
 }
-```
+{% endhighlight %}
 
 And let's try it out. 
 
-```cs
+{% highlight csharp linenos %}
+
 public class Program
 {
     public static void Main(string[] args)
@@ -853,7 +881,7 @@ public class Program
         Console.ReadLine();
     }
 }
-```
+{% endhighlight %}
 
 In the above program, I have a `LinkedList<double>`. Here we have to be explicit and say I want the LinkedList as `AsEnumerableOf<int>`. So, T for LinkedList will be type double, TOutput for the AsEnumerableOf method will be type int, and I should be able to loop through all the items in asInts and be able to see integer values come out.
 
@@ -865,7 +893,8 @@ Delegate is a type that essentially describes a method signature with its return
 
 Before moving forward I want to point out some changes I have made in my Main method,
 
-```cs
+{% highlight csharp linenos %}
+
 public class Program
 {
     public static void Main(string[] args)
@@ -894,7 +923,7 @@ public class Program
         }
     }
 }
-```
+{% endhighlight %}
 
 As you can see from the above code I have created two separate methods, one for creating LinkedList of int, and the second one for displaying data within it. This gives me some readability and separation of concern to some extent.
 
@@ -910,16 +939,18 @@ Let me create a delegate, a public delegate using the delegate keyword. And when
 
 We will define a method that doesn't have a return type. So, the return is void. And then the name of my delegate will be Printer. Also, we will need to take a parameter. Below is the code for the same.
 
-```cs
+{% highlight csharp linenos %}
+
 delegate void Printer(object data);
-```
+{% endhighlight %}
 
 This method has to take an object reference, and we'll call the parameter data. And now I have a new type, a type called Printer. 
 
 
 I can define parameters and variables of that type, so let me take a printer variable of type Printer in Display method, 
 
-```cs
+{% highlight csharp linenos %}
+
 private static void Display(LinkedList<int> list, Printer printer)
 {
     foreach (var item in list)
@@ -927,7 +958,7 @@ private static void Display(LinkedList<int> list, Printer printer)
         printer(item);
     }
 }
-```
+{% endhighlight %}
 
 So,
 
@@ -935,19 +966,21 @@ Now, I have a layer of indirection between Display and the ultimate output. When
 
 So, back in the program when I invoke Display, I now need to give it a delegate parameter. So, I will initialize a new Printer object and will point it to `Console.WriteLine`, and then I have something that I can pass to Display. 
 
-```cs
+{% highlight csharp linenos %}
+
 public static void Main(string[] args)
 {
     LinkedList<int> list = GenerateData();
     Display(list, new Printer(Console.WriteLine));
     Console.ReadLine();
 }
-```
+{% endhighlight %}
 
 
 And if I do a build at this point, the C# compiler is perfectly happy. I've created a Printer, initialized it, it'll point to a method, ConsoleWrite, passing that into the Display method, which will use it. 
 
-```cs
+{% highlight csharp linenos %}
+
 public class Program
 {
     delegate void Printer(object data);
@@ -978,7 +1011,7 @@ public class Program
         }
     }
 }
-```
+{% endhighlight %}
 
 So, if we run the program what we should see is that I can still Display out and printed to the screen correctly. 
 
@@ -988,13 +1021,15 @@ Now, of course, when Display goes to invoke print with an int value, since print
 
 So, I want a Printer<T> where T is the type of incoming data. I can now use T throughout this delegate definition for any parameters that I want. I could also use it as a return type if I wanted this method to return data, which I don't really need so I'll leave that as void. 
 
-```cs
+{% highlight csharp linenos %}
+
 delegate void Printer<T>(T data);
-```
+{% endhighlight %}
 
 And now for the Display method, I will have a Printer<T>, and where's the T going to come from? It's not going to be something that I hard code here. Instead, if I have a LinkedList<T>, and I'm calling this method Display<T> on that LinkedList, then I want the Printer to also use that generic argument T. So, with a LinkedList of int, I'll have a Printer of int, 
 
-```cs
+{% highlight csharp linenos %}
+
 public class Program
 {
     delegate void Printer<T>(T data);
@@ -1025,7 +1060,7 @@ public class Program
         }
     }
 }
-```
+{% endhighlight %}
 
 and you can see that this code is perfectly happy. 
 
@@ -1035,7 +1070,8 @@ And now if I run this program, there shouldn't be any visible difference in the 
 ## C# Generic Static Method
 You can also further simplify the Display method using extension method and generic method. Below is the code for the same.
 
-```cs
+{% highlight csharp linenos %}
+
 namespace generics_in_csharp
 {
     public delegate void Printer<T>(T data);
@@ -1072,7 +1108,7 @@ namespace generics_in_csharp
         }
     }
 }
-```
+{% endhighlight %}
 
 ![](/assets/images/generics-in-csharp/generics_in_csharp_demo7.PNG)
 
@@ -1104,7 +1140,8 @@ where T : U | The type argument supplied for T must be or derive from the argume
 
 The example below shows a generic class declaration where the parameterized type has to implement a specific interface.
 
-```cs
+{% highlight csharp linenos %}
+
 interface ICustomInterface
 { }
 public class Class2 : ICustomInterface
@@ -1123,16 +1160,17 @@ public class Class1
         CustomList<Class2> myCustomList1 = new CustomList<Class2>(); //No Error
     }
 }
-```
+{% endhighlight %}
 We will get an error with types that don’t implement `ICustomInterface`, like the type string here.
 
 Also, multiple interfaces can be specified as constraints on a single type, as follows:
-```cs
+{% highlight csharp linenos %}
+
 class LinkedList<T> where T : System.IComparable<T>, IEnumerable<T>
 {
     ...
 }
-```
+{% endhighlight %}
 
 ## Further Reading
 

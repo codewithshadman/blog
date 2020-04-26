@@ -26,14 +26,15 @@ Class declarations can have up to four different parts, surrounding the `class` 
 
 The class-body element specifies type members. The following is an example of a very simple class declaration, the class body being the lines following line 1:
 
-```cs
+{% highlight csharp linenos %}
+
 public class Shape
 {
     // class-body:
     // field, constructor, and 
     // method declarations 
 }
-```
+{% endhighlight %}
 
 
 We will now consider the other parts of a class declaration.
@@ -64,13 +65,14 @@ They can be used to associate declarative information - you can retrieve such in
 
 Attributes can be posted at the front of a class declaration. These comprise user-defined meta-data about the class; information which can be brought out at runtime. For example, one might define a `Serializable` attribute to indicate that instances of this type can be serialized. You can learn more about c# attributes [here](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/attributes/).
 
-```cs
+{% highlight csharp linenos %}
+
 [Serializable] // this is a class attribute
 public class Shape
 {
     // class-body
 }
-```
+{% endhighlight %}
 
 ## C\# Class Modifiers
 There are seven different class modifiers. Four of these - `public`, `internal`, `protected` and `private` - are used to specify the access levels of the types defined by the classes. 
@@ -118,7 +120,8 @@ The `class-base` part of the class declaration specifies the name of the class a
 
 As we noted [previously](/csharp-object-oriented-programming/#c-classes-and-types), classes can inherit from just one base class and any number of interfaces. The classes to be inherited from are named following a colon after the class's name (with any base class preceding any interfaces). The following line declares a public class called `DrawingRectangle` which inherits from the base class `Rectangle` and the interface `Drawing`:
 
-```cs
+{% highlight csharp linenos %}
+
 //Here DrawingRectangle is our derived class
 public class DrawingRectangle : Rectangle, Drawing //this is class-base
 {
@@ -134,7 +137,7 @@ public interface Drawing //this is just an interface
 {
     
 }
-```
+{% endhighlight %}
 
 ## C\# Constructors
 
@@ -145,7 +148,8 @@ Creating an instance of a class is done with the new operator. Calling new on an
 
 ### Adding A Constructor To Your Type
 
-```cs
+{% highlight csharp linenos %}
+
 class Shape
 {
     private int _maximumNumberOfSides;
@@ -155,14 +159,15 @@ class Shape
     }
     // Rest of the class
 }
-```
+{% endhighlight %}
 
 As you can see in above example, the constructor takes an argument of int. When you want to
 instantiate a new instance of this class, you need to pass a value to the constructor:
 
-```cs
+{% highlight csharp linenos %}
+
 Shape shape = new Shape(5);
-```
+{% endhighlight %}
 
 The constructor also runs some code to make sure that the object is in a usable state.
 Some good practices when designing your constructors are these:
@@ -179,7 +184,8 @@ avoid duplicate code. Below code shows how you can chain multiple constructors.
 
 
 
-```cs
+{% highlight csharp linenos %}
+
 class ConstructorChaining
 {
     private int _p;
@@ -189,7 +195,7 @@ class ConstructorChaining
         this._p = p;
     }
 }
-```
+{% endhighlight %}
 
 In production code it’s important that you make clear which constructor users of your class
 should use. You can do this by picking meaningful parameter names and by adding comments

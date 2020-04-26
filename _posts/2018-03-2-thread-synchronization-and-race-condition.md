@@ -27,7 +27,8 @@ redirect_from:
 
 Not all resources are meant to be used concurrently. Resources like integers and collection must be handled carefully when accessed through multiple threads, resources that are accessed and updated within multiple threads are known as Shared Resources. Let's see an example,
 
-```csharp
+{% highlight csharp linenos %}
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -78,7 +79,7 @@ namespace _01_Shared_Resources
         }
     }
 }
-```
+{% endhighlight %}
 
 However,
 
@@ -94,11 +95,12 @@ A race condition occurs when two or more threads can access shared data and they
 
 In our case, the line which is causing race condition is sum++, though this line seems to single line code and must not affect with concurrency but this single line of code gets transformed into multiline processor level instructions by JIT at the time of execution, below is the example
 
-```txt
+{% highlight text linenos %}
+
 mov eax, dword ptr [sum]
 inc eax
 mov dword ptr [sum], eax
-```
+{% endhighlight %}
 
 So what happens when our multiple threads execute this part of the code.
 

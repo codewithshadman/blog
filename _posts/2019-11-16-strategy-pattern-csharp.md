@@ -54,7 +54,8 @@ Now, In our imaginary store we 25% discount on price of item for the months of J
 
 Let's see how this fit in strategy pattern,
 
-```cs
+{% highlight csharp linenos %}
+
 using System;
 using System.Collections.Generic;
 
@@ -86,14 +87,15 @@ class QuarterDiscountStrategy : IOfferStrategy
         return 0.25;
     }
 }
-```
+{% endhighlight %}
 
 Here we declared two strategies, NoDiscountStrategy and QuarterDiscountStrategy, as per problem statement.
 
 
 Let's continue with the example and implement the context,
 
-```cs
+{% highlight csharp linenos %}
+
 class StrategyContext
 {
     double price; // price for some item or air ticket etc.
@@ -139,13 +141,14 @@ class StrategyContext
         }
     }
 }
-```
+{% endhighlight %}
 
 In strategy pattern context is optional. But if it is present, it acts as single point of contact for client.
 
 Now, we can implement the client code,
 
-```cs
+{% highlight csharp linenos %}
+
 static void Main(string[] args)
 {
     StrategyContext context = new StrategyContext(100);
@@ -157,13 +160,14 @@ static void Main(string[] args)
     context.ApplyStrategy(strategy);
     Console.ReadLine();
 }
-```
+{% endhighlight %}
 
 Above example shows the usage of Strategy pattern with Context. Context can be used as single point of contact for the Client.
 
 As shown in the output below, you will get discount depending on the month you have entered.
 
-```txt
+{% highlight text linenos %}
+
 output:
 Enter month number between 1 and 12
 Month =1
@@ -173,7 +177,7 @@ Enter month number between 1 and 12
 Month =7
 Price before offer :100.0
 Price after offer:75.0
-```
+{% endhighlight %}
 
 #### Multiple uses of Context
 1. It can populate data to execute an operation of strategy
@@ -186,7 +190,8 @@ wrapper and hides internals
 
 The following is a simple example of using the strategy pattern without a context class.
 
-```cs
+{% highlight csharp linenos %}
+
 using System;
 
 class Program
@@ -245,7 +250,7 @@ class Program
     }
 
 }
-```
+{% endhighlight %}
 
 Here we have two implementation strategies which implement the interface and solve the same problem in different ways. 
 
@@ -259,16 +264,18 @@ The example problem we using is a family of algorithms (strategies) that describ
 
 The contract for our family of algorithms is defined by the following interface:
 
-```cs
+{% highlight csharp linenos %}
+
 public interface ICommunicateInterface
 {
     string Communicate(string destination);
 }
-```
+{% endhighlight %}
 
 Then we can implement a number of algorithms, as follows:
 
-```cs
+{% highlight csharp linenos %}
+
 public class CommunicateViaPhone : ICommunicateInterface
 {
     public string Communicate(string destination)
@@ -292,19 +299,21 @@ public class CommunicateViaVideo : ICommunicateInterface
         return "communicating " + destination + " via Video..";
     }
 }
-```
+{% endhighlight %}
 
 These can be instantiated as follows:
 
-```cs
+{% highlight csharp linenos %}
+
 CommunicateViaPhone communicateViaPhone = new CommunicateViaPhone();
 CommunicateViaEmail communicateViaEmail = new CommunicateViaEmail();
 CommunicateViaVideo communicateViaVideo = new CommunicateViaVideo();
-```
+{% endhighlight %}
 
 Next, we implement a service that uses the strategy:
 
-```cs
+{% highlight csharp linenos %}
+
 public class CommunicationService
 {
     private ICommunicateInterface communcationMeans;
@@ -318,11 +327,12 @@ public class CommunicationService
         Console.WriteLine(communicate);
     }
 }
-```
+{% endhighlight %}
 
 Finally, we can use the different strategies as follows:
 
-```cs
+{% highlight csharp linenos %}
+
 static void Main(string[] args)
 {
     CommunicateViaPhone communicateViaPhone = new CommunicateViaPhone();
@@ -340,7 +350,7 @@ static void Main(string[] args)
     Console.ReadLine();
 
 }
-```
+{% endhighlight %}
 
 ### Strategy Pattern Using C# Delegates
 
@@ -351,16 +361,18 @@ Instead, we can describe it using .NET built-in generic delegate type [Func](htt
 The different algorithms composing the family of algorithms can be expressed as lambda
 expressions. This replaces the strategy classes and their instantiations.
 
-```cs
+{% highlight csharp linenos %}
+
 string communicateViaEmail(string destination) 
     => "communicating " + destination + " via Email..";
 string communicateViaPhone(string destination) 
     => "communicating " + destination + " via Phone..";
-```
+{% endhighlight %}
 
 Next, we can code the "service" as follows:
 
-```cs
+{% highlight csharp linenos %}
+
 public class CommunicationService
 {
     private Func<string, string> communcationMeans;
@@ -374,12 +386,13 @@ public class CommunicationService
         Console.WriteLine(communicate);
     }
 }
-```
+{% endhighlight %}
 
 Finally we use the strategies as follows:
 
 
-```cs
+{% highlight csharp linenos %}
+
 CommunicationService communicationService = new CommunicationService();
 // via phone
 communicationService.SetCommuncationMeans(communicateViaPhone);
@@ -387,16 +400,17 @@ communicationService.Communicate("1234567");
 // via email
 communicationService.SetCommuncationMeans(communicateViaEmail);
 communicationService.Communicate("hi@me.com");
-```
+{% endhighlight %}
 
 Or even:
 
-```cs
+{% highlight csharp linenos %}
+
 //via Video
 communicationService.SetCommuncationMeans((string destination) 
         => "communicating " + destination + " via Video..");
 communicationService.Communicate("1234567");
-```
+{% endhighlight %}
 
 > **Note:** You can download the complete solution demo from my [github repository](https://github.com/kudchikarsk/strategy-pattern-csharp).
 

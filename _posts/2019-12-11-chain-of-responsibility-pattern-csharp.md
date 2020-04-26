@@ -51,7 +51,8 @@ We will use the Chain of Responsibility pattern to implement this solution. The 
 
 We can implement this solution easily in a single program itself but then the complexity will increase and the solution will be tightly coupled. So we will create a chain of dispense systems to dispense bills of 50$, 20$ and 10$.
 
-```cs
+{% highlight csharp linenos %}
+
 namespace ATMDispenserExample
 {
     class Program
@@ -168,9 +169,10 @@ namespace ATMDispenserExample
         }
     }
 }
-```
+{% endhighlight %}
 
-```txt
+{% highlight text linenos %}
+
 Please enter amount to dispense:
 140
 Your amount $140 is dispensable!
@@ -180,7 +182,7 @@ Your amount $100 is dispensible!
 Please enter amount to dispense:
 200
 Failed to dispense $200!
-```
+{% endhighlight %}
 
 ### Example 2
 
@@ -192,7 +194,8 @@ There're a few basic interfaces we'll cover before we begin to get everybody up 
 
 First, we have an ExpenseReport. An ExpenseReport simply has a total value, the dollars, and cents of the expense. 
 
-```cs
+{% highlight csharp linenos %}
+
 using System;
 
 namespace ApprovalCommon
@@ -202,31 +205,34 @@ namespace ApprovalCommon
         Decimal Total { get; }
     }
 }
-```
+{% endhighlight %}
 
 Next, we have an ExpenseApprover. An ExpenseApprover is an employee who can approve an expense. 
 
-```cs
+{% highlight csharp linenos %}
+
 public interface IExpenseApprover
 {
     ApprovalResponse ApproveExpense(IExpenseReport expenseReport);
 }
-```
+{% endhighlight %}
 
 And then we have an ApprovalResponse; Denied, Approved, or Beyond the Approval Limit for that ExpenseApprover. 
 
-```cs
+{% highlight csharp linenos %}
+
 public enum ApprovalResponse
 {
     Denied,
     Approved,
     BeyondApprovalLimit,
 }
-```
+{% endhighlight %}
 
 The ExpenseReport concrete implementation is very straightforward. It simply exposes the Total as a property. 
 
-```cs
+{% highlight csharp linenos %}
+
 using System;
 
 namespace ApprovalCommon
@@ -245,11 +251,12 @@ namespace ApprovalCommon
         }
     }
 }
-```
+{% endhighlight %}
 
 The Employee class is the concrete implementation of the ExpenseApprover interface. Its constructor takes a string, which is the name and the decimal value for the approvalLimit. The ApproveExpense method simply looks at the ExpenseReport and determines if the value is above, or below the approvalLimit. If it's above the approvalLimit, BeyondApprovalLimit is returned. Otherwise, the Expense is Approved. 
 
-```cs
+{% highlight csharp linenos %}
+
 using System;
 
 namespace ApprovalCommon
@@ -274,11 +281,12 @@ namespace ApprovalCommon
         private readonly Decimal _approvalLimit;
     }
 }
-```
+{% endhighlight %}
 
 Here we have our main Expense Approval application.
 
-```cs
+{% highlight csharp linenos %}
+
 using System;
 using System.Collections.Generic;
 using ApprovalCommon;
@@ -324,7 +332,7 @@ namespace Approval
         }
     }
 }
-```
+{% endhighlight %}
 
 Our sample data is four workers. These workers represent a very simple management reporting structure. 
 
@@ -340,7 +348,8 @@ One of the issues we have is that the caller is responsible for iterating over t
 
 Now let's take a look at the Budget Approval application, using the Chain of Responsibility. 
 
-```cs
+{% highlight csharp linenos %}
+
 using System;
 using ApprovalCommon;
 
@@ -371,13 +380,14 @@ namespace Approval
         }
     }
 }
-```
+{% endhighlight %}
 
 It should be clear just at first glance that this is a significantly smaller amount of code than what we had in the non-Chain of Responsibility solution. 
 
 The most obvious difference, to begin with, is the addition of the ExpenseHandler class. This ExpenseHandler represents a single link in the Chain of Responsibility. Let's go ahead and take a look at that class to understand how it works. 
 
-```cs
+{% highlight csharp linenos %}
+
 using ApprovalCommon;
 
 namespace Approval
@@ -417,7 +427,7 @@ namespace Approval
         private IExpenseHandler _next;
     }
 }
-```
+{% endhighlight %}
 
 The ExpenseHandler implements the IExpenseHandler interface. This interface exposes two methods, the Approve method, which should look familiar, and the RegisterNext method. The RegisterNext method registers the next link in the chain. 
 
@@ -429,7 +439,8 @@ In the above solution, we have used a null object pattern to handle the null ref
 
 What I've done is I've created an EndOfChainExpenseHandler class, and this class exposes a singleton Instance. This Instance is the EndOfChainHandler. 
 
-```cs
+{% highlight csharp linenos %}
+
 using System;
 using ApprovalCommon;
 
@@ -457,7 +468,7 @@ namespace Approval
         private static readonly EndOfChainExpenseHandler _instance = new EndOfChainExpenseHandler();
     }
 }
-```
+{% endhighlight %}
 
 The benefits you'll see when using the Chain of Responsibility include a reduced coupling between the message sender and receiver. You'll be able to dynamically manage the message handlers, and the end of chain behavior can be defined appropriately depending on your business context.
 
@@ -469,7 +480,8 @@ So when an exception occurs in the try block, its send to the first catch block 
 
 In the following example, two catch blocks are used, and the most specific exception, which comes first, is caught.
 
-```cs
+{% highlight csharp linenos %}
+
 class ThrowTest3
 {
     static void Main()
@@ -504,7 +516,7 @@ class ThrowTest3
  System.ArgumentNullException: Value cannot be null.
  at Test.ThrowTest3.ProcessString(String s) ... First exception caught.
 */
-```
+{% endhighlight %}
 
 ## Chain Of Responsibility Pattern In ASP.NET
 
@@ -514,7 +526,8 @@ class ThrowTest3
 
  The following code snippet shows how one can write an object that leverages the chain of responsibility pattern to create a module that filters an incoming request. These filters are configured as chains and will pass the requested content to the next filter in the chain by the ASP.net runtime:
 
-```cs
+{% highlight csharp linenos %}
+
 public class SimpleHttpModule : IHttpModule 
 { 
   public SimpleHttpModule() { } 
@@ -549,9 +562,10 @@ public class SimpleHttpModule : IHttpModule
 
   public void Dispose() { } 
 } 
-```
+{% endhighlight %}
 
-```xml
+{% highlight xml linenos %}
+
 <configuration> 
   <system.web> 
     <httpModules> 
@@ -559,11 +573,12 @@ public class SimpleHttpModule : IHttpModule
     </httpModules> 
   </system.web> 
 </configuration> 
-```
+{% endhighlight %}
 
 In the ASP.NET pipeline, a request passes through a series of HTTP modules before it hits a handler. A simple HTTP handler routine is given as follows:
 
-```cs
+{% highlight csharp linenos %}
+
 public class SimpleHttpHandler: IHttpHandler 
 {
 
@@ -578,17 +593,18 @@ public class SimpleHttpHandler: IHttpHandler
   } 
 
 } 
-```
+{% endhighlight %}
 
 We can configure the handler as given next. Whenever we create an ASP.NET resource with the .smp extension, the handler will be SimpleHttpHandler:
 
-```xml
+{% highlight xml linenos %}
+
 <system.web> 
   <httpHandlers> 
     <add verb="*" path="*.smp" type="SimpleHttpHandler"/> 
   </httpHandlers> 
 </system.web> 
-```
+{% endhighlight %}
 
 ## Where To Apply Chain Of Responsibility Pattern?
 

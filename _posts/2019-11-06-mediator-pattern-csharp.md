@@ -45,7 +45,8 @@ If a new computer is added or an existing computer is removed, all other compute
 
 Let's see how the Mediator pattern fits into it.
 
-```cs
+{% highlight csharp linenos %}
+
 using System;
 
 class Program
@@ -160,7 +161,7 @@ class Program
         }
     }
 }
-```
+{% endhighlight %}
 
 In the above example `IMediator` defines the contract for communication between Colleagues. This communication is implemented in `NetworkMediator` using delegates and events.
 
@@ -175,7 +176,8 @@ Also,
 
 `ComputerColleague` class can maintain a private reference to the `NetworkMediator` and thus register or unregister itself for notification. Let's see the code example,
 
-```cs
+{% highlight csharp linenos %}
+
 class ComputerColleague : Colleague
 {
     private readonly NetworkMediator mediator;
@@ -197,7 +199,7 @@ class ComputerColleague : Colleague
     ...
     ...
 }
-```
+{% endhighlight %}
 
 The Mediator pattern makes provisions for more than one mediator. For example,
 there may be many different departments in a company. Each department

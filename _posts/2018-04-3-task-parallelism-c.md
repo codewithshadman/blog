@@ -35,7 +35,8 @@ In this article, we will be discussing different methods to achieve parallelism 
 
 A Task can have several child Tasks. The parent Task finishes when all the child tasks are ready. Below code shows how this works.
 
-```cs
+{% highlight csharp linenos %}
+
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -68,7 +69,7 @@ class Program
         Console.ReadLine();
     }
 }
-```
+{% endhighlight %}
 
 The finalTask runs only after the parent Task is finished, and the parent Task finishes when all three children are finished. You can use this to create quite complex Task hierarchies that will go through all the steps you specified.
 
@@ -78,7 +79,8 @@ The finalTask runs only after the parent Task is finished, and the parent Task f
 
 In the previous example, you had to create three Tasks all with the same options. To make the process easier, you can use a TaskFactory. A TaskFactory is created with a certain configuration and can then be used to create Tasks with that configuration. Below code shows how you can simplify the previous example with a factory.
 
-```cs
+{% highlight csharp linenos %}
+
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -110,7 +112,7 @@ class Program
         Console.ReadLine();
     }
 }
-```
+{% endhighlight %}
 
 ## C# Task.WaitAll {#c-task-waitall}
 
@@ -118,7 +120,8 @@ You can also use the method WaitAll to wait for multiple Tasks to finish before 
 
 Below code shows how to use this.
 
-```cs
+{% highlight csharp linenos %}
+
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -151,7 +154,7 @@ namespace Program_7
         }
     }
 }
-```
+{% endhighlight %}
 
 In this case, all three Tasks are executed simultaneously, and the whole run takes approximately 1000ms instead of 3000. Next to WaitAll, you also have a WhenAll method that you can use to schedule a continuation method after all Tasks have finished.
 
@@ -167,7 +170,8 @@ Also, you can create a WaitAllOneByOne pattern using the WaitAny method. It is u
 
 Below code shows how this works.
 
-```cs
+{% highlight csharp linenos %}
+
 using System;
 using System.Linq;
 using System.Threading;
@@ -195,7 +199,7 @@ namespace Chapter1
         }
     }
 }
-```
+{% endhighlight %}
 
 In this example, you process a completed Task as soon as it finishes. By keeping track of which Tasks are finished, you don't have to wait until all Tasks have completed.
 
@@ -213,7 +217,8 @@ Below code shows an example of using Parallel.For and Parallel.ForEach.
 
 ## C# Parallel.For and Parallel.Foreach {#c-parallel-for-and-parallel-foreach}
 
-```cs
+{% highlight csharp linenos %}
+
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -237,14 +242,15 @@ namespace Example9
         }
     }
 }
-```
+{% endhighlight %}
 
 
 You can cancel the loop by using the ParallelLoopState object. You have two options to do this: Break or Stop. Break ensures that all iterations that are currently running will be finished. Stop just terminates everything. Here is an example:
 
 ## C# Parallel.Break {#c-parallel-break}
 
-```cs
+{% highlight csharp linenos %}
+
 using System;
 using System.Threading.Tasks;
 
@@ -268,6 +274,6 @@ namespace Example10
         }
     }
 }
-```
+{% endhighlight %}
 
 When breaking the parallel loop, the result variable has an IsCompleted value of false and a LowestBreakIteration of 500. When you use the Stop method, the LowestBreakIteration is null.

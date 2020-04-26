@@ -30,7 +30,8 @@ In this post, we will discuss different types of comparison methods, such as equ
 
 Here is a bit of a quiz: What does this program print?
 
-```cs
+{% highlight csharp linenos %}
+
 using System;
 using System.Collections.Generic;
 
@@ -51,11 +52,12 @@ class Example
                 new Person { Name = "George Washington" }));
     }
 }
-```
+{% endhighlight %}
 
 If you said `true` then, unfortunately, you would be incorrect – this program prints `false`. Before I explain why this program prints `false` I would like to make one slight change to this program to make it print `true`.
 
-```cs
+{% highlight csharp linenos %}
+
 using System;
 using System.Collections.Generic;
 
@@ -76,7 +78,7 @@ class Example
                 new Person { Name = "George Washington" }));
     }
 }
-```
+{% endhighlight %}
 
 Did you spot it?
 
@@ -108,17 +110,19 @@ So does this mean that to have value equality we must use value types? Of course
 
 Every time you use the binary equality operator (==) or the Equals method on a reference type you are invoking Object.Equals for the instances in question. If you wish to provide value equality the most obvious thing to do would be to override System.Object.Equals and use this method to compare the fields of your two instances. Let us begin by revisiting our Person type which I have refactored to make these examples a bit more interesting:
 
-```cs
+{% highlight csharp linenos %}
+
 class Person
 {
     public string Name { get; set; }
     public DateTime Birthday { get; set; }
 }
-```
+{% endhighlight %}
 
 We have a class with two properties – let’s override the Equals method:
 
-```cs
+{% highlight csharp linenos %}
+
 class Person
 {
     public string Name { get; set; }
@@ -131,25 +135,28 @@ class Person
             && this.Birthday == other.Birthday;
     }
 }
-```
+{% endhighlight %}
 
 Now we have value equality for our reference type. While this is a simple solution, it is not ideal for the following reasons:
 
 This approach is not type-safe. Since the Equals method accepts an argument of type Object we cannot guarantee that the instance that was passed to this method is a Person.
 
-```cs
+{% highlight csharp linenos %}
+
 somePerson.equals("hello, world");  // throws an InvalidCastException
-```
+{% endhighlight %}
 
 This approach is not "null safe". Any comparisons with null will throw a NullReferenceException.
 
-```cs
+{% highlight csharp linenos %}
+
 somePerson.equals(null); // throws a NullReferenceException
-```
+{% endhighlight %}
 
 The null safety issue is easy enough to fix:
 
-```cs
+{% highlight csharp linenos %}
+
 class Person
 {
     ...
@@ -165,7 +172,7 @@ class Person
             && this.Birthday == other.Birthday;
     }
 }
-```
+{% endhighlight %}
 
 But how do we preserve type safety? Meet the IEquatable<T> interface.
 
@@ -173,18 +180,20 @@ But how do we preserve type safety? Meet the IEquatable<T> interface.
 
 This interface was designed specifically to help us tackle the type safety issue that we are facing. It declares a single member:
 
-```cs
+{% highlight csharp linenos %}
+
 public interface IEquatable<T>
 {
     bool Equals(T other);
 }
-```
+{% endhighlight %}
 
 As you can see, this interface gives us the ability to create a strongly-typed override of our existing Equals method. Implement the interface like this:
 
 ### IEquatable C# Example
 
-```cs
+{% highlight csharp linenos %}
+
 class Person : IEquatable<Person>
 {
     public string Name { get; set; }
@@ -203,7 +212,7 @@ class Person : IEquatable<Person>
             && this.Birthday == other.Birthday;
     }
 }
-```
+{% endhighlight %}
 
 Now that we have a strongly-typed Equals method any equality comparisons that are done on two instances of our type will be type-safe and null-safe. Using the `as` cast in the default overridden implementation of Equals allows us to pass either an instance of Person or null and our implementation of `IEquatable<T>.Equals` returns false which ensure that our methods won’t fail for null. For more information on the `as` operator, see my blog post [Is And As Operators In C#](/is-and-as-in-csharp/).
 
@@ -217,7 +226,8 @@ This method allows our calling code a performance boost by not having to call Eq
 
 As for the proper or best way to generate a hash code for an object instance, that is a discussion for another day. For now, I will add a simple GetHashCode implementation to our example to complete the exercise.
 
-```cs
+{% highlight csharp linenos %}
+
 class Person : IEquatable<Person>
 {
     public string Name { get; set; }
@@ -243,7 +253,7 @@ class Person : IEquatable<Person>
         return hash;
     }
 }
-```
+{% endhighlight %}
 
 All we are doing here is taking two coprime numbers (23 and 37) and using them to manipulate the hash codes of our instance’s state to arrive at a final integral value. 
 
@@ -257,7 +267,8 @@ The `==` (equality) and `!=` (inequality) operators check if their operands are 
 
 Here is a complete example that includes those operator overloads:
 
-```cs
+{% highlight csharp linenos %}
+
 class Person : IEquatable<Person>
 {
     public string Name { get; set; }
@@ -303,4 +314,4 @@ class Person : IEquatable<Person>
         return !(left == right);
     }
 }
-```
+{% endhighlight %}

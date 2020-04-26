@@ -30,14 +30,16 @@ A Tuple is a collection of Python objects separated by commas. In someways a tup
 
 Lets see some code example in python,
 
-```python
+{% highlight python linenos %}
+
 firstName, lastName = ("Bill", "Gates")
-```
+{% endhighlight %}
 Similar code in C#
 
-```csharp
+{% highlight csharp linenos %}
+
 (string FirstName, string LastName) person = ("Bill", "Gates");
-```
+{% endhighlight %}
 
 Lets see how C# went from **close to actual python style tuple** in C#,
 
@@ -46,7 +48,8 @@ Lets see how C# went from **close to actual python style tuple** in C#,
 The Tuple<T> class was introduced in .NET Framework 4.0. A tuple is a data structure that contains a sequence of elements of different data types. It can be used where you want to have a data structure to hold an object with properties, but you don't want to create a separate type for it.
 
 Lets see some sample code 
-```csharp
+{% highlight csharp linenos %}
+
 Tuple<int, string, string> person = 
 			new Tuple <int, string, string>(1, "Steve", "Jobs");
 person.Item1; // returns 1
@@ -70,7 +73,7 @@ numbers.Item6; // returns "Six"
 numbers.Item7; // returns 7
 numbers.Rest; // returns (8)
 numbers.Rest.Item1; // returns 8
-```
+{% endhighlight %}
 
 Tuples can be used in the following scenarios:
 - When you want to return multiple values from a method without using ref or out parameters.
@@ -94,7 +97,8 @@ To install the ValueTuple package, right click on the project in the solution ex
 
 Lets see some code example,
 
-```csharp
+{% highlight csharp linenos %}
+
 var person = (1, "Bill", "Gates");
     
 //equivalent Tuple
@@ -128,11 +132,12 @@ person.LastName; // returns "Gates"
 				(PersonId:1, FName:"Bill", LName: "Gates");
 
 
-```
+{% endhighlight %}
 
 You may have notice now from above example how this C# tuples are now much alike to python style tuples. We can also specify different member names for a ValueTuple returned from a method.
 
-```csharp
+{% highlight csharp linenos %}
+
 static void Main(string[] args)
 {
     var person = GetPerson();
@@ -143,13 +148,14 @@ static (int Id, string FirstName, string LastName) GetPerson()
 {
     return (1, "Bill", "Gates");
 }
-```
+{% endhighlight %}
 
 ValueTuple also allows "discards" in deconstruction for the members you are not going to use.
 
-```csharp
+{% highlight csharp linenos %}
+
 (var id, var fname, _) = GetPerson(); // use discard _ for the unused member LastName
-```
+{% endhighlight %}
 
 You can learn more about ValueType Tuples in C# [here][tuples-csharp-article].
 

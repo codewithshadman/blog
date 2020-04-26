@@ -41,7 +41,8 @@ This article explains various star (\*) pattern programs in c# programming langu
 
 ![](/assets/images/star-pattern/1.jpg)
 
-```cs
+{% highlight csharp linenos %}
+
 class Program
 {
     static void Main(string[] args)
@@ -58,13 +59,14 @@ class Program
         Console.ReadLine();
     }
 }        
-```
+{% endhighlight %}
 
 ## Right Angle Triangle Pattern
 
 ![](/assets/images/star-pattern/2.jpg)
 
-```cs
+{% highlight csharp linenos %}
+
 class Program
 {
     static void Main(string[] args)
@@ -81,13 +83,14 @@ class Program
         Console.ReadLine();
     }
 }      
-```
+{% endhighlight %}
 
 ## Diamond Pattern
 
 ![](/assets/images/star-pattern/3.jpg)
 
-```cs
+{% highlight csharp linenos %}
+
 class Program
 {
     static void Main(string[] args)
@@ -116,13 +119,14 @@ class Program
         Console.ReadLine();
     }
 }      
-```
+{% endhighlight %}
 
 ## Right Angle Triangle Reflection Pattern
 
 ![](/assets/images/star-pattern/4.jpg)
 
-```cs
+{% highlight csharp linenos %}
+
 class Program
 {
     static void Main(string[] args)
@@ -144,13 +148,14 @@ class Program
         Console.ReadLine();
     }
 }     
-```
+{% endhighlight %}
 
 ## Parallelogram Pattern
 
 ![](/assets/images/star-pattern/5.jpg)
 
-```cs
+{% highlight csharp linenos %}
+
 class Program
 {
     static void Main(string[] args)
@@ -173,13 +178,14 @@ class Program
         Console.ReadLine();
     }
 }         
-```
+{% endhighlight %}
 
 ## Hollow Rectangle Pattern
 
 ![](/assets/images/star-pattern/6.jpg)
 
-```cs
+{% highlight csharp linenos %}
+
 class Program
 {
     static void Main(string[] args)
@@ -214,13 +220,14 @@ class Program
         Console.ReadLine();
     }
 }         
-```
+{% endhighlight %}
 
 ## Castle Pattern
 
 ![](/assets/images/star-pattern/7.jpg)
 
-```cs
+{% highlight csharp linenos %}
+
 class Program
 {
     static void Main(string[] args)
@@ -253,13 +260,14 @@ class Program
 	        Console.Write(" ");
 	}
 }         
-```
+{% endhighlight %}
 
 ## Pyramid Pattern
 
 ![](/assets/images/star-pattern/8.jpg)
 
-```cs
+{% highlight csharp linenos %}
+
 class Program
 {
     static void Main(string[] args)
@@ -277,13 +285,14 @@ class Program
         Console.ReadLine();
     }
 }         
-```
+{% endhighlight %}
 
 ## Fair Flag Pattern
 
 ![](/assets/images/star-pattern/9.jpg)
 
-```cs
+{% highlight csharp linenos %}
+
 class Program
 {
     static void Main(string[] args)
@@ -313,13 +322,14 @@ class Program
         Console.ReadLine();
     }
 }         
-```
+{% endhighlight %}
 
 ## Hollow Right Angle Triangle Pattern 
 
 ![](/assets/images/star-pattern/10.jpg)
 
-```cs
+{% highlight csharp linenos %}
+
 class Program
 {
     static void Main(string[] args)
@@ -343,13 +353,14 @@ class Program
         Console.ReadLine();
     }
 }         
-```
+{% endhighlight %}
 
 ## Hollow Pyramid Pattern 
 
 ![](/assets/images/star-pattern/11.jpg)
 
-```cs
+{% highlight csharp linenos %}
+
 class Program
 {
     static void Main(string[] args)
@@ -378,13 +389,14 @@ class Program
         Console.ReadLine();
     }
 }         
-```
+{% endhighlight %}
 
 ## Left Arrow Pattern
 
 ![](/assets/images/star-pattern/12.jpg)
 
-```cs
+{% highlight csharp linenos %}
+
 class Program
 {
     static void Main(string[] args)
@@ -413,13 +425,14 @@ class Program
         Console.ReadLine();
     }
 }         
-```
+{% endhighlight %}
 
 ## Hollow Diamond Pattern
 
 ![](/assets/images/star-pattern/13.jpg)
 
-```cs
+{% highlight csharp linenos %}
+
 class Program
 {
     static void Main(string[] args)
@@ -473,13 +486,14 @@ class Program
         Console.ReadLine();
     }
 }         
-```
+{% endhighlight %}
 
 ## Heart Pattern
 
 ![](/assets/images/star-pattern/14.jpg)
 
-```cs
+{% highlight csharp linenos %}
+
 class Program
 {
     static void Main(string[] args)
@@ -515,4 +529,4 @@ class Program
         Console.ReadLine();
     }
 }         
-```
+{% endhighlight %}

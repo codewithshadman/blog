@@ -39,10 +39,11 @@ Here indention is something where Sharp Column Indenter can help you with.
 
 In mathematics you always keep your equals lined up directly underneath the one above. It keeps it clean and lets you know you're working on the same problem, for example:
             
-```csharp
+{% highlight csharp linenos %}
+
 y   = 2x
 y/2 = x            
-```
+{% endhighlight %}
 
 Programming is slightly different. We often have a lot of assignments underneath each other, and while they are not strictly the same as maths, there is a close relationship. As such, aligning the equals allows us to quickly spot the relationship.
 
@@ -55,7 +56,8 @@ First example
 
 Take a look at this code:
 
-```csharp
+{% highlight csharp linenos %}
+
 //natural code with no code alignment and you can see that
 //readability of the code is not that good 
 var people1 = new List<Person>()
@@ -71,11 +73,12 @@ var people1 = new List<Person>()
   new Person { Name = "Domonique Biv", Location = "Barrackpur India", Age = 57 } ,
   new Person { Name = "Jonah", Location = "Barrancabermeja Colombia", Age = 34 }
 };
-```
+{% endhighlight %}
       
 The idea that I’m talking about is to use something like this below,
 
-```csharp
+{% highlight csharp linenos %}
+
 //same above code with column indention
 var people2 = new List<Person>()
 {
@@ -90,13 +93,14 @@ var people2 = new List<Person>()
   new Person { Name = "Domonique Biv", Location = "Barrackpur India"        , Age = 57 }, 
   new Person { Name = "Jonah"        , Location = "Barrancabermeja Colombia", Age = 34 }  
 };
-```
+{% endhighlight %}
 
 The Sharp Column Indenter extension allows you to align by more than just the equals. As you start to see the benefits of alignment, you see that there is so much more to align with.
 
 Compare these:
 
-```csharp
+{% highlight csharp linenos %}
+
 var benita = new Person() { Name = "Benita" };
 var deedeeAlmon = new Person() { Name = "Deedee Almon Fonsec" };
 var chaseHussain = new Person() { Name = "Chase Hussain" };
@@ -106,11 +110,12 @@ benita.Age = 35;
 deedeeAlmon.Age = 12;
 chaseHussain.Age = 24;
 cordia.Age = 22;
-```
+{% endhighlight %}
       
 same code with column indention,
       
-```csharp
+{% highlight csharp linenos %}
+
 var benita       = new Person ( ) { Name = "Benita"              } ; 
 var deedeeAlmon  = new Person ( ) { Name = "Deedee Almon Fonsec" } ; 
 var chaseHussain = new Person ( ) { Name = "Chase Hussain"       } ; 
@@ -120,7 +125,7 @@ benita       . Age = 35 ;
 deedeeAlmon  . Age = 12 ; 
 chaseHussain . Age = 24 ; 
 cordia       . Age = 22 ; 
-```
+{% endhighlight %}
 
 By aligning by the dot we can clearly see that we are setting the same property on each variable, and the thing that changes is the variable name.
 

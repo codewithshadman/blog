@@ -33,16 +33,18 @@ Conditions are used to execute part of a code only if some predefined requiremen
 
 The first type of condition we will look at is if-condition, which has the following syntax:
 
-```cs
+{% highlight csharp linenos %}
+
 if (condition) 
 {
    statement
 }
-```
+{% endhighlight %}
 	
 Again, the syntax is very close to ordinary English: If a condition is met, then execute something. Let's look at a simple example:
 
-```cs
+{% highlight csharp linenos %}
+
 class Program
 {
     static void Main(string[] args)
@@ -56,13 +58,14 @@ class Program
         Console.ReadLine();
     }
 }	 
-```
+{% endhighlight %}
 	
 ## C\# If-Else Condition
 
 The next type of condition will want to look at is else , which may be presented in the following form:
 	
-```cs
+{% highlight csharp linenos %}
+
 if (condition) 
 {
 	statement
@@ -71,7 +74,7 @@ else
 {
 	statement
 }
-```
+{% endhighlight %}
 
 	
 Again, the syntax is very close to ordinary English: if a condition is met execute something or else execute something else.
@@ -79,7 +82,8 @@ Again, the syntax is very close to ordinary English: if a condition is met execu
 In previous chapter, you learned how to find the number of a month. In the following example, we will use the month number in an if-else condition to find out what season it is:
 
 
-```cs
+{% highlight csharp linenos %}
+
 class Program
 {
     static void Main(string[] args)
@@ -97,7 +101,7 @@ class Program
         Console.ReadLine();
     }
 }
-```
+{% endhighlight %}
 	
 As you can see, this condition is not a particularly smart condition - it only works when it's March!
 
@@ -121,7 +125,8 @@ Operators | Description
 The operators can be used to develop more precise conditions, so now we can expand the above example to include all the spring months:
 
 
-```cs
+{% highlight csharp linenos %}
+
 class Program
 {
     static void Main(string[] args)
@@ -139,23 +144,25 @@ class Program
         Console.ReadLine();
     }
 }
-```
+{% endhighlight %}
 
 	
 	
 Let's take a closer look at the extended condition:
 
-```cs
+{% highlight csharp linenos %}
+
 today.Month >= 3 && today.Month <= 5
-```
+{% endhighlight %}
 	
 The condition can be translated into:
 
 
-```cs
+{% highlight csharp linenos %}
+
 If the month is greater than or equal to 3,
 	and the month is less than or equal to 5
-```
+{% endhighlight %}
 	
 	
 Smart, eh? Operators play a significant role in many different parts of C#.
@@ -167,7 +174,8 @@ But it still only works with March, April and May. All other months are not yet 
 Using else-if, we can expand the condition and make it work for all months:
 
 
-```cs
+{% highlight csharp linenos %}
+
 class Program
 {
     static void Main(string[] args)
@@ -192,14 +200,15 @@ class Program
         Console.ReadLine();
     }
 }
-```
+{% endhighlight %}
 
 To write conditions is all about thinking logically and being methodical. The example above is pretty straightforward, but conditions can get very complex.
 
 ## C\# Switch Case
 Another way of writing conditions is to use the switch method:
 
-```cs
+{% highlight csharp linenos %}
+
 switch (expression) 
 { 
     case 1: 
@@ -212,7 +221,7 @@ switch (expression)
        statement
        break;
 }
-```
+{% endhighlight %}
 	
 	
 This method is based on an expression and then lists different "answers" or "values" with related statements. The easiest way to explain the method is to show an example.
@@ -220,7 +229,8 @@ This method is based on an expression and then lists different "answers" or "val
 As you may remember from lesson 4, the function date("w") returns the current weekday. This can be used in an example where we write the name of the day (instead of a number):
 
 
-```cs
+{% highlight csharp linenos %}
+
 class Program
 {
     static void Main(string[] args)
@@ -254,7 +264,7 @@ class Program
         Console.ReadLine();
     }
 }
-```
+{% endhighlight %}
 
 Often switch can be a good alternative to if-else conditions. What you should use in a given situation depends on which method you find easiest and most logical. Making your scripts logical and clear can be a great challenge.
 
@@ -271,7 +281,8 @@ The jump statements include:
 ## C\# Break
 The 'break' statement breaks out of the 'while' and 'for' loops covered in previous lesson, and the 'switch' statements covered before in this lesson. The following code gives an example - albeit a very inefficient one - of how it could be used. The output of the loop is the numbers from 0 to 4.
 
-```cs
+{% highlight csharp linenos %}
+
 int a = 0;
 while (true)
 {
@@ -280,14 +291,15 @@ while (true)
     if (a == 5)
         break;
 }
-```
+{% endhighlight %}
 
 
 ## C\# Continue
 
 The 'continue' statement can be placed in any loop structure. When it executes, it moves the program counter immediately to the next iteration of the loop. The following code example uses the 'continue' statement to count the number of values between 1 and 100 inclusive that are not multiples of seven. At the end of the loop the variable y holds the required value.
 
-```cs
+{% highlight csharp linenos %}
+
 int y = 0;
 for (int x=1; x<101; x++)
 {
@@ -295,18 +307,19 @@ for (int x=1; x<101; x++)
         continue;
     y++;
 }
-```
+{% endhighlight %}
 
 
 ## C\# Goto
 
 The 'goto' statement is used to make a jump to a particular labelled part of the program code. It is also used in the 'switch' statement described below. We can use a 'goto' statement to construct a loop, as in the following example (but again, this usage is not recommended):
 
-```cs
+{% highlight csharp linenos %}
+
 int a = 0;
 start:
 System.Console.WriteLine(a);
 a++;
 if (a < 5)
     goto start;
-```
+{% endhighlight %}

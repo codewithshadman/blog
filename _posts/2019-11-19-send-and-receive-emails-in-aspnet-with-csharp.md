@@ -45,16 +45,18 @@ For the complete set of parameters of this class, please refer to [Microsoft's d
 
 This one is fairly easy and quick to set up as SMTP (Simple Mail Transfer Protocol) is the most common communication standard used in email transmission. In the example below, we'll show how to send a very simple email with the following details:
 
-```txt
+{% highlight text linenos %}
+
 To: elizabeth@westminster.co.uk	
 From: piotr@mailtrap.io
 Title: Hey what's up?
 Body: Hey Elizabeth, let's meet for lunch on Monday, WDYT?
-```
+{% endhighlight %}
 
 In order to send such an email, we'll use the aforementioned MailMessage class from .NET API.
 
-```cs
+{% highlight csharp linenos %}
+
 // in the beginning of the file
 using System.Net;
 using System.Net.Mail;
@@ -83,7 +85,7 @@ catch (SmtpException ex)
 {
   Console.WriteLine(ex.ToString());
 }
-```
+{% endhighlight %}
 
 Once the message was configured, we connected to the SMTP server and sent it this way!
 
@@ -93,7 +95,8 @@ Now that we know how to send basic emails, let's consider a very common scenario
 
 On top of MailMessage class, we'll use [Attachment class](https://docs.microsoft.com/en-us/dotnet/api/system.net.mail.attachment?view=netframework-4.8) from .NET API. Make sure you add the attachment to the current working directory first.
 
-```cs
+{% highlight csharp linenos %}
+
 // in the beginning of the file
 using System.Net;
 using System.Net.Mail;
@@ -127,7 +130,7 @@ catch (SmtpException ex)
 {
   Console.WriteLine(ex.ToString());
 }
-```
+{% endhighlight %}
 
 If you need to send multiple invoices (lucky you!) or other files, simply use a loop and add the other files to the email.
 
@@ -137,7 +140,8 @@ We've just covered sending emails with attachments. But what if you're sending i
 
 When trying to send an email with images in C#, you're not going to use a typical `<img src="" alt="" />` construction. It would add an image attachment to the email and that's the last thing we need right now. Instead, we'll use LinkedResource object to directly embed an image in the HTML version of our message to the Queen. We will then follow our regular approach with MailMessage class. As always, remember to upload the file first to your current working directory. If it's missing, an email will be sent without any attachment and, really, aren't we receiving these “oops, forgot about the attachment!” emails too often already?
 
-```cs
+{% highlight csharp linenos %}
+
 // in the beginning of the file
 using System.Net;
 using System.Net.Mail;
@@ -170,22 +174,24 @@ catch (SmtpException ex)
 {
   Console.WriteLine(ex.ToString());
 }                
-```
+{% endhighlight %}
 
 ## Sending to multiple recipients
 
 No rocket science here either. Let's go back to the original email we've sent to our noble recipient.
 
-```txt
+{% highlight text linenos %}
+
 To: elizabeth@westminster.co.uk	
 From: piotr@mailtrap.io
 Title: Hey what's up?
 Body: Hey Elizabeth, let's meet for lunch on Monday, WDYT?
-```
+{% endhighlight %}
 
 Let's say we want to have a bit bigger lunch party than originally planned, we're going to talk about the Royal Wedding after all. Let's keep Prince Harry and his wife Meghan in the loop. New recipients are simply added to the code, separated by a comma. As in the example below.
 
-```cs
+{% highlight csharp linenos %}
+
 // in the beginning of the file
 using System.Net;
 using System.Net.Mail;
@@ -213,12 +219,13 @@ catch (SmtpException ex)
 {
   Console.WriteLine(ex.ToString());
 }
-```
+{% endhighlight %}
 
 
 Things get a tiny bit more tricky when you want to add people in bcc and cc, we'll need a few additional lines:
 
-```cs
+{% highlight csharp linenos %}
+
 // in the beginning of the file
 using System.Net;
 using System.Net.Mail;
@@ -249,7 +256,7 @@ catch (SmtpException ex)
 {
   Console.WriteLine(ex.ToString());
 }
-```
+{% endhighlight %}
 
 Voila!
 
@@ -267,7 +274,8 @@ Compared to other methods, querying DNS manually consumes more CPU and networkin
 
 In order to implement it, you'll need to install a 3rd party plugin. [DnsPlugin.NET](https://www.nuget.org/packages/DnsClient) is our choice here. See the sample code:
 
-```cs
+{% highlight csharp linenos %}
+
 // in the top of the file
 // requires installation of https://www.nuget.org/packages/DnsClient
 using System.Net;
@@ -302,14 +310,15 @@ foreach(DnsClient.Protocol.MxRecord record in response.Answers) {
 		Console.WriteLine(ex.ToString());
 	}
 }
-```
+{% endhighlight %}
 
 
 ## Using API to send emails
 
 A much better approach to sending emails without SMTP is with API. It's definitely the fastest one. It also provides an additional layer of security by utilizing API keys and allows you to use many 3rd party providers that give you tons of additional features such as analytics, email authentication, and others. Each provider will likely offer their own documentation, below we present a sample code from SendGrid that's very clear to understand and implement if you're using their platform.
 
-```cs
+{% highlight csharp linenos %}
+
 // using SendGrid's C# Library
 // https://github.com/sendgrid/sendgrid-csharp
 using SendGrid;
@@ -340,7 +349,7 @@ namespace Example
         }
     }
 }
-```
+{% endhighlight %}
 
 
 ## Receiving emails in C\#
@@ -349,7 +358,8 @@ Finally, you might be wondering if there's a way to receive the emails directly 
 
 Receiving emails is not a part of core C# stack so you will need to utilize some 3rd party libraries for that purpose. [OpenPop.NET open-source library](https://sourceforge.net/projects/hpop/) seems to be getting the job done in this case. You can use the following code to fetch the topics of incoming mail:
 
-```cs
+{% highlight csharp linenos %}
+
 var client = new POPClient();
 client.Connect("pop.gmail.com", 995, true);
 client.Authenticate("piotr@mailtrap.io", "My_password_here");
@@ -357,7 +367,7 @@ client.Authenticate("piotr@mailtrap.io", "My_password_here");
 var count = client.GetMessageCount();
 Message message = client.GetMessage(count);
 Console.WriteLine(message.Headers.Subject);
-```
+{% endhighlight %}
 
 For the details on using OpenPop library for this or any other purposes, please refer to [their documentation](http://hpop.sourceforge.net/documentation/).
 

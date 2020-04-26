@@ -42,7 +42,8 @@ ThreadPool.QueueUserWorkItem is a static method that is used to queue the user w
 
 Here is an example,
 
-```csharp
+{% highlight csharp linenos %}
+
 using System;
 using System.Threading;
 
@@ -64,29 +65,32 @@ class Example1
         Console.WriteLine("Hello World!");
     }
 }
-```
+{% endhighlight %}
 
 as you can see we can directly pass this Speak method name to the QueueUserWorkItem method as it takes WaitCallback delegate as a parameter.
 
 Here is the definition of this delegate,
 
-```cs
+{% highlight csharp linenos %}
+
 public delegate void WaitCallback(object state);
-```
+{% endhighlight %}
 
 See how it share the same signature like our Speak method with void as return type and take object as parameter.
 
 QueueUserWorkItem also has overload for parameterised method like this,
 
-```txt
+{% highlight text linenos %}
+
 QueueUserWorkItem(WaitCallback, Object)
-```
+{% endhighlight %}
 
 Here the first parameter is your method name and the second parameter is the object that you want to pass to your method.
 
 Here is an example,
 
-```csharp
+{% highlight csharp linenos %}
+
 using System;
 using System.Threading;
 
@@ -108,7 +112,7 @@ class Example1
         Console.WriteLine(say);
     }
 }
-```
+{% endhighlight %}
 
 Did you notice how we passed our required parameter for Speak method to QueueUserWorkItem as the second parameter.
 

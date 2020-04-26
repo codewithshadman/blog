@@ -12,6 +12,10 @@
 	margin-bottom:2em;
 }
 
+.lineno {
+	user-select:none;
+}
+
 // Import partials from `sass_dir` (defaults to `_sass`)
 @import
 	"syntax"

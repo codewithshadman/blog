@@ -38,7 +38,8 @@ Imperative programs describe how something is done whereas declarative programs 
 
 Imperative programs are generally difficult to read and understand. For example:
 
-```cs
+{% highlight csharp linenos %}
+
 using System;
 
 class Example
@@ -56,7 +57,7 @@ class Example
         Console.WriteLine(sum);
     }
 }
-```
+{% endhighlight %}
 
 It is not immediately apparent what this program does. Only through careful examination can we deduce that it prints the sum of all even numbers between 0 and 99.
 
@@ -68,7 +69,8 @@ In computer science, declarative programming is a programming paradigm—a style
 
 This is how the above program would be implemented using a declarative style:
 
-```cs
+{% highlight csharp linenos %}
+
 using System;
 using System.Linq;
 
@@ -82,13 +84,14 @@ class Example
         Console.WriteLine(sum);
     }
 }
-```
+{% endhighlight %}
 
 Obviously, the second example is different, but is it better? I believe it is. We have condensed the example into a single expression and the expression is significantly easier to understand. The name of each method is used to express the intention of that portion of the program. Rather than looping with a classic for-loop I have used the newer `Enumerable.Range` method. This not only better expresses my intentions but also gives me a starting place from which I can easily stream the numbers through a filter (the Where method) and finally aggregate them with Sum.
 
 But I still think this code could be better. Let me do one last thing to make our program even more declarative:
 
-```cs
+{% highlight csharp linenos %}
+
 using System;
 using System.Linq;
 
@@ -107,7 +110,7 @@ class Example
         return number % 2 == 0;
     }
 }
-```
+{% endhighlight %}
 
 This change is subtle but important. We have moved the somewhat cryptic expression that tests for evenness into its own method. Since this method has a single responsibility and is clearly named, it is ideal for inclusion in our declarative expression. It is important to understand that declarative programs don’t necessarily mean fewer lines of code. Declarative programs are characterized by how expressive it is. By moving the test for evenness into its own method we may have increased the line count of the program, but we have also greatly improved the readability of the programs as well.
 
@@ -118,18 +121,20 @@ I am a .NET developer and if you are too, you will find this kind of programming
 
 For example, let's say you have a function that does something to each element in an array or list. Traditional code would look like this:
 
-```cs
+{% highlight csharp linenos %}
+
 foreach (object item in MyList)
 {
    DoSomething(item);
 }
-```
+{% endhighlight %}
 
 No big deal there. But what if you use the more-declarative syntax and instead define `DoSomething()` as an Action? Then you can say it this way:
 
-```cs
+{% highlight csharp linenos %}
+
 MyList.ForEach(DoSometing);
-```
+{% endhighlight %}
 
 This is, of course, more concise.
 
@@ -141,7 +146,8 @@ Below are some examples I found from my peers:
 
 Imperative:
 
-```js
+{% highlight js linenos %}
+
 var today = new Date();
 var decimalDate = today.getHours() + (today.getMinutes() / 60);
 
@@ -170,11 +176,12 @@ function time_convert(num)
   if(minutes < 10) minutes = `${minutes}0`;
   return hours + ":" + minutes;         
 }
-```
+{% endhighlight %}
 
 Declarative:
 
-```js
+{% highlight js linenos %}
+
 var decimalHours = [...Array(48).keys()].map(n=> n * 0.5);
 var timeOptions = decimalHours
 .filter(isTimeInFuture)
@@ -213,7 +220,7 @@ function secondsToTimeFormat(num)
   if(minutes < 10) minutes = `${minutes}0`;
   return hours + ":" + minutes;         
 }
-```
+{% endhighlight %}
 
 
 I hope that I have shown how you can improve your programs by making it more declarative. If you strive to write more declarative programs you will end up with better software that is easier to read, understand, and maintain.

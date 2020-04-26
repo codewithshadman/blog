@@ -29,67 +29,76 @@ A pointer is a variable that holds the memory address of another type. In C#, po
 
 Pointers are declared implicitly, using the 'dereferencer' symbol `*`, as in the following example:
 
-```cs
+{% highlight csharp linenos %}
+
 int *p;
-```
+{% endhighlight %}
 Note that some coders place the dereferencer symbol immediately after the type name, eg.
 
-```cs
+{% highlight csharp linenos %}
+
 int* p;
-```
+{% endhighlight %}
 This variation appears to work just as well as the previous one.
 
 This declaration sets up a pointer `p`, which will point to the initial memory address of an integer (stored in four bytes).
 
 The combined syntactical element `*p` (`p` prefixed by the dereferencer symbol `*`) is used to refer to the type located at the memory location held by p. Hence given its declaration, `*p` can appear in integer assignments like the following:
 
-```cs
+{% highlight csharp linenos %}
+
 *p = 5;
-```
+{% endhighlight %}
 
 This code gives the value 5 to the integer that was initialised by the declaration. It is important, however, not to confuse such an assignment with one in which the derefencer symbol is absent, e.g.
 
-```cs
+{% highlight csharp linenos %}
+
 p = 5;
-```
+{% endhighlight %}
 
 The effect of this assignment is to change the memory location held by p. It doesn't change the value of the integer initialised by the original declaration; it just means that p no longer points to that integer. In fact, p will now point to the start of the four bytes present at memory location 5.
 
 Another important symbol for using pointers is the operator &, which in this context returns the memory address of the variable it prefixes. To give an example of this symbol, the following code sets up p to point to integer i's memory location:
 
-```cs
+{% highlight csharp linenos %}
+
 int i = 5;
 int *p;
 p = &i;
-```
+{% endhighlight %}
 
 Given the above, the code
 
-```cs
+{% highlight csharp linenos %}
+
 *p = 10;
-```
+{% endhighlight %}
 changes the value of i to 10, since `*p` can be read as 'the integer located at the memory value held by p'.
 
 ## C\# Pointers & Structures {#c-pointers-and-structures}
 
 There is another important piece of notation for pointers. Pointers can be declared for [structs](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/structs), as in the following example (which uses the 'Coords' struct defined further below):
 
-```cs
+{% highlight csharp linenos %}
+
 Coords x = new Coords();
 Coords *y = &x;
-```
+{% endhighlight %}
 
 One can then use the declared pointer y to access a public field of x (say z). This would be done using either the expression
 
-```cs
+{% highlight csharp linenos %}
+
 (*y).z
-```
+{% endhighlight %}
 
 or the equivalent expression, which uses the -> string:
 
-```cs
+{% highlight csharp linenos %}
+
 y -> z
-```
+{% endhighlight %}
 
 ## C\# Unsafe Code
 
@@ -105,7 +114,8 @@ There is a further quirk to learn. Any value types declared within unsafe code a
 
 The following code gives an example of a method marked 'unsafe'. From the previous paragraph it follows that the pointer p cannot be declared within a 'fixed' statement on line 9, because `p` is set up to point to the struct `c` (a value type) which is declared within the unsafe code
 
-```cs
+{% highlight csharp linenos %}
+
 using System;
 public struct Coords
 {
@@ -123,12 +133,13 @@ public struct Coords
         Console.WriteLine(c.x);
     }
 }
-```
+{% endhighlight %}
 
 
 Compare this with the following code, in which the pointer `p` on line 8 must be declared within a 'fixed' statment, because it is set up to point to a type which is not declared within the unsafe block of code:
 
-```cs
+{% highlight csharp linenos %}
+
 using System;
 public struct Coords
 {
@@ -145,12 +156,13 @@ public struct Coords
         Console.WriteLine(c.x);
     }
 }
-```
+{% endhighlight %}
 
 
 In the examples given above, 'unsafe' is included as a method modifier. However, it can also be used within a code block, as in the following code fragment:
 
-```cs
+{% highlight csharp linenos %}
+
 using System;
 public static void Main()
 {
@@ -160,7 +172,7 @@ public static void Main()
         [...]
     }
 }
-```
+{% endhighlight %}
 
 ## C\# Pointers, Methods and Arrays
 
@@ -168,14 +180,16 @@ Although we stated above that pointers can only be used with value types, an exc
 
 A pointer can be declared in relation to an array, as in the following:
 
-```cs
+{% highlight csharp linenos %}
+
 int[] a = {4, 5};
 int *b = a;
-```
+{% endhighlight %}
 
 What happens in this case is that the memory location held by b is the location of the first type held by a. This first type must, as before, be a value type. The code beneath shows that it is possible to step through the values of an array using a pointer, but explaining this further goes beyond the scope of this tutorial.
 
-```cs
+{% highlight csharp linenos %}
+
 using System;
 public class Tester
 {
@@ -196,6 +210,6 @@ public class Tester
         }
     }
 }
-```
+{% endhighlight %}
 
 This article only scratches the surface of a complicated topic, however, so if you are new to pointers it is recommended that you do further reading before using them in your code.

@@ -19,25 +19,28 @@ comments: true
 
 Recently, I saw some code that looked something like this:
 
-```cs
+{% highlight csharp linenos %}
+
 StringBuilder builder = new StringBuilder();
 builder.Append(String.Format("{0} {1}", firstName, lastName));
 // Do more with builder...
-```
+{% endhighlight %}
 
 Now, I don't wana get into arguments about how String.Concat() is more performant here. String.Format() allows code to be more easily localized and it is being used for that purpose here. The real problem is that StringBuilder.AppendFormat() should be used instead:
 
-```cs
+{% highlight csharp linenos %}
+
 StringBuilder builder = new StringBuilder();
 builder.AppendFormat("{0} {1}", firstName, lastName);
 // Do more with builder...
-```
+{% endhighlight %}
 
 <!--more-->
 
 The reason that this is important is because, internally, String.Format() actually creates a StringBuilder and calls StringBuilder.AppendFormat()! String.Format() is implemented something like this:
 
-```cs
+{% highlight csharp linenos %}
+
 public static string Format(IFormatProvider provider, string format, params object[] args)
 {
   if (format == null || args == null)
@@ -47,7 +50,7 @@ public static string Format(IFormatProvider provider, string format, params obje
   builder.AppendFormat(provider, format, args);
   return builder.ToString();
 }
-```
+{% endhighlight %}
 
 you can see the actual implementation in the source code for the runtime of .NET Core.
 Here is the link for the same: [String.Manipulation.cs](https://github.com/dotnet/coreclr/blob/master/src/System.Private.CoreLib/shared/System/String.Manipulation.cs)
@@ -66,14 +69,16 @@ It turns out that the formatting logic is actually implemented in StringBuilder.
 
 This is also important to know if you are trying to avoid creating a StringBuilder by concatentating strings with String.Format(). For example:
 
-```cs
+{% highlight csharp linenos %}
+
 string nameString = "<td>" + String.Format("{0} {1}", firstName, lastName) + "</td>"
   + "<td>" + String.Format("{0}, {1}", id, department) + "</td>";
-```
+{% endhighlight %}
 
 That code will actually create two StringBuilders, if the size of formatted string is greater than MaxBuilderSize, used in StringBuilderCache, which is set to 360. So, creating one StringBuilder and using AppendFormat() will be more performent:
 
-```cs
+{% highlight csharp linenos %}
+
 StringBuilder nameBuilder = new StringBuilder();
 nameBuilder.Append("<td>");
 nameBuilder.AppendFormat("{0} {1}", firstName, lastName);
@@ -82,11 +87,12 @@ nameBuilder.Append("<td>");
 nameBuilder.AppendFormat("{0}, {1}", id, department);
 nameBuilder.Append("</td>");
 string nameString = nameBuilder.ToString();
-```
+{% endhighlight %}
 
 I decided to run some performance tests to verify my claims. First, I timed code that demonstrates the very reason that StringBuilder exists:
 
-```cs
+{% highlight csharp linenos %}
+
 const int LOOP_SIZE = 10000;
 const string firstName = "Shadman";
 const string lastName = "Kudchikar";
@@ -100,13 +106,14 @@ static void PerformanceTest1()
   for (int i = 0; i < LOOP_SIZE; i++)
     nameString += String.Format("{0} {1}", firstName, lastName);
 }
-```
+{% endhighlight %}
 
 The above code creates a new string and then concatenates to it inside of a for-loop. This causes two new strings to be created on each pass--one from String.Format() and one from the concatenation. This is woefully inefficient.
 
 Next, I tested the same code modified to use a StringBuilder with String.Format():
 
-```cs
+{% highlight csharp linenos %}
+
 static void PerformanceTest2()
 {
   StringBuilder builder = new StringBuilder((firstName.Length + lastName.Length + 1) * LOOP_SIZE);
@@ -116,11 +123,12 @@ static void PerformanceTest2()
 
   string nameString = builder.ToString();
 }
-```
+{% endhighlight %}
 
 Finally, I tested code that uses StringBuilder.AppendFormat() instead of String.Format():
 
-```cs
+{% highlight csharp linenos %}
+
 static void PerformanceTest3()
 {
   StringBuilder builder = new StringBuilder((firstName.Length + lastName.Length + 1) * LOOP_SIZE);
@@ -130,31 +138,34 @@ static void PerformanceTest3()
 
   string nameString = builder.ToString();
 }
-```
+{% endhighlight %}
 
 These three methods ran with the following timings:
 
 For .NET Framework:
 
-```txt
+{% highlight text linenos %}
+
 PerformanceTest1: 0.21045 seconds
 PerformanceTest2: 0.001585 seconds
 PerformanceTest3: 0.0010846 seconds
-```
+{% endhighlight %}
 
 For .NET Core:
 
-```txt
+{% highlight text linenos %}
+
 PerformanceTest1: 0.173821 seconds
 PerformanceTest2: 0.0012753 seconds
 PerformanceTest3: 0.0007812 seconds
-```
+{% endhighlight %}
 
 Obviously, concatenating a string in a loop without using a StringBuilder is amazingly inefficient. And, removing the call to String.Format also yields a performance boost.
 
 Next, I tested the following two methods:
 
-```cs
+{% highlight csharp linenos %}
+
 static void PerformanceTest4()
 {
   string htmlString;
@@ -178,23 +189,25 @@ static void PerformanceTest5()
     builder.Length = 0;
   }
 }
-```
+{% endhighlight %}
 
 These two methods ran with the following timings:
 
 For .NET Framework:
 
-```txt
+{% highlight text linenos %}
+
 PerformanceTest4: 0.0050095 seconds
 PerformanceTest5: 0.0044467 seconds
-```
+{% endhighlight %}
 
 For .NET Core:
 
-```txt
+{% highlight text linenos %}
+
 PerformanceTest4: 0.0036363999999999997 seconds
 PerformanceTest5: 0.0019971 seconds
-```
+{% endhighlight %}
 
 As you can see, it is important to know when to use String.Format and when to use StringBuilder.AppendFormat(). While the performance boosts that can be achieved are fairly small, they are too easy to code.
 

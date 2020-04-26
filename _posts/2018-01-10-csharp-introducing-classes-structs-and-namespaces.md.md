@@ -84,7 +84,8 @@ Any type is made up of elements, which we term type members. There are two main 
 
 The second, main kind of type members that a class can specify are [methods](/csharp-methods/), functions designed for reading and manipulating the value and reference types an instance contains.
 
-```cs
+{% highlight csharp linenos %}
+
 public class Employee
 {
     public int age; // a member field that holds age of an employee
@@ -100,13 +101,14 @@ public class Employee
         this.age = age;
     }
 }
-```
+{% endhighlight %}
 
-```cs
+{% highlight csharp linenos %}
+
 var employee = new Employee();
 employee.age = 80;
 employee.UpdateAge(81);
-```
+{% endhighlight %}
 
 ![A picture illustrating a reference type object](/assets/images/reference_type.png)
 
@@ -116,7 +118,8 @@ Object oriented languages like C# allow inheritance from reference types. If a t
 
 C#'s inheritance model is more similar to Java's than to C++'s. In particular, C# classes inherit always from a single base class (if one is not specified in the declaration, inheritance is from System.Object). At the same time, however, C# classes can inherit from any number of interfaces.
 
-```cs
+{% highlight csharp linenos %}
+
 public class Employee : Person
 {
     public int age;
@@ -127,20 +130,22 @@ public class Person
     public string firstName;
     public string lastName;
 }
-```
+{% endhighlight %}
 
-```cs
+{% highlight csharp linenos %}
+
 var employee = new Employee();
 employee.firstName = "John";
 employee.lastName = "Doe";
 employee.age = 80;
-```
+{% endhighlight %}
 
 ## C\# Abstract Classes
 
 Some classes are not designed to have direct instances. Rather, they are designed simply to be inherited from, by ancestors which may themselves have direct instances (or not). A class is 'abstract' just in case it cannot itself have direct instances.
 
-```cs
+{% highlight csharp linenos %}
+
 public abstract class Animal
 {
 
@@ -150,16 +155,18 @@ public class Dog : Animal
 {
 
 }
-```
+{% endhighlight %}
 
-```cs
+{% highlight csharp linenos %}
+
 var dog = new Dog(); //No Error
 var animal = new Animal(); //Error
-```
+{% endhighlight %}
 
 Classes can be abstract because in a class it is possible to specify a class method without specifying its body. Such methods are themselves termed 'abstract'. Where a class contains an abstract method it cannot be instantiated since it is not specified what should happen were the method to be called.
 
-```cs
+{% highlight csharp linenos %}
+
 public abstract class BasePerson
 {
     int age;
@@ -183,7 +190,7 @@ public class Person : BasePerson
         return firstName + " " + lastName;
     }
 }
-```
+{% endhighlight %}
 
 ## C\# Interfaces
 
@@ -191,7 +198,8 @@ An interface is more like a contract that has only abstract methods. An interfac
 
 Also, all the members of the interface must be implemented in a class or struct. C# will give a compile-time error if any one of the members is not defined.
 
-```cs
+{% highlight csharp linenos %}
+
 public interface IPerson
 {
     string FullName(); //abstract method
@@ -208,7 +216,7 @@ public class Person: IPerson
         return firstName + " " + lastName;
     }
 }
-```
+{% endhighlight %}
 
 ## Difference Between Abstract Class And Interface In C\#
 
@@ -228,7 +236,8 @@ It can be fully, partially or not implemented. | It should be fully implemented.
 ## C\# Nested Classes
 Classes are usually specified independently of each other. But one class can be specified within another's specification. In this case, the latter class is termed a nested class.
 
-```cs
+{% highlight csharp linenos %}
+
 public class Person
 {
     public Info info;
@@ -239,19 +248,21 @@ public class Person
         public string phoneNumber;
     }
 }
-```
+{% endhighlight %}
 
-```cs
+{% highlight csharp linenos %}
+
 var person = new Person();
 person.info.address="London";
 person.info.address="123456";
-```
+{% endhighlight %}
 
 ## C\# Structs
 A struct is a user-defined value type. It is declared in a very similar way to a class, except that it can't inherit from any class, nor can any class inherit from it (as mentioned previously, however, all value types do inherit from System.object). The following example shows a partial declaration for a 'Coordinate' struct:
 
 
-```cs
+{% highlight csharp linenos %}
+
 struct Coordinate
 {
     public int x;
@@ -263,20 +274,22 @@ struct Coordinate
         this.y = y;
     }
 }
-```
+{% endhighlight %}
 
 
 Given the above, one could familiarly initialize a Coordinate type, using code like:
 
-```cs
+{% highlight csharp linenos %}
+
 Coordinate c = new Coordinate(10, 2);
-```
+{% endhighlight %}
 
 Note that if a variable of a struct type is declared without being given an explicit value, eg:
 
-```cs
+{% highlight csharp linenos %}
+
 Coordinate c2 ;
-```
+{% endhighlight %}
 
 it does not equate to 'null' (this being the default value for reference types, rather than value types). Instead, the variable is initialized to a state where its fields have their default values. If these fields are basic value types, they will generally be set to zero. If these fields are reference types, they will be set to 'null'.
 
@@ -290,37 +303,43 @@ To illustrate the use of namespaces: suppose that two different C# developers co
 
 Most classes depend upon the existence of other classes - for instance, they may specify contained types. It is possible in the specification always to write each class' full namespace, but these are often too long for it to be worthwhile. To take an example at random, the following is the fully qualified name of a class in the .NET framework relating to a particular type of cryptographic algorithm:
 
-```cs
+{% highlight csharp linenos %}
+
 System.Security.Cryptography.AsymmetricAlgorithm
-```
+{% endhighlight %}
 
 This problem is addressed by the use of the 'using' keyword, placed at the very top of the class specification. For instance, in a class specification including the phrase
 
-```cs
+{% highlight csharp linenos %}
+
 using System.Security.Cryptography;
-```
+{% endhighlight %}
 
 one could write refer to the above class simply using its class name
 
-```cs
+{% highlight csharp linenos %}
+
 AsymmetricAlgorithm
-```
+{% endhighlight %}
 
 Alternatively, one could specify an alias for the namespace, eg
 
-```cs
+{% highlight csharp linenos %}
+
 using myAlias = System.Security.Cryptography;
-```
+{% endhighlight %}
 
 and then refer to the class with
 
-```cs
+{% highlight csharp linenos %}
+
 myAlias.AsymmetricAlgorithm
-```
+{% endhighlight %}
 
 One specifies a namespace for one's classes using the 'namespace' keyword. For instance, the following code states that the class 'Adder' is in the namespace `calc.math`.
 
-```cs
+{% highlight csharp linenos %}
+
 namespace calc
 {
     namespace math
@@ -331,12 +350,13 @@ namespace calc
         }
     }
 }
-```
+{% endhighlight %}
 
 
 Alternatively, and more simply, one write the above as:
 
-```cs
+{% highlight csharp linenos %}
+
 namespace calc.math
 {
     public class Adder
@@ -344,6 +364,6 @@ namespace calc.math
         // insert code here
     }
 }
-```
+{% endhighlight %}
 
 In the following articles we will learn about C# [Classes](/csharp-class/), [Methods](/csharp-methods/) and [Polymorphism](/csharp-polymorphism/) in more detail.

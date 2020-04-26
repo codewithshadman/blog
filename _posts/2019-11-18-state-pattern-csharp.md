@@ -47,7 +47,8 @@ Let's take a look at an implementation of this simple example.
 
 `Program.cs`
 
-```cs
+{% highlight csharp linenos %}
+
 using System;
 using System.Linq;
 
@@ -141,11 +142,12 @@ namespace Example_1
         }
     }
 }
-```
+{% endhighlight %}
 
 `WorkItem.cs`
 
-```cs
+{% highlight csharp linenos %}
+
 using System;
 
 namespace Example_1
@@ -274,11 +276,12 @@ namespace Example_1
         }
     }
 }
-```
+{% endhighlight %}
 
 `WorkItemRepository.cs`
 
-```cs
+{% highlight csharp linenos %}
+
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;
@@ -352,7 +355,7 @@ namespace Example_1
         }
     }
 }
-```
+{% endhighlight %}
 
 I have here our command line interface of a work item tracking system that is using the basic CMMI approach that TFS uses with four states to the work items. There's Proposed, Active, Resolved, and Closed. 
 
@@ -392,7 +395,8 @@ The WorkItem has been modified. On the WorkItem I've implemented the ICommands i
 
 `ICommand.cs`
 
-```cs
+{% highlight csharp linenos %}
+
 namespace Example_2
 {
     public interface ICommand
@@ -404,11 +408,12 @@ namespace Example_2
         void Print();
     }
 }
-```
+{% endhighlight %}
 
 `WorkItem.cs`
 
-```cs
+{% highlight csharp linenos %}
+
 using Example_2.States;
 
 namespace Example_2
@@ -508,7 +513,7 @@ namespace Example_2
         }
     }
 }
-```
+{% endhighlight %}
 
 So all of this is pretty simple, but when the state changes, the `command` object that provides the actual work also needs to change. This is done by implementing the state property. So in the state property, we see here that the value of the state being set is stored in the instance variable, and when the state changes, the state properly will also instantiate a new command object based on the state value and passes in a reference to the WorkItem. 
 
@@ -520,7 +525,8 @@ The states themselves have been broken up into a separate class for each state.
 
 `Proposed.cs`
 
-```cs
+{% highlight csharp linenos %}
+
 using System;
 
 namespace Example_2.States
@@ -556,11 +562,12 @@ namespace Example_2.States
     }
 }
 
-```
+{% endhighlight %}
 
 `Active.cs`
 
-```cs
+{% highlight csharp linenos %}
+
 using System;
 
 namespace Example_2.States
@@ -597,11 +604,12 @@ namespace Example_2.States
     }
 }
 
-```
+{% endhighlight %}
 
 `Resolved.cs`
 
-```cs
+{% highlight csharp linenos %}
+
 using System;
 
 namespace Example_2.States
@@ -637,11 +645,12 @@ namespace Example_2.States
         }
     }
 }
-```
+{% endhighlight %}
 
 `Closed.cs`
 
-```cs
+{% highlight csharp linenos %}
+
 using System;
 
 namespace Example_2.States
@@ -677,11 +686,12 @@ namespace Example_2.States
     }
 }
 
-```
+{% endhighlight %}
 
 `BaseState.cs`
 
-```cs
+{% highlight csharp linenos %}
+
 using System;
 
 namespace Example_2.States
@@ -703,7 +713,7 @@ namespace Example_2.States
         }
     }
 }
-```
+{% endhighlight %}
 
 
 If we look at the active state, we see how the Active class is inherited from the BaseState and implements the ICommands interface. 

@@ -58,7 +58,8 @@ To get started with Tasks in C# you have to create an object of Task Class, whic
 ### C\# Task Example {#csharp-task-example}
 Let's see an example,
 
-```csharp
+{% highlight csharp linenos %}
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -103,7 +104,7 @@ namespace _01_Getting_Started_With_Task
         }
     }
 }
-```
+{% endhighlight %}
 
 Let's see what's happening in the above program line by line.
 
@@ -133,10 +134,11 @@ Executing a Task on another thread makes sense only if you want to keep the user
 
 Also, In the above example, you may have seen the below code,
 
-```cs
+{% highlight csharp linenos %}
+
 //wait for task t to complete its execution
 t.Wait();
-```
+{% endhighlight %}
 
 Calling `Wait` method of the task is equivalent to calling the `Join` method on a [thread](/multithreading-in-csharp/getting-started-with-thread-class-in-csharp/#csharp-start-new-thread). When the `Wait` method is called within the `Main` method the main thread pauses its execution until the task `t` completes its execution.
 
@@ -144,7 +146,8 @@ Calling `Wait` method of the task is equivalent to calling the `Join` method on 
 
 The .NET Framework also has the generic version of task class `Task<T>` that you can use if a Task should return a value. Here `T` is the data type you want to return as a result. The below code shows how this works.
 
-```cs
+{% highlight csharp linenos %}
+
 using System;
 using System.Threading.Tasks;
 
@@ -166,7 +169,7 @@ namespace Example2
         }
     }
 }
-```
+{% endhighlight %}
 
 Attempting to read the `Result` property on a Task will force the thread that's trying to read the result to wait until the task is finished, which is equivalent to calling `Join` method on a thread and calling `Wait` method in the task as mentioned before.
 
@@ -194,7 +197,8 @@ Another great feature that task supports is the continuation. This means that yo
 
 Below is an example of creating such a continuation.
 
-```cs
+{% highlight csharp linenos %}
+
 using System;
 using System.Threading.Tasks;
 
@@ -222,13 +226,14 @@ namespace Example3
         }
     }
 }
-```
+{% endhighlight %}
 
 ## Scheduling Different Continuation Tasks {#scheduling-different-continuation-tasks}
 
 The ContinueWith method has a couple of overloads that you can use to configure when the continuation will run. This way you can add different continuation methods that will run when an exception happens, the Task is canceled, or the Task completes successfully. The below code shows how to do this.
 
-```cs
+{% highlight csharp linenos %}
+
 using System;
 using System.Threading.Tasks;
 
@@ -261,7 +266,7 @@ namespace Example_4
         }
     }
 }
-```
+{% endhighlight %}
 
 Using task with continuation is a great way to create a responsive application that doesn't block the main thread. In desktop applications like Windows Forms and WPF, we can use this feature of the task to create a very responsive application that doesn't block the UI thread.
 
@@ -271,7 +276,8 @@ To give a demo of a non-responsive application I created a simple Windows Forms 
 
 Here is the code of the application,
 
-```csharp
+{% highlight csharp linenos %}
+
 using System;
 using System.Diagnostics;
 using System.Windows.Forms;
@@ -315,13 +321,14 @@ namespace _02_Program_For_Responsiveness
         }
     }
 }
-```
+{% endhighlight %}
 
 ## Adding Tasks For Responsiveness {#adding-tasks-for-responsiveness}
 
 Let's add a task in our `Calculate_Click` method to make it responsive,
 
-```csharp
+{% highlight csharp linenos %}
+
  private void Calculate_Click(object sender, EventArgs e)
         {
             var task=new Task(() =>
@@ -335,7 +342,7 @@ Let's add a task in our `Calculate_Click` method to make it responsive,
 
             task.Start();
         }
-```
+{% endhighlight %}
 
 When you run this version of the application you will find that it's not updating values; Also if you look into the debug window of visual studio you will notice that there is InvalidOperationExecption raised each time you hit the calculate button.
 
@@ -347,13 +354,15 @@ Let's try to solve this problem,
 
 To solve this problem one thing we can do is we can specify the .NET to run this particular task in UI thread which is our current thread instead of running into a separate thread by using the task scheduler parameter in `task.Start()` method like this,
 
-```csharp
+{% highlight csharp linenos %}
+
 task.Start(TaskScheduler.FromCurrentSynchronizationContext());
-```
+{% endhighlight %}
 
 Here is the complete `Calculate_Click` method example,
 
-```csharp
+{% highlight csharp linenos %}
+
  private void Calculate_Click(object sender, EventArgs e)
         {
             var task=new Task(() =>
@@ -367,7 +376,7 @@ Here is the complete `Calculate_Click` method example,
 
             task.Start(TaskScheduler.FromCurrentSynchronizationContext());
         }
-```
+{% endhighlight %}
 
 However, when you run this version of the application you will find that the user interface is once again lock up. 
 
@@ -385,7 +394,8 @@ You have to use a `TaskScheduler` associated with the current UI Synchronization
 
 Let's see how the final code will look like,
 
-```csharp
+{% highlight csharp linenos %}
+
 private void Calculate_Click(object sender, EventArgs e)
         {
             Stopwatch stopWatch = new Stopwatch();
@@ -409,7 +419,7 @@ private void Calculate_Click(object sender, EventArgs e)
 
             task.Start();
         }
-```
+{% endhighlight %}
 And that's how it's done!
 
 However, there are still some other improvements that can be done in the above code which we will discuss in the next post.

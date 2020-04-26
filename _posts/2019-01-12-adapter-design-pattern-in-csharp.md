@@ -60,7 +60,8 @@ The IDbDataAdapter interface inherits from the IDataAdapter interface and allows
 
 Now, In the below code, I created a `DataRenderer` class that takes `IDbDataAdapter` as a parameter and renders data that comes from data adapters in the form of data Tables.
 
-```csharp
+{% highlight csharp linenos %}
+
 public class DataRenderer
 {
     private readonly IDbDataAdapter _dataAdapter;
@@ -95,13 +96,14 @@ public class DataRenderer
         }
     }
 }
-```
+{% endhighlight %}
 
 Now consider,
 
 If we want to render the below `persons` list using the above `DataRenderer` class, in the same format without tweaking its code. 
 
-```csharp
+{% highlight csharp linenos %}
+
 public class Person
 {
     public string Name { get; set; }
@@ -117,7 +119,7 @@ static void Main(string[] args)
    
     Console.ReadLine();
 }
-```
+{% endhighlight %}
 
 But, `DataRenderer` accepts an `IDbDataAdapter` and thus it is incompatible with `persons` datatype. However, one thing we can do is that we can create another renderer that accepts the `persons` list. 
 
@@ -125,7 +127,8 @@ What if,
 
 We could convert this `List<Person> persons` into the format that is compatible with `DataRenderer` class then we don't have to write the same repeatable code for rendering data. Let's see how
 
-```csharp
+{% highlight csharp linenos %}
+
 class PersonCollectionDbAdapter : IDbDataAdapter
 {
     private readonly IEnumerable<Person> _persons;
@@ -212,11 +215,12 @@ class PersonCollectionDbAdapter : IDbDataAdapter
         set { throw new NotImplementedException(); }
     }
 }
-```
+{% endhighlight %}
 
 After creating DbAdapter for our `persons` list we can render our list using the existing `DataRenderer` class. Let's see how
 
-```cs
+{% highlight csharp linenos %}
+
 static void Main(string[] args)
 {
     List<Person> persons = new List<Person>() {
@@ -235,7 +239,7 @@ Name                 Description
 Foo                  25
 Bar                  25
 */
-```
+{% endhighlight %}
 
 Now from the above code, we can conclude that the `List<Person>` is an Adaptee, `DataRenderer` is a Client that depends on `IDbDataAdapter` our Adapter and `PersonCollectionDbAdapter` is our Concrete Adapter.
 

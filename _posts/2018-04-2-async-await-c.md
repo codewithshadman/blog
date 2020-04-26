@@ -37,21 +37,23 @@ The await keyword simplifies the attaching of [C# Task](/csharp-task/) continuat
 
 Starting with a basic scenario, the compiler expands:
 
-```cs
+{% highlight csharp linenos %}
+
 var result = await expression;
 statement(s);
-```
+{% endhighlight %}
 
 into something functionally similar to:
 
-```cs
+{% highlight csharp linenos %}
+
 var awaiter = expression.GetAwaiter();
 awaiter.OnCompleted (() =>
 {
     var result = awaiter.GetResult();
     statement(s);
 });
-```
+{% endhighlight %}
 
 The compiler also emits code to short-circuit the continuation in case of synchronous completion.
 
@@ -59,7 +61,8 @@ The compiler also emits code to short-circuit the continuation in case of synchr
 
 To demonstrate the above idea, I made a small WPF application that fetches data from the URL given in the textbox. You can find the complete project [here](https://github.com/kudchikarsk/async-await-demo).
 
-```cs
+{% highlight csharp linenos %}
+
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -111,7 +114,7 @@ namespace WpfApp
         }
     }
 }
-```
+{% endhighlight %}
 
 Here `responseTask.ContinueWith` what simply does is that it callback the action, defined as the lambda expression, after the `responseTask` operation is finished.
 
@@ -130,7 +133,8 @@ Also, let's remove all the continuation from the code and directly use the .Resu
 
 Let's see how that affects our application. 
 
-```cs
+{% highlight csharp linenos %}
+
 using System;
 using System.Net.Http;
 using System.Windows;
@@ -170,7 +174,7 @@ namespace WpfApp
         }
     }
 }
-```
+{% endhighlight %}
 
 You'll notice here that I can mark my `Button_Click` handler as async. And if you run the application and see if this affected the performance of our application, you'll quickly notice that the application UI gets locks up. Let's jump into the code and discuss about why this is still not an asynchronous operation. 
 
@@ -182,9 +186,10 @@ Why is this a problem?
 
 Now, in the above code you may have seen the following line:
 
-```cs
+{% highlight csharp linenos %}
+
 var response = httpClient.GetAsync(url).Result;
-```
+{% endhighlight %}
 
 Here GetAsync returns a task of an HttpResponseMessage, a task is a representation of our asynchronous operation. This asynchronous operation happens on a different thread. 
 
@@ -194,9 +199,10 @@ It will actually block the thread until this Result is available, so this is pro
 
 Actually, what we need to do is to make sure that whenever we encounter the async keyword, we also have the await keyword inside that same method. Like this,
 
-```cs
+{% highlight csharp linenos %}
+
 var response = await httpClient.GetAsync(url);
-```
+{% endhighlight %}
 
 The await keyword is a way for us to indicate that we want to get the Result out of this asynchronous operation only once the data is available without blocking the current thread. So the above code gives us the HttpResponseMessage. 
 
@@ -204,15 +210,17 @@ Also,
 
 While reading the content from the response you'll find that ReadAsString is also an asynchronous operation, and it also hints us here that we need to await this as well.
 
-```cs
+{% highlight csharp linenos %}
+
 var data = await response.Content.ReadAsStringAsync();
-```
+{% endhighlight %}
 
 We could, of course, say ReadAsStringAsync and then call the Result property, but this would block again and make this code run synchronously, and in a lot of cases, calling `.Result` or `.Wait` will, in fact, deadlock the application. So avoid calling `.Result` or `.Wait`.
 
 Let's see the final result with all the changes we did,
 
-```cs
+{% highlight csharp linenos %}
+
 using System;
 using System.Net.Http;
 using System.Windows;
@@ -253,7 +261,7 @@ namespace WpfApp
     }
 }
 
-```
+{% endhighlight %}
 
 So,
 
@@ -267,7 +275,8 @@ Also,
 
 You can await the result of an async method that returns a Task because the method returns a Task, not because it’s async. That means you can also await the result of a non-async method that returns a Task:
 
-```cs
+{% highlight csharp linenos %}
+
 public async Task NewStuffAsync()
 {
   // Use await and have fun with the new stuff.
@@ -286,7 +295,7 @@ public async Task ComposeAsync()
   await NewStuffAsync();
   await MyOldTaskParallelLibraryCode();
 }
-```
+{% endhighlight %}
 
 ## Application Of Asynchronous Principles Accross .Net
 
@@ -298,7 +307,8 @@ The asynchronous principles that we talk about in our applications are not only 
 
 Let's see an example:
 
-```cs
+{% highlight csharp linenos %}
+
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -334,13 +344,14 @@ namespace WebApplication.Controllers
     }
 }
 
-```
+{% endhighlight %}
 
 Here is a test controller inside a web project that's allowing us to pretty much do the same thing that we do in our Windows application. However, we have a minor difference here:
 
-```cs
+{% highlight csharp linenos %}
+
 .ConfigureAwait(false)
-```
+{% endhighlight %}
 
 both of the task call this method in the end.
 

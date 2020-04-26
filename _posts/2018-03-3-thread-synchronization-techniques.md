@@ -46,7 +46,8 @@ Today's processors already provide lock feature to carry out an atomic update on
 
 Let's see an updated version of the buggy code we saw in the previous chapter,
 
-```csharp
+{% highlight csharp linenos %}
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -97,7 +98,7 @@ namespace _03_Atomic_Update
         }
     }
 }
-```
+{% endhighlight %}
 
 ## Data Partitioning {#data-partitioning}
 
@@ -105,7 +106,8 @@ Data Partitioning is actually kind of strategy where you decide to process data 
 
 To use data partitioning you must have some domain-specific knowledge of data (such as an array or multiple files manipulation), where you decide that one thread will process just one slice of data while other thread will work on another slice. Let's see an example,
 
-```csharp
+{% highlight csharp linenos %}
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -185,7 +187,7 @@ namespace _04_Data_Partitioning
         }
     }
 }
-```
+{% endhighlight %}
 
 However,
 
