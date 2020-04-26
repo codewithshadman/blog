@@ -7,7 +7,7 @@ class: post-template
 subclass: 'post csharp-intermediate'
 title: C# Attributes
 description: In this article, you will learn how to use C# attributes in your own code and how to use reflection along with attributes.
-cover: "assets/images/csharp-attributes.jpg"
+cover: "assets/images/programming2.jpg"
 date: Sat Apr 18 00:00:00 2020
 last_modified_at: Sat Apr 18 13:31:37 2020
 author: shadman_kudchikar
