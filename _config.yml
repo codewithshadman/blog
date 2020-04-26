@@ -9,7 +9,7 @@ paginate: 15
 baseurl: /
 domain_name: "https://codewithshadman.com"
 google_analytics: 'UA-114994933-6'
-plugins: [jekyll-paginate, jekyll-redirect-from]
+plugins: [jekyll-paginate, jekyll-redirect-from, jekyll-sitemap]
 
 # Details for the RSS feed generator
 url:            'https://codewithshadman.com'
