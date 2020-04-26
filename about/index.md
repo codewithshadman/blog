@@ -9,26 +9,6 @@ subclass: 'post page'
 ---
 
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-<style type="text/css">
-#display-picture {
-	display: block;
-	margin: auto;
-	border-radius: 50%;
-	width: 128px;
-	height: 128px;
-	border: 10px solid #cdcdcd;
-	padding: 0px;
-}
-
-.text-center {
-	text-align: center;
-}
-
-.div-center {
-    margin: auto;
-    width: fit-content;
-}
-</style>
 
 <img id="display-picture" src="/assets/images/kudchikarsk.jpg">
 <h2 class="text-center">Shadman Kudchikar</h2>

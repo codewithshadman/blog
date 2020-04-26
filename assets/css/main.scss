@@ -16,6 +16,25 @@
 	user-select:none;
 }
 
+#display-picture {
+	display: block;
+	margin: auto;
+	border-radius: 50%;
+	width: 128px;
+	height: 128px;
+	border: 10px solid #cdcdcd;
+	padding: 0px;
+}
+
+.text-center {
+	text-align: center;
+}
+
+.div-center {
+    margin: auto;
+    width: fit-content;
+}
+
 // Import partials from `sass_dir` (defaults to `_sass`)
 @import
 	"syntax"

@@ -1,0 +1,91 @@
+---
+layout: default
+title: Author Page
+cover: false
+post_class: 'author-template'
+---
+
+<header class="main-header post-head {% if page.cover %}" style="background-image: url({{ page.cover | prepend:site.baseurl | prepend: site.url }}) {%else%}no-cover{% endif %}">
+    <nav class="main-nav {% if page.cover %} overlay {% endif %} clearfix">
+        <a class="back-button icon-arrow-left" href="{{ site.baseurl }}">Home</a>
+        <a class="subscribe-button icon-feed" href="{{ site.baseurl }}feed.xml">Subscribe</a>
+    </nav>
+</header>
+
+{% for author in site.data.authors %}
+    {% if author[1].username == page.author %}
+    <header class="site-header outer {% if author[1].cover or page.cover %}" style="background-image: url({{ site.baseurl }}{% if author[1].cover %}{{ author[1].cover }}{% elsif page.cover %}{{ page.cover }}{% endif %}) {% else %}no-cover{% endif %}">
+        <div class="inner">
+           
+            <div class="site-header-content">
+                {% if author[1].picture %}
+                    <img class="author-profile-image" src="{{ site.baseurl }}{{ author[1].picture }}" alt="{{ page.author }}" />
+                {% endif %}
+                <h1 class="site-title author-name">{{ author[1].name }}</h1>
+                {% if author[1].bio %}
+                    <h2 class="author-bio">{{ author[1].bio }}</h2>
+                {% endif %}
+                <div class="author-meta">
+                    {% if author[1].location %}
+                        <div class="author-location">{{ author[1].location }} <span class="bull">&bull;</span></div>
+                    {% endif %}
+                    <div class="author-stats">
+                        {% if paginator.total_posts == 0 %}No posts{% elsif paginator.total_posts == 1 %}1 post{% else %}{{ paginator.total_posts }} posts{% endif %} <span class="bull">&bull;</span>
+                    </div>
+                    {% if author[1].url %}
+                        <a class="social-link social-link-wb" href="{{ author[1].url_full }}" target="_blank" rel="noopener">{% include website.html %}</a>
+                    {% endif %}
+                    {% if author[1].twitter %}
+                        <a class="social-link social-link-tw" href="https://twitter.com/{{ author[1].twitter }}" target="_blank" rel="noopener">{% include twitter.html %}</a>
+                    {% endif %}
+                    {% if author[1].facebook %}
+                        <a class="social-link social-link-fb" href="https://facebook.com/{{ author[1].facebook }}" target="_blank" rel="noopener">{% include facebook.html %}</a>
+                    {% endif %}
+                    <a class="social-link social-link-rss" href="https://feedly.com/i/subscription/feed/{{ site.url }}{{ site.baseurl }}author/{{ page.author }}/feed.xml" target="_blank" rel="noopener">{% include rss.html %}</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    {% endif %}
+{% endfor %}
+<!-- /author -->
+
+<main id="content" class="content" role="main">
+
+
+    <div class="extra-pagination inner">
+        {% include pagination.html %}
+    </div>
+
+    {% for post in paginator.posts %}
+
+    <article class="post">
+        <header class="post-header">
+            <h2 class="post-title"><a href="{{ post.url }}">{{ post.title }}</a></h2>
+        </header>
+        <section class="post-excerpt">
+            {{ post.description }} <a class="read-more" href="{{ post.url }}">&raquo;</a>
+        </section>
+        <footer class="post-meta">
+            {% for author in site.data.authors %}
+                    {% if author[1].username == post.author %}
+                        {% if author[1].picture %}
+                         <img class="author-thumb" src="{{ site.baseurl }}{{ author[1].picture }}" alt="{{ author[1].name }}" nopin="nopin" />
+                <a href="{{ site.baseurl }}author/{{ post.author }}/">{{ author[1].name }}</a>
+                        {% endif %}                       
+                    {% endif %}
+                {% endfor %}
+            {% if post.tags.size > 0 %} 
+                {{ post.tags | array_to_sentence_string | prepend: 'on ' | replace: "Csharp", "C#" }} 
+            {% endif %}
+            <time class="post-date" datetime="{{ post.date | date:"%Y-%m-%d" }}">
+                {{ post.date | date_to_string }}
+            </time> 
+        </footer>
+    </article>
+
+    {% endfor %}
+
+    {% include author_pagination.html %}
+
+</main>

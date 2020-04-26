@@ -1,0 +1,26 @@
+{% for post in  posts %}
+    <article class="post">
+        <header class="post-header">
+            <h2 class="post-title"><a href="{{ post.url }}">{{ post.title }}</a></h2>
+        </header>
+        <section class="post-excerpt">
+            {{ post.description }} <a class="read-more" href="{{ post.url }}">&raquo;</a>
+        </section>
+        <footer class="post-meta">
+            {% for author in site.data.authors %}
+                    {% if author[1].username == post.author %}
+                        {% if author[1].picture %}
+                         <img class="author-thumb" src="{{ site.baseurl }}{{ author[1].picture }}" alt="{{ author[1].name }}" nopin="nopin" />
+                <a href="{{ site.baseurl }}author/{{ post.author }}/">{{ author[1].name }}</a>
+                        {% endif %}                       
+                    {% endif %}
+                {% endfor %}
+            {% if post.tags.size > 0 %} 
+                {{ post.tags | array_to_sentence_string | prepend: 'on ' | replace: "Csharp", "C#" }} 
+            {% endif %}
+            <time class="post-date" datetime="{{ post.date | date:"%Y-%m-%d" }}">
+                {{ post.date | date_to_string }}
+            </time> 
+        </footer>
+    </article>
+{% endfor %}
