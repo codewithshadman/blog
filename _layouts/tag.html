@@ -1,0 +1,59 @@
+---
+layout: default
+current: tag
+title: Tag Page
+cover: false
+class: 'tag-template'
+navigation: True
+logo: 'assets/images/ghost.png'
+---
+
+
+<header class="main-header post-head {% if page.cover %}" style="background-image: url({{ page.cover | prepend:site.baseurl | prepend: site.url }}) {%else%}no-cover{% endif %}">
+    <nav class="main-nav {% if page.cover %} overlay {% endif %} clearfix">
+        <a class="back-button icon-arrow-left" href="{{ site.baseurl }}">Home</a>
+        <a class="subscribe-button icon-feed" href="{{ site.baseurl }}feed.xml">Subscribe</a>
+    </nav>
+</header>
+
+<!-- default -->
+<!-- The tag above means - insert everything in this file into the {body} of the default.hbs template -->
+
+<!-- The big featured header, it uses blog cover image as a BG if available -->
+<!-- #tag -->
+{% include dynamic_tag_info.html %}
+<header class="site-header outer {% if cover or page.cover %}" style="background-image: url({{ site.baseurl }}{% if cover %}{{ cover }}{% else %}{{ page.cover }}{% endif%}) {% else %}no-cover{% endif %}">
+    <div class="inner">       
+        <div class="site-header-content">
+            <h1 class="site-title">
+                {% if tag_title %}
+                {{ tag_title | capitalizeall }}
+                {% else %}
+                {{ page.tag | capitalizeall }}
+                {% endif %}
+            </h1>
+            <p class="site-description">
+                {% if tag_description %}
+                    {{ tag_description }}
+                {% elsif page.tag %}
+    			    A collection of {{ paginator.total_posts }} posts
+                {% endif %}
+            </p>
+        </div>
+    </div>
+</header>
+<!-- tag -->
+
+<!-- The main content area -->
+<main id="content" class="content" role="main">
+
+
+    <div class="extra-pagination inner">
+        {% include pagination.html %}
+    </div>
+
+    {% include paginate_posts.html %}
+
+    {% include author_pagination.html %}
+
+</main>

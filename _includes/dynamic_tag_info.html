@@ -1,0 +1,8 @@
+<!-- dynamically loading backgrounds for tags,  descriptions and page titles -->
+{% assign tag_identifier =  page.url | urilast | underscoresall  %}
+{% assign tag_data =  site.data.tags[tag_identifier] %}
+{% if tag_data  %}
+	{% assign cover = tag_data.cover %}
+    {% assign tag_description = tag_data.description %}
+    {% assign tag_title = tag_data.title %}
+{% endif %}

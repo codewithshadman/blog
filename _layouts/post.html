@@ -20,10 +20,17 @@ home: true
         <header class="post-header">
             <h1 class="post-title">{{ page.title }}</h1>
             <section class="post-meta">
-                <time class="post-date" datetime="{{ page.date | date:"%Y-%m-%d" }}">{{ page.date | date_to_string }}</time>
-                {% if page.tags.size > 0 %}
-                    {{ page.tags | array_to_sentence_string | prepend: 'on ' | replace: "Csharp", "C#" }}
-                {% endif %}
+                <time class="post-date" datetime="{{ page.date | date:"%Y-%m-%d" }}">{{ page.date | date_to_string }}</time>             
+                on 
+                {% for tag in page.tags %}
+                            {% assign tag_name = tag | underscoresall %}
+                            {% assign tag_data = site.data.tags[tag_name] %}
+                            {% if forloop.index == page.tags.size %}
+                               <a href='{{ site.baseurl }}tag/{{ tag_data.name | downcase | replace: ' ', '-' }}/'>{{ tag_data.title }}</a>
+                            {% else %}
+                               <a href='{{ site.baseurl }}tag/{{ tag_data.name | downcase | replace: ' ', '-' }}/'>{{ tag_data.title }}</a>,
+                            {% endif %}
+                        {% endfor %}
             </section>
         </header>
 
