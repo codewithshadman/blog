@@ -148,11 +148,11 @@ public class Person
 
 The normal way the class and its properties displayed is as follows.
 
-![](/assets/images/csharp-attributes/capture1.JPG)
+![](/assets/images/csharp-attributes/Capture1.png)
 
 To add the DebuggerDisplay attribute, you need to refer to System.Diagnostics namespace.
 
-![](/assets/images/csharp-attributes/capture2.JPG)
+![](/assets/images/csharp-attributes/Capture2.png)
 
 The attribute takes a string value as a parameter.
 
@@ -174,7 +174,7 @@ public class Person
 The display of the class would change like the following.
 
 
-![](/assets/images/csharp-attributes/capture3.JPG)
+![](/assets/images/csharp-attributes/Capture3.png)
 
 
 ### DebuggerBrowsable attribute
@@ -199,18 +199,18 @@ public class Person
 Debugging the code displays the usual way of the array name and its values on expanding.
 
 
-![](/assets/images/csharp-attributes/capture4.JPG)
+![](/assets/images/csharp-attributes/Capture4.png)
  
 
 Let’s add the attribute. You need to add a reference to System.Diagnostics namespace.
 
 
-![](/assets/images/csharp-attributes/capture5.JPG)
+![](/assets/images/csharp-attributes/Capture5.png)
  
 
 Notice that, it takes an enum as a parameter. The DebuggerBrowsableState enum has the following values.
 
-![](/assets/images/csharp-attributes/capture6.JPG)
+![](/assets/images/csharp-attributes/Capture6.png)
 
 Using this attribute other than Property, Index, and Field would give you the error. Now we would add the RootHidden enum type of DebuggerBrowsableState to AbsentDays property.
 
@@ -230,7 +230,7 @@ public class Person
 Notice that, the property name is not displayed and the children are expanded by default.
 
 
-![](/assets/images/csharp-attributes/capture7.JPG)
+![](/assets/images/csharp-attributes/Capture7.png)
 
 
 This is again very useful if you have many properties and you need to check a few of them. It saves time to drill down.
@@ -278,7 +278,7 @@ class Program
 
 The conditional attribute takes conditionString as a parameter. Wherein methods are selectively called on the basis of this definition of the symbol.
 
-![](/assets/images/csharp-attributes/capture8.JPG)
+![](/assets/images/csharp-attributes/Capture8.png)
 
 It instructs the compiler to compile (into Microsoft Intermediate Language) or not, based on a condition - whether or not a specific conditional compilation symbol is defined. 
 
@@ -293,7 +293,7 @@ public static void Display(Person person)
 
 Now if we run the program it will not display any output. However when we can define the symbol in project properties.
 
-![](/assets/images/csharp-attributes/capture9.JPG)
+![](/assets/images/csharp-attributes/Capture9.png)
 
 Now if we run the program we can see the output
 

@@ -6,7 +6,7 @@ tags: [Programming]
 class: post-template
 subclass: 'post programming'
 title: Declarative Programming
-description:
+description: In this article, I will introduce you to an alternative style of programming called declarative programming. Proper declarative programs are easier to read, understand, and maintain.
 cover: "assets/images/declarative-programming.jpg"
 date: Mon Dec  2 21:43:12 2019
 last_modified_at: Tue Dec  3 22:20:28 2019
