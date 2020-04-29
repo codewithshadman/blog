@@ -1791,10 +1791,11 @@ body:not(.post-template) .post-title {
     height: 100px;
     border: 10px solid #cdcdcd;
     padding: 0px;
+    margin-bottom: .5em
 }
 
 .site-header-content .author-name {
-    text-align: center;
+    text-align: center;    
 }
 
 .site-header-content .author-bio {
