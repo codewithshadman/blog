@@ -7,7 +7,7 @@ class: post-template
 subclass: 'post design-patterns'
 title:  "Repository Pattern C#"
 description: "A Repository mediates between the domain and data mapping layers. Repository Pattern in C# supports the objective of achieving a clean separation and one-way dependency between the domain and data mapping layers."
-cover: "assets/images/repository-pattern-csharp.jpg"
+cover: "assets/images/programming2.jpg"
 date: Sun Jun 30 14:00:06 2019
 last_modified_at: Sun Nov 24 17:06:50 2019
 author: shadman_kudchikar
