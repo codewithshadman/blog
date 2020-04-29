@@ -16,23 +16,20 @@
 	user-select:none;
 }
 
-#display-picture {
+.display-picture {
 	display: block;
-	margin: auto;
+	margin: auto !important;
 	border-radius: 50%;
-	width: 128px;
-	height: 128px;
+	width: 100px !important;
+	height: 100px !important;
 	border: 10px solid #cdcdcd;
-	padding: 0px;
+	padding: 0px !important;
 }
 
 .text-center {
 	text-align: center;
-}
-
-.div-center {
+	width: fit-content;
     margin: auto;
-    width: fit-content;
 }
 
 // Import partials from `sass_dir` (defaults to `_sass`)

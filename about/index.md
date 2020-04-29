@@ -1,18 +1,15 @@
 ---
 layout: page
-current: about
 title: About me
 navigation: true
-logo: 'assets/images/ghost.png'
-class: page-template
-subclass: 'post page'
+post_class: page-template
 ---
 
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-<img id="display-picture" src="/assets/images/kudchikarsk.jpg">
+<img class="display-picture" src="/assets/images/kudchikarsk.jpg">
 <h2 class="text-center">Shadman Kudchikar</h2>
-<div class="div-center">
+<div class="text-center">
 	<a href="https://twitter.com/kudchikarsk?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-size="large" data-dnt="true" data-show-count="false">Follow @kudchikarsk</a>
 </div>
 

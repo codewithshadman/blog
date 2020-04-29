@@ -3,7 +3,7 @@ layout: default
 current: tag
 title: Tag Page
 cover: false
-class: 'tag-template'
+post_class: tag-template
 navigation: True
 logo: 'assets/images/ghost.png'
 ---
@@ -25,14 +25,14 @@ logo: 'assets/images/ghost.png'
 <header class="site-header outer {% if cover or page.cover %}" style="background-image: url({{ site.baseurl }}{% if cover %}{{ cover }}{% else %}{{ page.cover }}{% endif%}) {% else %}no-cover{% endif %}">
     <div class="inner">       
         <div class="site-header-content">
-            <h1 class="site-title">
+            <h1 class="tag-name">
                 {% if tag_title %}
                 {{ tag_title | capitalizeall }}
                 {% else %}
                 {{ page.tag | capitalizeall }}
                 {% endif %}
             </h1>
-            <p class="site-description">
+            <p class="tag-description">
                 {% if tag_description %}
                     {{ tag_description }}
                 {% elsif page.tag %}
