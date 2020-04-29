@@ -1797,6 +1797,10 @@ body:not(.post-template) .post-title {
     text-align: center;
 }
 
+.site-header-content .author-bio {
+    font-size: inherit;
+}
+
 .site-header-content .author-meta {
     z-index: 10;
     flex-shrink: 0;
