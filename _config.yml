@@ -1,4 +1,5 @@
 name: Code with Shadman
+title: Code with Shadman
 description: Easy-to-understand tutorials on the .NET stack with C# language
 meta_description: "Easy-to-understand tutorials on the .NET stack with C# language."
 
@@ -17,3 +18,7 @@ url:            'https://codewithshadman.com'
 author:         'Shadman Kudchikar'
 
 permalink: /:title/
+
+twitter: kudchikarsk # replace by your username
+facebook: shadman.kudchikar # replace by your username
+email: kudchikarsk@gmail.com
