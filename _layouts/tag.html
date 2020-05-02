@@ -10,10 +10,7 @@ logo: 'assets/images/ghost.png'
 
 
 <header class="main-header post-head {% if page.cover %}" style="background-image: url({{ page.cover | prepend:site.baseurl | prepend: site.url }}) {%else%}no-cover{% endif %}">
-    <nav class="main-nav {% if page.cover %} overlay {% endif %} clearfix">
-        <a class="back-button icon-arrow-left" href="{{ site.baseurl }}">Home</a>
-        <a class="subscribe-button icon-feed" href="{{ site.baseurl }}feed.xml">Subscribe</a>
-    </nav>
+    {% include site-nav.html %}
 </header>
 
 <!-- default -->

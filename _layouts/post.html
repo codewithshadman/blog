@@ -3,14 +3,12 @@ layout: default
 disqus: false
 archive: false
 post_class: post-template
+class: post-template
 home: true
 ---
 
 <header class="main-header post-head {% if page.cover %}" style="background-image: url({{ page.cover | prepend:site.baseurl | prepend: site.url }}) {%else%}no-cover{% endif %}">
-    <nav class="main-nav {% if page.cover %} overlay {% endif %} clearfix">
-        <a class="back-button icon-arrow-left" href="{{ site.baseurl }}">Home</a>
-        <a class="subscribe-button icon-feed" href="{{ site.baseurl }}feed.xml">Subscribe</a>
-    </nav>
+    {% include site-nav.html %}
 </header>
 
 <main class="content" id="content" role="main">
@@ -18,7 +16,7 @@ home: true
     <article class="post">
 
         <header class="post-header">
-            <h1 class="post-title">{{ page.title }}</h1>
+            <h1 class="post-title post-full-title">{{ page.title }}</h1>
             <section class="post-meta">
                 {% if page.tags %}
                 on 
@@ -40,6 +38,15 @@ home: true
         <section class="post-content">
             {{content}}
         </section>
+
+         <!-- Email subscribe form at the bottom of the page -->
+            {% if site.subscribers %}
+                <section class="subscribe-form">
+                    <h3 class="subscribe-form-title">Subscribe to {{ site.title }}</h3>
+                    <p class="text-center">Get the latest posts delivered right to your inbox</p>
+                    {% include subscribe-form.html placeholder="youremail@example.com" %}
+                </section>
+            {% endif %}
 
         {% if page.archive %}
         <section class="archive">
@@ -85,3 +92,76 @@ home: true
     </article>
 
 </main>
+
+<!-- Links to Previous/Next posts -->
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+            {% if page.tags.size > 0 %}
+                {% assign primary = page.tags | first %}
+                {% assign related_posts = 0 %}
+                {% for post in site.posts %}
+                  {% if post.tags.size > 0 %}
+                      {% if post.tags contains primary %}
+                        {% assign related_posts = related_posts | plus: 1 %}
+                      {% endif %}
+                  {% endif %}
+                {% endfor %}
+                {% if related_posts > 1 %}
+                    <article class="read-next-card"
+                       
+                    >
+                        <header class="read-next-card-header">
+                            <small class="read-next-card-header-sitetitle">&mdash; {{ site.title }} &mdash;</small>
+                            {% if primary %}
+                                {% assign tag_name = primary | underscoresall %}
+                                <h3 class="read-next-card-header-title"><a href="{{ site.baseurl }}tag/{{ primary | downcase | replace: ' ', '-' }}/">{{ site.data.tags[tag_name].title | capitalizeall }}</a></h3>
+                            {% endif %}
+                        </header>
+                        <div class="read-next-divider">{% include infinity.html %}</div>
+                        <div class="read-next-card-content">
+                            <ul>
+                                {% assign count = 0 %}
+                                {% for post in site.posts %}
+                                  {% if post.tags contains primary %}
+                                    {% if post.title != page.title %}
+                                        {% assign count = count | plus: 1 %}
+                                        {% if count <= 3 %}
+                                            <li><a href="{{ site.baseurl }}{{ post.url | remove_first: '/' }}">{{ post.title }}</a></li>
+                                        {% endif %}
+                                    {% endif %}
+                                  {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <footer class="read-next-card-footer">
+                            <a href="{{ site.baseurl }}tag/{{ primary | downcase | replace: ' ', '-' }}/">
+                                {% if related_posts > 1 %}
+                                    See all {{ related_posts | minus: 1 }} posts  →
+                                {% elsif related_posts == 1 %}
+                                    {{ related_posts }} post  →
+                                {% else %}
+                                    No posts.
+                                {% endif %}
+                            </a>
+                        </footer>
+                    </article>
+                {% endif %}
+            {% endif %}   
+
+             <!-- If there's a next post, display it using the same markup included from - partials/post-card.hbs -->
+            {% if page.next %}
+                {% include post-card-next.html %}
+            {% endif %}
+
+            <!-- If there's a previous post, display it using the same markup included from - partials/post-card.hbs -->
+            {% if page.previous %}
+                {% include post-card-previous.html %}
+            {% endif %}        
+
+        </div>
+    </div>
+</aside>
+
+
+{% include floating-header.html %}

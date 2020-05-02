@@ -1,18 +1,19 @@
 ---
 layout: default
 post_class: post-template page-template
+class: page-template
 ---
 
-<nav class="main-nav clearfix">
-    <a class="back-button icon-arrow-left" href="{{ site.baseurl }}">Home</a>
-    <a class="subscribe-button icon-feed" href="{{ site.baseurl }}feed.xml">Subscribe</a>
-</nav>
+<header class="main-header post-head {% if page.cover %}" style="background-image: url({{ page.cover | prepend:site.baseurl | prepend: site.url }}) {%else%}no-cover{% endif %}">
+    {% include site-nav.html %}
 
+    <h1 class="post-title">{{ page.title }}</h1>
+    <h2 class="page-description">{{ page.description }}</h2>
+
+</header>
 
 <main class="content" role="main">
-    <article class="post">      
-
-        <h1 class="post-title">{{ page.title }}</h1>
+    <article class="post">
 
         <section class="post-content">
             {{content}}
