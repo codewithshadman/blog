@@ -2563,6 +2563,18 @@ body:not(.post-template) .post-title {
 /* 17.a Post Feed
 /* ---------------------------------------------------------- */
 
+
+.post-feed {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 40px 0 0 0;
+}
+
+.posts-inner {
+    max-width: none;
+}
+
 .post-card {
     flex: 1 1 300px;
     display: flex;
@@ -2643,6 +2655,7 @@ body:not(.post-template) .post-title {
 
 .post-card-excerpt p {
     font-size: 1.5rem;   
+    letter-spacing: normal;
 }
 
 .post-card-meta {

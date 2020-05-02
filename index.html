@@ -34,7 +34,11 @@ about: 'about/'
         {% include pagination.html %}
     </div>
 
-    {% include paginate_posts.html %}
+    <div class="inner posts-inner">
+        <div class="post-feed">
+            {%  include post-card.html recent_first=true %}    
+        </div>
+    </div>
 
     {% include pagination.html %}
 
