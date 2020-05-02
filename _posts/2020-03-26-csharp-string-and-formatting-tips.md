@@ -7,7 +7,7 @@ class: post-template
 subclass: 'post csharp-tips'
 title: C# String and Formatting Tips
 description: In this article, we're going to be learning about a whole host of different tips and tricks related to C# String and Formatting. 
-cover: "assets/images/programming2.jpg"
+cover: "assets/images/csharp-string-and-formatting-tips.jpg"
 date: Fri Mar 27 00:00:00 2020
 last_modified_at: Fri Mar 27 19:03:35 2020
 author: shadman_kudchikar
