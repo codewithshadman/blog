@@ -1,12 +1,13 @@
 ---
 layout: default
 title: Home
-cover: false
+cover: assets/images/programming2.jpg
+display_cover: false
 about: 'about/'
 ---
 
 
-<header class="main-header {% if page.cover %}" style="background-image: url({{ page.cover | prepend:site.baseurl | prepend: site.url }}) {%else%}no-cover{% endif %}">
+<header class="main-header {% if page.display_cover %}" style="background-image: url({{ page.cover | prepend:site.baseurl | prepend: site.url }}) {%else%}no-cover{% endif %}">
     <nav class="main-nav overlay clearfix">
             {% if page.logo %}
                 <a class="blog-logo" href="{{ site.baseurl }}">
