@@ -2217,11 +2217,17 @@ body:not(.post-template) .post-title {
 }
 
 @media (max-width: 500px) {
+    .subscribe-form-title {
+        font-size: 2rem;
+    }    
+
     .subscribe-form form {
         flex-direction: column;
+        display: block;
     }
     .subscribe-form .form-group {
         width: 100%;
+        display: flex;
     }
     .subscribe-form button {
         margin: 10px 0 0 0;
@@ -2387,6 +2393,16 @@ body:not(.post-template) .post-title {
 
 .subscribe-overlay-close:hover {
     cursor: default;
+}
+
+@media (max-width: 650px) {
+    .subscribe-overlay-title {
+        font-size: 3rem;
+    }
+
+    .subscribe-overlay-description {
+        font-size: 2rem;
+    }
 }
 
 /* 17. Related posts
