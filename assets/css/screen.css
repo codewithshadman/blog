@@ -2821,5 +2821,10 @@ body:not(.post-template) .post-title {
 @media (max-width: 500px) {
     .tags-outer {
         margin: 2rem 16px;
+        margin-bottom: -40px
+    }
+
+    .tag {
+        font-size: 14px;
     }
 }

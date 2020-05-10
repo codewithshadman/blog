@@ -35,3 +35,11 @@
 .post-meta .tag:hover {
 	text-decoration: none;
 }
+
+.tag-header {
+	text-align: center;
+}
+
+.main-nav {
+    padding-bottom: 0px;
+}
