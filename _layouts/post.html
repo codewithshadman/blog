@@ -21,16 +21,17 @@ home: true
                 {% if page.tags %}
                 on 
                 {% endif %}
+                <ul class="tags">
                 {% for tag in page.tags %}
                             {% assign tag_name = tag | underscoresall %}
                             {% assign tag_data = site.data.tags[tag_name] %}
                             {% if forloop.index == page.tags.size %}
-                               <a href='{{ site.baseurl }}tag/{{ tag_data.name | downcase | replace: ' ', '-' }}/'>{{ tag_data.title }}</a>
+                               <a class="tag" href='{{ site.baseurl }}tag/{{ tag_data.name | downcase | replace: ' ', '-' }}/'>{{ tag_data.title }}</a>
                             {% else %}
-                               <a href='{{ site.baseurl }}tag/{{ tag_data.name | downcase | replace: ' ', '-' }}/'>{{ tag_data.title }}</a>,
+                               <a class="tag" href='{{ site.baseurl }}tag/{{ tag_data.name | downcase | replace: ' ', '-' }}/'>{{ tag_data.title }}</a>,
                             {% endif %}
                         {% endfor %}
-                        
+                        </ul>
                 <time class="post-date" datetime="{{ page.date | date:"%Y-%m-%d" }}">{{ page.date | date_to_string }}</time>
             </section>
         </header>
