@@ -1,0 +1,61 @@
+---
+layout: error
+current: error
+title: "404 - Page Not Found"
+permalink: 404.html
+---
+<!--
+This error template is used for all 404 errors, which might occur on your site.
+It's a good idea to keep this template as minimal as possible in terms of both file size and complexity.
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>{{ page.title }}</title>
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />    
+
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.css" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+    <!-- Customisation  -->
+    <link rel="stylesheet" type="text/css" href="/assets/built/main.css" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- This tag outputs SEO meta+structured data and other important settings -->
+    {% include head.html %}
+</head>
+<body class="error-template">
+    <div class="site-wrapper">
+
+        <header class="main-header post-head {% if page.cover %}" style="background-image: url({{ page.cover | prepend:site.baseurl | prepend: site.url }}) {%else%}no-cover{% endif %}">
+            {% include site-nav.html %}
+        </header>
+
+        <main id="site-main" class="site-main outer" role="main">
+            <div class="inner">
+
+                <section class="error-message">
+                    <h1 class="error-code">404</h1>
+                    <p class="error-description">Page not found</p>
+                    <a class="error-link" href="{{ site.baseurl }}">Go to the front page →</a>
+                </section>
+            </div>
+        </main>
+
+        <!-- get "posts" limit="3" -->
+        <aside class="outer error-outer">
+            <div class="inner">
+                <div class="post-feed">
+                    <!-- The tag below includes the markup for each post - partials/post-card.hbs -->
+                    {%  include post-card-error.html %}
+                </div>
+            </div>
+        </aside>
+        <!-- /get -->
+
+    </div>
+</body>
+</html>

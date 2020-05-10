@@ -25,9 +25,9 @@ In this article, you will learn how to use C# attributes in your own code and ho
 ## Contents
 
 - [Using C# Attributes ](#using-c-attributes)
-    - [C# Code Time Attributes](#c#-code-time-attributes)
+    - [C# Code Time Attributes](#c-code-time-attributes)
     - [C# Design Time Attributes](#c-design-time-attributes)
-    - [C# Run Time Attributes](#C#-run-time-attributes)
+    - [C# Run Time Attributes](#c-run-time-attributes)
 - [Applying C# Attributes](#applying-c-attributes)
     - [How to apply a C# attribute](#how-to-apply-a-c-attribute)
     - [Using multiple C# attributes](#using-multiple-c-attributes)
@@ -37,7 +37,7 @@ In this article, you will learn how to use C# attributes in your own code and ho
     - [DebuggerBrowsable attribute](#debuggerbrowsable-attribute)
     - [Conditional attribute](#conditional-attribute)
 - [Reading C# attributes](#reading-c-attributes)
-- [C# Reflection](#c#-reflection)
+- [C# Reflection](#c-reflection)
     - [Invoke Method with parameters using C# reflection](#invoke-method-with-parameters-using-c-reflection)
     - [Things you can achieve with C# reflection](#things-you-can-achieve-with-c-reflection)
 - [Applying C# Reflection with Attributes](#applying-c-reflection-with-attributes)
