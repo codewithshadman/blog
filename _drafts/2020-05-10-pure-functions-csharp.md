@@ -14,7 +14,7 @@ author: shadman_kudchikar
 comments: false
 ---
 
-As software becomes more and more complex, it is more and more important to structure it well. Well-structured software is easy to write and to debug, and provides a collection of modules that can be reused to reduce future programming costs. This all can be achieved through functional progamming.
+As software becomes more and more complex, it is more and more important to structure it well. Well-structured software is easy to write and to debug and provides a collection of modules that can be reused to reduce future programming costs. This all can be achieved through functional programming.
 
 In my series of post on [functional programming](/tag/csharp-functional-programming/) I will try to demonstrate the significance of functional programming, that will help C# programmers to exploit its advantages.
 
@@ -24,7 +24,7 @@ In my series of post on [functional programming](/tag/csharp-functional-programm
 - [Benefits Of Functional Programming](#benefits-of-functional-programming)
 - [What Are FP Functions / Pure Functions?](#what-are-fp-functions--pure-functions)
     - [A Pure Function Is A Map Between Two Sets](#a-pure-function-is-a-map-between-two-sets)
-    - [The Output Of A Pure Fucntion Is Determined Exclusively By Its Input](#the-output-of-a-pure-fucntion-is-determined-exclusively-by-its-input)
+    - [The Output Of A Pure Function Is Determined Exclusively By Its Input](#the-output-of-a-pure-function-is-determined-exclusively-by-its-input)
     - [Domain And Codomain Constitute A Function’s Interface](#domain-and-codomain-constitute-a-functions-interface)
 - [How You Can Define Functions In C#](#how-you-can-define-functions-in-c)
     - [Methods](#methods)
@@ -45,15 +45,15 @@ We tend to see the introduction of more functional features with every new relea
 
 - Anonymous types look like an approximation of [ML records](https://en.wikibooks.org/wiki/Standard_ML_Programming/Types#Records). ML is a general-purpose functional programming language.
 
-I wouldn't necessarily consider some of those features mentioned above as exclusive to functional programming languages, but its pretty clear that the C# developers have taken a lot of inspiration from functional programming languages in the past few years.
+I wouldn't necessarily consider some of those features mentioned above as exclusive to functional programming languages, but it's pretty clear that the C# developers have taken a lot of inspiration from functional programming languages in the past few years.
 
-For more in-depth explanation see [Is C#7 starting to look like a functional language?](https://hackernoon.com/is-c-7-starting-to-look-like-a-functional-language-d4326b427aaa).
+For a more in-depth explanation see [Is C#7 starting to look like a functional language?](https://hackernoon.com/is-c-7-starting-to-look-like-a-functional-language-d4326b427aaa).
 
-However, adoption of functional programming in the C# community has been slow. 
+However, the adoption of functional programming in the C# community has been slow. 
 
-This adoption is slow as most of the books and articles explains functional
+This adoption is slow as most of the books and articles explain functional
 techniques and concepts with examples from the domains of mathematics or computer
-science. However most programmers works on business applications and this creates a domain gap.
+science. However, most programmers work on business applications and this creates a domain gap.
 
 However, 
 
@@ -67,11 +67,11 @@ Let's see why Functional Programming matters and you should try to adopt it,
 
 - The other major benefit is concurrency, which is easier to do with functional programming because a program written in the imperative style may work well in a single-threaded implementation but cause all sorts of bugs, like [race condition](/thread-synchronization-and-race-condition/), when concurrency comes in. Functional code offers much better guarantees in concurrent scenarios.
 
-- There is no hidden state (private fields or static fields) or any kind of dependency on the outside world. This fact alone is going to make testing much easier because we don’t have to worry about Mocking dependency or other hacks to prepare the functionality for test.
+- There is no hidden state (private fields or static fields) or any kind of dependency on the outside world. This fact alone is going to make testing much easier because we don’t have to worry about Mocking dependency or other hacks to prepare the functionality for the test.
 
-- In Functional Programming by looking at functions we immediately receive a lot of information about what a function does just by looking at its signature. Sometimes that is all we need to know about a function and that’s far more clear and faster then the behaivour methods in Object oriented style.
+- In Functional Programming, by looking at functions we immediately receive a lot of information about what a function does just by looking at its signature. Sometimes that is all we need to know about a function and that’s far more clear and faster than the behavior methods in Object-oriented style.
 
-To understand this benefits we must first understand what are "FP Functions" / "Pure Functions" in functional programming and why they matter?
+To understand these benefits we must first understand what are "FP Functions" / "Pure Functions" in functional programming and why they matter?
 
 ## What Are FP Functions / Pure Functions?
 
@@ -82,14 +82,14 @@ In mathematics, and also in functional programming, a function is a map between 
 {% highlight csharp linenos %}
 public static class Math
 {
-	public static int Add(int a, int b)
-	{
-		return a+b;
-	}
+    public static int Add(int a, int b)
+    {
+        return a+b;
+    }
 }
 {% endhighlight %}
 
-In the above example our domain and codomain both are Integers i.e. they are range from -2,147,483,648 to 2,147,483,647. This is easy to write as the validation is already done by the language itself but this is not always the case when you write a business logic. Let's see a different kind of example:
+In the above example our domain and codomain both are Integers i.e. they are range from -2,147,483,648 to 2,147,483,647. This is easy to write as the validation is already done by the language itself but this is not always the case when you write business logic. Let's see a different kind of example:
 
 {% highlight csharp linenos %}
 public static string GetDomains(string email)
@@ -103,7 +103,7 @@ public static string GetDomains(string email)
 }
 {% endhighlight %}
 
-In the above example the method has two possible outcomes actually three it can return a string, a null object or throws a exception. And this will be the case for every fuction that operates on email. One way to mprove this program is creating a data object that represents our domain. Let's see how,
+In the above example the method has two possible outcomes actually three it can return a string, a null object, or throws an exception. And this will be the case for every function that operates on email. One way to improve this program is creating a data object that represents our domain. Let's see how
 
 {% highlight csharp linenos %}
 using System;
@@ -138,7 +138,7 @@ namespace Example1
 }
 {% endhighlight %}
 
-In this implementation, Email still uses an string in its underlying representation, but the constructor ensures that Email can only be instantiated with a valid value.
+In this implementation, Email still uses a string in its underlying representation, but the constructor ensures that Email can only be instantiated with a valid value.
 
 The Email type is being created precisely to represent the domain of the GetDomains function, which can now be rewritten as follows:
 
@@ -148,9 +148,9 @@ public static string GetDomains(Email email) => email.Value.Split('@').LastOrDef
 
 This new implementation has several advantages. You’re guaranteeing that only valid values can be given; GetDomains no longer causes runtime errors; and the concern of validating the email value is captured in the constructor of the Email type, removing the need for duplicating validation wherever an Email is processed.
 
-### The Output Of A Pure Fucntion Is Determined Exclusively By Its Input
+### The Output Of A Pure Function Is Determined Exclusively By Its Input
 
-The value that a function yields is determined exclusively by its input. You’ll see that this isn’t always the case with functions in programming. Let's see why,
+The value that a function yield is determined exclusively by its input. You’ll see that this isn’t always the case with functions in programming. Let's see why
 
 {% highlight csharp linenos %}
 using System;
@@ -180,7 +180,7 @@ namespace Common
 
 {% endhighlight %}
 
-Is IsMinor method pure? The result of IsMinor will depend on the current date, so, clearly, the answer is no! What kind of side effect are we facing here? It’s I/O: DateTime.Now queries the system clock, which is not in the context of the program.
+Is the IsMinor method pure? The result of IsMinor will depend on the current date, so, clearly, the answer is no! What kind of side effect are we facing here? It’s I/O: DateTime.Now queries the system clock, which is not in the context of the program.
 
 Functions that perform I/O are difficult to test. For example, the following test passes as I’m writing this, but it will start to fail on the 16th of December, 2019:
 
@@ -207,15 +207,15 @@ public bool IsMinor(DateTime on)
 {% endhighlight %}
 Now the implementation of IsMinor is pure (because today is not mutable). You’ve effectively pushed the side effect of reading the current date outwards.
 
-However still our method is dependent on a hidden field. The programming constructs we use to
+However, still, our method is dependent on a hidden field. The programming constructs we use to
 represent functions all have access to a “context”: an instance method has
 access to instance fields.
 
-As we discussed Pure functions closely resemble mathematical functions: they do nothing other than compute an output value based on their input values. They never mutates global state—“Global” here means any state that’s visible outside of the function’s scope.
+As we discussed Pure functions closely resemble mathematical functions: they do nothing other than computing an output value based on their input values. They never mutate global state—“Global” here means any state that’s visible outside of the function’s scope.
 
 A private instance field is considered global because it’s visible from all methods within the class.
 
-So we can even furthur refactor our code to attend true purity.
+So we can even further refactor our code to attend true purity.
 
 {% highlight csharp linenos %}
 public static class DateTimeExtension
@@ -257,15 +257,15 @@ foreach (var person in people.Where(p=>p.DateOfBirth.IsMinor(DateTime.Now)))
 
 ### Domain And Codomain Constitute A Function’s Interface
 
-The types for the domain and codomain constitute a function’s interface, also called its type, or signature. You can think of this as a contract: a function signature declares that, given an element from the domain, it will yield an element from the codomain. 
+The types for the domain and codomain constitute a function’s interface, also called its type or signature. You can think of this as a contract: a function signature declares that, given an element from the domain, it will yield an element from the codomain. 
 
-In the above example we defined this using return type of method and type for parameters
+In the above example, we defined this using return type of method and type for parameters
 
 {% highlight csharp linenos %}
 public static int Add(int a, int b)
 {% endhighlight %}
 
-Here both our domain and codomain is defined as int type.
+Here both our domain and codomain are defined as int type.
 
 {% highlight csharp linenos %}
 public static string GetDomains(Email email) => email.Value.Split('@').LastOrDefault();
@@ -293,7 +293,7 @@ The constructs that really enable you to program in a functional style are deleg
 
 ### Delegates
 
-Delegates are type-safe function pointers. Type-safe here means that a delegate is strongly typed: the types of the input and output values of the function are known at compile time, and
+Delegates are type-safe function pointers. Type-safe here means that a delegate is strongly typed: the types of the input and output values of the function are known at compile-time, and
 consistency is enforced by the compiler.
 
 
@@ -322,7 +322,7 @@ you can just use the type:
 {% highlight csharp linenos %}
 Func<Person, Greeting>
 {% endhighlight %}
-The type of Greeter in the preceding example is equivalent to, or “compatible with,” `Func<Person,Greeting>`. In both cases it’s a function that takes a Person and returns a Greeting.
+The type of Greeter in the preceding example is equivalent to, or “compatible with,” `Func<Person,Greeting>`. In both cases, it’s a function that takes a Person and returns a Greeting.
 
 There’s a similar delegate family to represent actions—functions that have no return value, such as void methods:
 
@@ -354,7 +354,7 @@ We normally think of dictionaries as data, so it’s enriching to change perspec
 
 ## Why Function Purity Matters?
 
-The deterministic Nature of Pure functions / FP functions (that is, the fact that they always return the same output for the same input) has some interesting consequences. 
+The deterministic nature of Pure functions / FP functions (that is, the fact that they always return the same output for the same input) has some interesting consequences. 
 
 Pure functions are easy to test and to reason about. Furthermore, the fact that outputs only depend on inputs means that the order of evaluation isn’t important. Whether you evaluate the result of a function now or later, the result will not change. 
 
@@ -440,13 +440,13 @@ If you test this approach with a large enough input list, you’ll get a result 
 ...
 {% endhighlight %}
 
-You can see that the numbering is improper after 13th item.
+You can see that the numbering is improper after the 13th item.
 
 This will look [pretty familiar](/thread-synchronization-and-race-condition/) if you have some multithreading experience. Because multiple processes are reading and writing to the counter at the same time, some of the updates are lost.
 
 Now, the thing is
 
-Here, our select method violates the pure function rule: "The output of a pure fucntion is determined exclusively by its input". 
+Here, our select method violates the pure function rule: "The output of a pure function is determined exclusively by its input". 
 
 {% highlight csharp %}
 var list = names.AsParallel().Select(item => 
@@ -456,12 +456,12 @@ var list = names.AsParallel().Select(item =>
 });
 {% endhighlight %}
 
-As our select lambda expressesion depends on a external closed-over variable count it makes our lambda function impure.
+As our select lambda expression depends on an external closed-over variable count it makes our lambda function impure.
 
 You probably know that this could be fixed by using a lock or the Interlocked class when incrementing the counter. But locking is an imperative construct that we’d rather avoid when coding functionally.
 
 One possible way to avoid the pitfalls of concurrent updates is to remove the problem at the
-source: don’t use shared state to begin with. How this can be done will vary with each scenario,
+source: don’t use the shared state, to begin with. How this can be done will vary with each scenario,
 
 but I’ll show you a solution for the current scenario that will enable us to format the list in parallel.
 
@@ -480,6 +480,6 @@ WriteLine(String.Join("\n", list));
 
 In this case, ParallelEnumerable does all the heavy lifting, and you can easily resolve the problem by reducing this specific scenario to the more common scenario of zipping two parallel sequences—a scenario common enough that it’s addressed in the framework.
 
-In this scenario it was possible to enable parallel execution by removing state updates altogether, but this isn’t always the case, nor is it always this easy. But the ideas you’ve seen so far already put you in a better position when tackling issues related to parallelism, and more generally concurrency.
+In this scenario, it was possible to enable parallel execution by removing state updates altogether, but this isn’t always the case, nor is it always this easy. But the ideas you’ve seen so far already put you in a better position when tackling issues related to parallelism, and more generally concurrency.
 
 That’s all for now, join me in the next article by subscribing to my newsletter using the form below.
