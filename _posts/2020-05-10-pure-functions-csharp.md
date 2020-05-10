@@ -6,12 +6,12 @@ tags: [Csharp Functional Programming]
 class: post-template
 subclass: 'post csharp-functional-programming'
 title: Pure Functions C#
-description: 
+description: This article explains what are "FP Functions" / "Pure Functions" in C# functional programming and why they matter.
 cover: "assets/images/pure-functions-csharp.jpg"
 date: Sat May  9 23:08:04 2020
 last_modified_at: Sat May  9 23:08:06 2020
 author: shadman_kudchikar
-comments: false
+comments: true
 ---
 
 As software becomes more and more complex, it is more and more important to structure it well. Well-structured software is easy to write and to debug and provides a collection of modules that can be reused to reduce future programming costs. This all can be achieved through functional programming.
