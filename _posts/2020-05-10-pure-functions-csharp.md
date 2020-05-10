@@ -6,7 +6,7 @@ tags: [Csharp Functional Programming]
 class: post-template
 subclass: 'post csharp-functional-programming'
 title: Pure Functions C#
-description: This article explains what are "FP Functions" / "Pure Functions" in C# functional programming and why they matter.
+description: This article explains what are FP Functions or Pure Functions in C# functional programming and why they matter.
 cover: "assets/images/pure-functions-csharp.jpg"
 date: Sat May  9 23:08:04 2020
 last_modified_at: Sat May  9 23:08:06 2020

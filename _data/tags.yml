@@ -25,7 +25,7 @@ csharp_design_patterns:
   title: C# Design Patterns
 csharp_functional_programming:
   name: Csharp Functional Programming
-  description: 
+  description: A well-structured software is easy to write and to debug and provides a collection of modules that can be reused to reduce future programming costs. This all can be achieved through functional programming. The C# tutorials in this section will try to demonstrate the significance of functional programming, that will help C# programmers to exploit its advantages.
   cover: False
   title: C# Functional Programming
 csharp_tips:
