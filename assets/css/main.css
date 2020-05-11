@@ -27,7 +27,7 @@
 }
 
 .post-meta .tags {
-    display: inline;
+    display: inline-flex;
     margin-left: 10px;
     margin-right: -5px;
 }

@@ -26,9 +26,13 @@ home: true
                             {% assign tag_name = tag | underscoresall %}
                             {% assign tag_data = site.data.tags[tag_name] %}
                             {% if forloop.index == page.tags.size %}
-                               <a class="tag" href='{{ site.baseurl }}tag/{{ tag_data.name | downcase | replace: ' ', '-' }}/'>{{ tag_data.title }}</a>
+                              <li>
+                                   <a class="tag" href='{{ site.baseurl }}tag/{{ tag_data.name | downcase | replace: ' ', '-' }}/'>{{ tag_data.title }}</a>
+                              </li>
                             {% else %}
-                               <a class="tag" href='{{ site.baseurl }}tag/{{ tag_data.name | downcase | replace: ' ', '-' }}/'>{{ tag_data.title }}</a>,
+                               <li>
+                                   <a class="tag" href='{{ site.baseurl }}tag/{{ tag_data.name | downcase | replace: ' ', '-' }}/'>{{ tag_data.title }}</a>,
+                               </li>
                             {% endif %}
                         {% endfor %}
                         </ul>
