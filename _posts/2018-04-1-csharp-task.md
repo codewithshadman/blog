@@ -20,15 +20,15 @@ redirect_from:
   - /tasks-in-csharp/programming-for-responsiveness/
 ---
 
-C# Task is one of the central elements of the task-based asynchronous pattern first introduced in the .NET Framework 4.
+**C# task** is one of the central elements of the task-based asynchronous pattern first introduced in the .NET Framework 4.
 
-C# Task object typically executes asynchronously on a thread pool thread rather than synchronously on the main application thread.
+**C# task** object typically executes asynchronously on a thread pool thread rather than synchronously on the main application thread.
 
 Although, we can directly offload the work to [thread pool](/thread-pool-in-csharp/) using the queue user work item method. However, this method has its weaknesses as we can't tell whether the operation has finished or what a return value is.
 
-This is where a C# Task can be helpful. The C# Task can tell you if the work is completed and if the operation returns a result. A Task is an object that represents some work that should be done.
+This is where a **C# task** can be helpful. The **C# task** can tell you if the work is completed and if the operation returns a result. A Task is an object that represents some work that should be done.
 
-C# Tasks provide a sophisticated way to handle async or parallel operation by providing various options like,
+**C# task**s provide a sophisticated way to handle async or parallel operation by providing various options like,
 
 - Ability to cancel an ongoing operation
 - Return resulting value from operation (like a method functions)
@@ -59,7 +59,7 @@ We will understand this concept better once we dive deep and look at some exampl
 
 ## Using C\# Tasks
 
-To get started with Tasks in C# you have to create an object of Task Class, which is available in namespace `System.Threading.Tasks` and provide the code to be executed within the task as the task action parameter.
+To get started with **Tasks in C#** you have to create an object of Task Class, which is available in namespace `System.Threading.Tasks` and provide the code to be executed within the task as the task action parameter.
 
 ### C\# Task Example {#csharp-task-example}
 Let's see an example,
@@ -436,11 +436,11 @@ In the next post [Async And Await In C#](/tasks-in-csharp/async-await-c/), you'l
 
 - [Async And Await In C#](/async-await-c/) - In this article, you’ll learn what are async and await keywords in C#, and how to use async-await feature along with Task for asynchronous programming. You will also learn about the application of this asynchronous principle across .Net Applications.
 
-- [Task Parallelism C#](/task-parallelism-c/) - Task parallelism is the process of running tasks in parallel. Task parallelism divides tasks and allocates those tasks to separate threads for processing. In this article, we will be discussing different methods to achieve parallelism using Tasks in C#.
+- [Task Parallelism C#](/task-parallelism-c/) - Task parallelism is the process of running tasks in parallel. Task parallelism divides tasks and allocates those tasks to separate threads for processing. In this article, we will be discussing different methods to achieve parallelism using **Tasks in C#**.
 
 ## C# Task FAQ
 
-Following are some frequently asked questions within community related to C# tasks.
+Following are some frequently asked questions within community related to **C# tasks**.
 
 ### C# Task.run Return Value
 
