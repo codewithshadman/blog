@@ -11,9 +11,9 @@
                 <header class="post-card-header">
                     {% if page.previous.tags.size > 0 %}
                         {% for tag in page.previous.tags %}
-                            {% if forloop.index == page.previous.tags.size %}
-                                {% assign tag_identifier = tag | underscoresall %}
-                                {% assign tag_name = site.data.tags[tag_identifier].title %}
+                            {% assign tag_identifier = tag | underscoresall %}
+                            {% assign tag_name = site.data.tags[tag_identifier].title %}
+                            {% if forloop.index == page.previous.tags.size %}                                
                                 <span class="post-card-tags">{{ tag_name }}</span>
                             {% else %}
                                <span class="post-card-tags">{{ tag_name }}</span>

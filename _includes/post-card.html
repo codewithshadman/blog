@@ -20,9 +20,9 @@
                 <header class="post-card-header">
                     {% if post.tags.size > 0 %}
                         {% for tag in post.tags %}
+                            {% assign tag_identifier = tag | underscoresall %}
+                            {% assign tag_name = site.data.tags[tag_identifier].title %}
                             {% if forloop.index == post.tags.size %}
-                                {% assign tag_identifier = tag | underscoresall %}
-                                {% assign tag_name = site.data.tags[tag_identifier].title %}
                                 <span class="post-card-tags">{{ tag_name }}</span>
                             {% else %}
                                <span class="post-card-tags">{{ tag_name }}</span>

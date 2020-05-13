@@ -26,18 +26,16 @@
     margin: auto;
 }
 
-.post-meta .tags {
-    display: inline-flex;
-    margin-left: 10px;
-    margin-right: -5px;
-}
-
-.post-meta .tag:hover {
-	text-decoration: none;
-}
-
 .tag-header {
 	text-align: center;
+}
+
+.tag-description, .author-description {
+	text-align: justify;
+}
+
+.tag-description {
+	margin-bottom: 4rem;
 }
 
 .main-nav {

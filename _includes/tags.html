@@ -1,9 +1,15 @@
- <ul class="tags">
-    <li><a class="tag" href="{{site.baseurl}}tag/csharp-beginner/">C# Beginner</a></li>    
-    <li><a class="tag" href="{{site.baseurl}}tag/csharp-intermediate/">C# Intermediate</a></li>    
-    <li><a class="tag" href="{{site.baseurl}}tag/csharp-advanced/">C# Advanced</a></li>
-    <li><a class="tag" href="{{site.baseurl}}tag/csharp-tips/">C# Tips</a></li>
-    <li><a class="tag" href="{{site.baseurl}}tag/csharp-multithreading/">C# Multithreading</a></li>
-    <li><a class="tag" href="{{site.baseurl}}tag/csharp-design-patterns/">C# Design Patterns</a></li>  
-    <li><a class="tag" href="{{site.baseurl}}tag/csharp-functional-programming/">C# Functional Programming</a></li>                    
+  <ul class="tags">
+    {% for tag in site.data.tags %}
+        {% assign tag_name = tag[0] %}
+        {% assign tag_data = site.data.tags[tag_name] %}
+        {% if forloop.index == site.data.tags.size %}
+          <li>
+               <a href='{{ site.baseurl }}tag/{{ tag_data.name | downcase | replace: ' ', '-' }}/'>{{ tag_data.title }} <span>{{ site.tags[tag_data.name].size }}</span></a>
+          </li>
+        {% else %}
+           <li>
+               <a class="tag" href='{{ site.baseurl }}tag/{{ tag_data.name | downcase | replace: ' ', '-' }}/'>{{ tag_data.title }} <span>{{ site.tags[tag_data.name].size }}</span></a>
+           </li>
+        {% endif %}
+    {% endfor %}                 
 </ul>
