@@ -32,6 +32,8 @@ In my series of post on [functional programming](/tag/csharp-functional-programm
     - [Lambda Expressions](#lambda-expressions)
     - [Dictionaries](#dictionaries)
 - [Why Function Purity Matters?](#why-function-purity-matters)
+- [Further Reading](#further-reading)
+- [Books](#books)
 
 ## Is C# Functional Language?
 
@@ -483,3 +485,17 @@ In this case, ParallelEnumerable does all the heavy lifting, and you can easily 
 In this scenario, it was possible to enable parallel execution by removing state updates altogether, but this isn’t always the case, nor is it always this easy. But the ideas you’ve seen so far already put you in a better position when tackling issues related to parallelism, and more generally concurrency.
 
 That’s all for now, join me in the next article by subscribing to my newsletter using the form below.
+
+## Further Reading
+
+- [Functional Programming Concepts Applied Using C#](https://nearsoft.com/blog/functional-programming-concepts-applied-using-c/) by [Jorge Yañez](https://nearsoft.com/blog/author/jyanez/) - There has been a lot of fuzz in recent years about functional programming. You might be interested but it can be hard to apply it to your everyday work. This post aims to give you a cheatsheet with functional concepts and techniques used in the .NET framework.
+
+- [What pure functional programming is all about: Part 1](https://www.fpcomplete.com/blog/2017/04/pure-functional-programming) - In this post you will look at a little language theory, type theory, and implementation and practice of pure functional programming. This post also discuss correctness, architecture, and performance of pure programs.
+
+- [Functional Programming in C#: Map, Filter, and Reduce Your Way to Clean Code](https://blog.submain.com/csharp-functional-programming/) - You can do functional programming in C#. Learn C# Map, Filter, and Reduce in order to help you write cleaner code that's easier to reason about.
+
+## Books
+
+- [Functional Programming in C#: How to write better C# code](https://amzn.to/35Zy5ry) - Functional Programming in C# teaches you to apply functional thinking to real-world problems using the C# language. The book, with its many practical examples, is written for proficient C# programmers with no prior FP experience. It will give you an awesome new perspective.
+
+- [Real-World Functional Programming: With Examples in F# and C#](https://amzn.to/2WTWxqh) - Real-World Functional Programming is a unique tutorial that explores thefunctional programming model through the F# and C# languages. The clearlypresented ideas and examples teach readers how functional programming differsfrom other approaches. It explains how ideas look in F#-a functionallanguage-as well as how they can be successfully used to solve programmingproblems in C#. Readers build on what they know about .NET and learn wherea functional approach makes the most sense and how to apply it effectively inthose cases.
