@@ -54,7 +54,7 @@ Let's see how to create a repository using EF, let say you have customer entity 
 
 {% highlight csharp linenos %}
 
-public interface ICustomerRepository:IDisposable    
+public interface ICustomerRepository 
 {        
     IEnumerable GetCustomers();        
     Customer GetCustomerByID(int customerId);        
@@ -106,27 +106,8 @@ public class CustomerRepository:ICustomerRepository
     public void Save()        
     {            
         context.SaveChanges();        
-    }        
+    }
     
-    private bool disposed = false;        
-    
-    protected virtual void Dispose(bool disposing)        
-    {            
-        if (!this.disposed)            
-        {                
-            if (disposing)                
-            {                    
-                context.Dispose();                
-            }
-        }            
-        this.disposed = true;        
-    }        
-    
-    public void Dispose()        
-    {            
-        Dispose(true);            
-        GC.SuppressFinalize(this);        
-    }    
 }
 {% endhighlight %}
 
