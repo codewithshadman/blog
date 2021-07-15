@@ -63,3 +63,9 @@ visual_studio:
   description: Microsoft Visual Studio is an integrated development environment from Microsoft. It is used to develop computer programs, as well as websites, web apps, web services and mobile apps.
   cover: False
   title: Visual Studio
+
+work_from_home:
+  name: Work From Home
+  description: 
+  cover: False
+  title: Work From Home
