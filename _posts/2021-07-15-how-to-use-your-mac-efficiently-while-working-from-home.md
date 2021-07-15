@@ -8,8 +8,8 @@ subclass: 'post work-from-home'
 title: How to Use Your Mac Efficiently While Working From Home?
 description: These are some of the most important and easy ways to keep your work from home experience up to the mark. You can try these tips at home for a better productive work atmosphere if you have a MacBook. And remember that the more of the suggestions you implement into your work strategy, the more efficient you will be.
 cover: "assets/images/work-from-home/image1.jpg"
-date: Thu Jul 15 21:49:14 2021
-last_modified_at: Thu Jul 15 21:49:18 2021
+date: Thu Jul 15 01:49:14 2021
+last_modified_at: Thu Jul 15 01:49:18 2021
 author: shadman_kudchikar
 comments: true
 ---
