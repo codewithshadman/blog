@@ -69,3 +69,9 @@ work_from_home:
   description: 
   cover: False
   title: Work From Home
+
+college_students:
+  name: College Students
+  description: 
+  cover: False
+  title: College Students
