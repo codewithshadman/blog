@@ -9,7 +9,7 @@ title: Top 5 Tips and Tricks for Better Development Lifecycle
 description: Creating a secure SDLC process demands dedication and effort in each phase, from a collection of requirements to deployment and maintenance. It requires a change of mind in the development team to focus on security at every project stage rather than focusing only on functionality. 
 cover: "assets/images/programming2.jpg"
 date: Fri Jan 28 12:57:52 2022
-last_modified_at: Fri Jan 28 12:57:54 2022
+last_modified_at: Fri Jan 28 12:57:54 2016
 author: shadman_kudchikar
 comments: true
 ---
