@@ -497,6 +497,7 @@ You can now start writing your unit tests for your controller classes from this 
 - [https://www.danylkoweb.com/Blog/creating-a-repository-pattern-without-an-orm-A9](https://www.danylkoweb.com/Blog/creating-a-repository-pattern-without-an-orm-A9)
 - [https://www.danylkoweb.com/Blog/enhancing-the-ado-repository-with-crud-functionality-CD](https://www.danylkoweb.com/Blog/enhancing-the-ado-repository-with-crud-functionality-CD)
 - [https://ardalis.com/resolving-dependencies-in-asp-net-mvc-5-with-structuremap](https://ardalis.com/resolving-dependencies-in-asp-net-mvc-5-with-structuremap)
-
+- [https://assignmentcore.com/csharp-homework/](https://assignmentcore.com/csharp-homework/)
+    
 [post-image]: /assets/images/repository-pattern-csharp.jpg "Repository Pattern C#"
 [repository-pattern-image]: /assets/images/repository-pattern-csharp_structure.png "Repository Pattern Structure Diagram"
