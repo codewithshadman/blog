@@ -37,6 +37,7 @@ A modern .NET microservice template powered by [BytLabs core packages](https://w
 - [Setting Up Domain Models](#setting-up-domain-models)
 - [Setting Up Application Layer](#setting-up-application-layer)
 - [Setting Up Infrastructure Layer](#setting-up-infrastructure-layer)
+- [Further Explore](#further-explore)
 - [Conclusion](#conclusion)
 - [Need Help?](#need-help)
 
@@ -100,12 +101,12 @@ BytLabs.MicroserviceTemplate.Domain
 |-- Aggregates
    |
    |-- OrderAggregate
-   |-- Order.cs (Root Aggregate)
-   |-- OrderItem.cs (Entity)
-   |
-   |-- Events
-      |-- OrderCreatedEvent.cs
-      |-- OrderShippedEvent.cs
+      |-- Order.cs (Root Aggregate)
+      |-- OrderItem.cs (Entity)
+      |
+      |-- Events
+         |-- OrderCreatedEvent.cs
+         |-- OrderShippedEvent.cs
 ```
 
 Let's see how to set up the Domain layer, keeping the order example in mind. First, let's look at how to define aggregates and entities.
@@ -150,7 +151,7 @@ public class Order : AggregateRootBase<Guid>
 }
 ```
 
-### Key Concepts in the `Order` Class
+#### Key Concepts in the `Order` Class
 
 1. **Inheritance from `AggregateRootBase<Guid>`:**
 
@@ -204,7 +205,7 @@ namespace BytLabs.MicroserviceTemplate.Domain.Aggregates.OrderAggregate.Events
 }
 ```
 
-### Key Concepts in Domain Events
+#### Key Concepts in Domain Events
 
 1. **Implementation of `IDomainEvent`:**
    
@@ -248,7 +249,7 @@ public class OrderItem : Entity<Guid>
 }
 ```
 
-### Key Concepts in the `OrderItem` Class
+#### Key Concepts in the `OrderItem` Class
 
 1. **Inheritance from `Entity<Guid>`:**
 
@@ -270,7 +271,7 @@ public class OrderItem : Entity<Guid>
 
    - The constructor checks the validity of the `Quantity` and `Price` before setting them, ensuring that only valid values are accepted, which maintains consistency in the domain model.
 
-### How the `OrderItem` Works with the `Order` Aggregate
+#### How the `OrderItem` Works with the `Order` Aggregate
 
 The `OrderItem` class is designed to be part of the `Order` aggregate, and it is used within the `Order` class to represent the items included in the order. 
 
@@ -347,7 +348,7 @@ public class CreateOrderCommandHandler : ICommandHandler<CreateOrderCommand, Cre
 }
 ```
 
-### Explanation
+#### Explanation
 
 1. **`CreateOrderCommand`:**
    - This is a simple record that encapsulates the data required to create an order. It contains the `OrderId`, `OrderDate`, and a collection of `OrderItem` entities.
@@ -531,6 +532,22 @@ layer with the below code:
 Through Dependency Injection (DI), the `MongoRepository<Order, Guid>` is injected into command handlers like `CreateOrderCommandHandler`, allowing the infrastructure layer's data access logic to be seamlessly integrated into the application without coupling the business logic to a specific technology like MongoDB. This makes the code more modular and testable.
 
 ---
+
+## Further Explore
+
+To deepen your understanding of the BytLabs Microservice Template, we recommend exploring how certain components are implemented to achieve scalability and maintainability:
+
+1. **Event Handling: `SendEmailOrderCreatedEventHandler`**  
+   - Review the implementation of the [`SendEmailOrderCreatedEventHandler`](https://github.com/bytlabs/BytLabs.MicroserviceTemplate/blob/main/src/BytLabs.MicroserviceTemplate.Application/Events/OrderCreatedEvents/SendEmailOrderCreatedEventHandler.cs) to see how domain events are handled in a decoupled manner.
+   - This showcases how disconnected operations, such as sending emails upon an `OrderCreatedEvent`, can be efficiently handled as event handlers.
+
+2. **Roadmap for Integration Events**  
+   - Understand the distinction between **Domain Events** and **Integration Events**:
+     - **Domain Events**: Scoped to a single service, reflecting changes within the service's domain.
+     - **Integration Events**: Cross-service events enabling communication and consistency across the distributed system.
+   - The BytLabs Microservice Template is planning to enhance its architecture to support **integration events** alongside domain events. [Click here](https://github.com/bytlabs/BytLabs.MicroserviceTemplate?tab=readme-ov-file#roadmap) to explore what's coming up on our roadmap.
+
+--- 
 
 ## Conclusion
 
