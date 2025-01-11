@@ -8,8 +8,8 @@ subclass: 'post domain_driven_design'
 title: The Only Microservice Template You'll Ever Need
 description: This blog post outlines how to use BytLabs.MicroserviceTemplate, to define your use cases in the Domain, Application, and Infrastructure layers.
 cover: "assets/images/black-white-1842149_640.jpg"
-date: Fri Jan 10 23:08:04 2025
-last_modified_at: Fri Jan 10 23:08:04 2025
+date: Fri Jan 9 23:08:04 2025
+last_modified_at: Fri Jan 9 23:08:04 2025
 author: shadman_kudchikar
 comments: true
 ---
