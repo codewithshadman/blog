@@ -76,9 +76,9 @@ microservices:
 
 a_junior_who_asked_why:
   name: A Junior Who Asked Why
-  description: Whether you're a junior developer trying to level up, a mid-level dev looking to understand architecture, or even a tech lead searching for ways to guide your team, this book is for you. You won’t find step-by-step tutorials or code-heavy chapters here. Instead, this book is a story—my story, and possibly yours. A journey from junior developer to thoughtful software designer.
+  description: Whether you're a junior developer trying to level up, a mid-level dev looking to understand architecture, or even a lead engineer searching for ways to guide your team, this book is for you. You won’t find step-by-step tutorials or code-heavy chapters here. Instead, this book is a story—my story, and possibly yours. A journey from junior developer to thoughtful software designer.
   cover: False
-  title: A Junior Who Asked Why - Inside the Mind of a Tech Lead
+  title: A Junior Who Asked Why
 
 work_from_home:
   name: Work From Home

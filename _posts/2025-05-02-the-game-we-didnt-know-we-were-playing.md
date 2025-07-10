@@ -39,7 +39,7 @@ I remember moments in that childhood game where the next dot my cousin chose was
 
 ### **Drawing with Space in Mind**
 
-Today, I wear the hat of a tech lead. I guide projects, make architectural decisions, and think about long-term consequences in codebases. And in some way, I feel like I’m still playing that old game—just at a different scale.
+Today, I wear the hat of a lead engineer. I guide projects, make architectural decisions, and think about long-term consequences in codebases. And in some way, I feel like I’m still playing that old game—just at a different scale.
 
 In our world, the "dots" are the business requirements, features, or goals handed down by clients, stakeholders, or product managers. The "lines" we draw are the code we write, the services we architect, the APIs we expose. And the rule still stands: no retracing. No hasty decisions that trap you later. No shortcuts that feel good now but block you from completing the path later.
 
@@ -61,7 +61,7 @@ The exact same principle that won me games against my cousin.
 
 ### **Thinking Like a Software Architect**
 
-And this is what a tech lead or software architect does 90% of the time—not just write code, but think about how the code we write today will affect our ability to draw future lines.
+And this is what a lead engineer or software architect does 90% of the time—not just write code, but think about how the code we write today will affect our ability to draw future lines.
 
 The role isn’t just about choosing the “best” technology. It’s about seeing the grid, predicting the paths, and designing with flexibility in mind. We think not just about now, but about tomorrow’s feature, next month’s bug, or next year’s scaling challenge.
 

@@ -99,7 +99,7 @@ And when something does go wrong? You know *exactly* where to look — inside th
 
 ### The Root of Every Solution: A Class, a Method, a Boundary
 
-Today, as a tech lead, I’ve come to believe something simple yet profound:
+Today, as a lead engineer, I’ve come to believe something simple yet profound:
 
 > **Almost every solution in modern software starts with a class.**
 
