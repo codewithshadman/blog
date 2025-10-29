@@ -7,10 +7,10 @@ post_class: page-template
 
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-<img class="display-picture" src="/assets/images/kudchikarsk.jpg">
+<img class="display-picture" src="/assets/images/iamshadmank.png">
 <h2 class="text-center">Shadman Kudchikar</h2>
 <div class="text-center">
-	<a href="https://twitter.com/kudchikarsk?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-size="large" data-dnt="true" data-show-count="false">Follow @kudchikarsk</a>
+	<a href="https://twitter.com/iamshadmank?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-size="large" data-dnt="true" data-show-count="false">Follow @iamshadmank</a>
 </div>
 
 I am a **software developer** currently living in Mumbai, India. I started this blog as a way to share my knowledge and **connect with other fellow coders.**
